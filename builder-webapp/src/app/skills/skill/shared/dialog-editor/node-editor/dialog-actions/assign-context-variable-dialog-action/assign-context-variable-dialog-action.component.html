@@ -1,0 +1,7 @@
+<div class="assign-context-variable-dialog-action">
+    <div class="title">Assign variable</div>
+    <input type="text" class="input-variable-name" placeholder="Name"
+        [(ngModel)]="action.variableName" (ngModelChange)="onChange()">
+    <input type="text" class="input-variable-value" placeholder="Value"
+        [(ngModel)]="action.value" (ngModelChange)="onChange()">
+</div>

@@ -1,0 +1,123 @@
+
+.skill-select-page {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+
+    .title-and-button-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+        margin-bottom: 40px;
+
+        .title {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .create-new-skill-button {
+            margin-left: auto;
+            margin-right: 0;
+        }
+    }
+
+    .skills-container {
+
+        width: 500px;
+        margin: 0 auto;
+        margin-top: 50px;
+
+        .skill {
+            width: 100%;
+            padding: 20px;
+            border: var(--skill-list-item-border);
+            border-radius: 6px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            background: var(--skill-list-item-background);
+            color: var(--skill-list-item-color);
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            align-content: center;
+            overflow: hidden;
+
+            &:hover {
+                cursor: pointer;
+                background: var(--skill-list-item-background-hover);
+            }
+
+            .skill-profile-picture {
+                border-radius: 10000px;
+                height: 50px;
+                width: 50px;
+            }
+
+            .name-and-description {
+                position: relative;
+                width: calc(100% - 70px) !important;
+                margin-left: 20px;
+                height: 50px;
+                display: flex;
+                flex-flow: column wrap;
+                justify-content: center;
+                align-items: center;
+                align-content: center;
+
+                .name {
+                    font-weight: bold;
+                    width: 100%;
+                    margin-bottom: 5px;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                }
+
+                .description {
+                    width: 100%;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                }
+
+            }
+
+        }
+
+    }
+
+    @media (max-width: 550px) { .skills-container { width: 90%; } }
+}
+
+
+.content-text {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+
+    .title {
+        margin-bottom: 25px;
+        font-weight: bold;
+        font-size: 1.3rem;
+    }
+
+    label {
+        width: 100%;
+        margin-bottom: 15px;
+
+        div {
+            font-weight: bold;
+            width: 100%;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+        }
+    }
+}

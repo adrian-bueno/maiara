@@ -1,0 +1,17 @@
+<div
+    class="utterance-item-container"
+    [ngClass]="{ 'is-last': isLast, 'is-first': isFirst, 'is-first-and-last': isFirst && isLast }">
+
+    <div
+        class="utterance-item"
+        [ngClass]="{ 'is-entity': item.entity, 'is-last': isLast, 'has-space-right': !isLast }">
+            <content-editable-text
+                [(text)]="item.text"
+                [removeSelection]="true"
+                (textChange)="onItemTextChange($event)"
+                (onBlur)="onBlur($event)"
+                (textSelected)="onTextSelected($event)">
+            </content-editable-text>
+    </div>
+
+</div>

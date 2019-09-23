@@ -1,0 +1,24 @@
+.assign-context-variable-dialog-action {
+    width: 100%;
+
+    .title {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        align-items: center;
+    }
+
+    .input-variable-name {
+        width: 40%;
+    }
+
+    .input-variable-value {
+        margin-left: 2%;
+        width: 58%;
+    }
+
+}

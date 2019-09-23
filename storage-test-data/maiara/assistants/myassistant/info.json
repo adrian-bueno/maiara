@@ -1,0 +1,26 @@
+{
+    "id": "myassistant",
+    "name": "My Assistant",
+    "description": "My homemade personal assistant",
+    "channelsConfig": [{
+        "channelType": "telegram",
+        "credentials": {
+            "token": "{{TELEGRAM_TOKEN}}"
+        },
+        "polling": "{{TELEGRAM_POLLING}}",
+        "publicDomain": "{{TELEGRAM_PUBLIC_DOMAIN}}",
+        "endpoint": "{{TELEGRAM_ENDPOINT}}"
+    }, {
+        "channelType": "facebookMessenger",
+        "credentials": {
+            "pageAccessToken": "{{FACEBOOK_PAGE_ACCESS_TOKEN_TOKEN}}",
+            "verifyToken": "{{FACEBOOK_VERIFY_TOKEN}}"
+        },
+        "publicDomain": "{{FACEBOOK_PUBLIC_DOMAIN}}",
+        "endpoint": "{{FACEBOOK_ENDPOINT}}"
+    }],
+    "skillsIds": ["myskill", "smalltalk"],
+    "welcomeMessageStart": ["Welcome!"],
+    "fallbackReplies": ["I don't have answers available for what you're asking.", "I didn't understand you. Write me again."],
+    "detectLanguage": true
+}

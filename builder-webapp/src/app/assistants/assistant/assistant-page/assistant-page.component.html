@@ -1,0 +1,158 @@
+<main class="assistant-home-page">
+
+    <div class="assistant-header">
+        <img class="assistant-profile-picture" src="/assets/images/assistant-default-image-2.jpg" alt="Skill image">
+        <h1 class="assistant-name" [ngClass]="{ 'is-empty': assistant?.name.length === 0 }">
+            <content-editable-text *ngIf="assistant"
+                [(text)]="assistant.name"
+                [trimOnBlur]="true"
+                (textChange)="onNameChange($event)">
+            </content-editable-text>
+        </h1>
+        <div class="assistant-description" [ngClass]="{ 'is-empty': assistant?.description.length === 0 }">
+            <content-editable-text *ngIf="assistant"
+                [(text)]="assistant.description"
+                [trimOnBlur]="true"
+                (textChange)="onDescriptionChange($event)">
+            </content-editable-text>
+        </div>
+    </div>
+
+    <div class="channels-container">
+        <div class="channel">
+            <img src="/assets/images/telegram.svg" alt="Telegram icon">
+            <div class="title">Telegram</div>
+            <label class="switch-container">
+                <div class="switch">
+                    <input type="checkbox" [(ngModel)]="telegramActive" (change)="telegramActiveChange()">
+                    <span class="slider is-rounded"></span>
+                </div>
+            </label>
+        </div>
+        <div class="channel" style="margin-left: 20px;">
+            <img src="/assets/images/facebook-messenger.svg" alt="Facebook Messenger icon">
+            <div class="title">Facebook Messenger</div>
+            <label class="switch-container">
+                <div class="switch">
+                    <input type="checkbox" [(ngModel)]="facebookMessengerActive" (change)="facebookMessengerActiveChange()">
+                    <span class="slider is-rounded"></span>
+                </div>
+            </label>
+        </div>
+
+    </div>
+
+
+    <div class="assistant-page-container">
+
+        <div class="title-and-button-container">
+            <h3 class="title">Skills</h3>
+            <button class="button is-outlined is-rounded is-small add-new-item-button"
+                (tap)="addSkill()">
+                    <i class="icon is-left fas fa-plus"></i>
+                    Add Skill
+            </button>
+        </div>
+
+        <div *ngFor="let skill of assistantSkills; let index = index" class="skill">
+            <img class="skill-profile-picture" src="/assets/images/skill-default-image-2.jpg" alt="Skill image">
+            <div class="name-and-description">
+                <div class="name">{{ skill.name }}</div>
+                <div class="description">{{ skill.description }}</div>
+            </div>
+            <div class="delete-skill-button" (tap)="removeSkill(index)">
+                <i class="icon is-left has-text-danger fas fa-times-circle"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="assistant-page-container">
+
+        <div class="title-and-button-container">
+            <h3 class="title">Welcome message</h3>
+            <button class="button is-outlined is-rounded is-small add-new-item-button"
+                (tap)="addWelcomeMessageVariation()">
+                    <i class="icon is-left fas fa-plus"></i>
+                    Add message variation
+            </button>
+        </div>
+
+        <div *ngFor="let message of assistant?.welcomeMessageStart; let index = index; trackBy: customTrackByIndex" class="input-text">
+            <input type="text" [(ngModel)]="assistant.welcomeMessageStart[index]">
+            <div class="delete-input-text-button" (tap)="removeWelcomeMessageVariation(index)">
+                <i class="icon has-text-danger fas fa-times-circle"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="assistant-page-container">
+
+        <div class="title-and-button-container">
+            <h3 class="title">Fallback replies</h3>
+            <button class="button is-outlined is-rounded is-small add-new-item-button"
+                (tap)="addFallbackReplyVariation()">
+                    <i class="icon is-left fas fa-plus"></i>
+                    Add message variation
+            </button>
+        </div>
+
+        <div *ngFor="let message of assistant?.fallbackReplies; let index = index; trackBy: customTrackByIndex" class="input-text">
+            <input type="text" [(ngModel)]="assistant.fallbackReplies[index]">
+            <div class="delete-input-text-button" (tap)="removeFallbackReplyVariation(index)">
+                <i class="icon is-left has-text-danger fas fa-times-circle"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="assistant-page-container" *ngIf="assistant && assistant.detectLanguage !== undefined">
+
+        <div class="title-and-button-container">
+            <h3 class="title">Detect language</h3>
+        </div>
+
+        <div>Try to detect an available language?</div>
+        <div style="margin-bottom: 12px;">(Does not work with sentences of less than 3 words)</div>
+
+        <label>
+            <div class="switch">
+                <input type="checkbox" [(ngModel)]="assistant.detectLanguage">
+                <span class="slider is-rounded"></span>
+            </div>
+        </label>
+
+    </div>
+
+
+    <div class="delete-assistant-button-container">
+        <button class="button is-danger is-outlined is-rounded" (tap)="deleteAssistant()">
+            Delete assistant
+        </button>
+    </div>
+
+</main>
+
+
+
+<div class="warning-popup" *ngIf="showAddSkillsPopup">
+    <div class="content">
+        <div class="content-text">
+            <div *ngFor="let skill of notAddedSkills; let index = index" class="skill"
+                (tap)="confirmAddSkill(index)">
+                    <img class="skill-profile-picture" src="/assets/images/skill-default-image-2.jpg" alt="Skill image">
+                    <div class="name-and-description">
+                        <div class="name">{{ skill.name }}</div>
+                        <div class="description">{{ skill.description }}</div>
+                    </div>
+            </div>
+            <p *ngIf="notAddedSkills?.length === 0">
+                No more skills available
+            </p>
+        </div>
+        <div class="content-footer">
+            <button class="button is-rounded is-outlined is-left-button" (tap)="cancelAddSkills()">Cancel</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,154 @@
+@import 'mixins';
+@import 'navbar';
+
+
+$node-editor-width: 450px;
+
+
+.dialog-editor-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+
+    &.has-node-editor-open {
+        right: $node-editor-width;
+    }
+}
+
+.new-node-button {
+    position: fixed;
+    top: $navbar-height + 4.5rem;
+    left: 25px;
+    font-weight: bold;
+    z-index: 9;
+}
+
+.dialog-editor {
+    position: relative;
+    width: 5000px;
+    height: 5000px;
+    min-width: 100%;
+    min-height: 100%;
+    box-sizing: border-box;
+    overflow: auto;
+
+    background-size: 20px 20px, 20px 20px;
+    background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
+    background-image: linear-gradient(var(--dialog-editor-grid-color) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--dialog-editor-grid-color) 1px, transparent 1px);
+}
+
+
+.edge-container {
+    position: absolute;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+
+    path {
+        stroke: var(--gray3);
+        stroke-width: 4;
+        fill: none;
+        cursor: pointer;
+
+        &:hover {
+            stroke: var(--color-danger);
+        }
+    }
+
+    line {
+        stroke: var(--dialog-editor-edge-color);
+        stroke-width: 4;
+        fill: none;
+        cursor: pointer;
+        // cursor: url("https://i.stack.imgur.com/bUGV0.png"), auto;
+
+        &:hover {
+            stroke: var(--color-danger);
+        }
+
+        &.is-new-edge {
+            cursor: auto;
+            &:hover {
+                stroke: var(--dialog-editor-edge-color);
+            }
+        }
+    }
+}
+
+
+.node-editor-container {
+    position: fixed;
+    top: $navbar-height + 4.5rem;
+    left: auto;
+    right: 2.5rem;
+    bottom: 2.5rem;
+    overflow: auto;
+    width: $node-editor-width;
+    background: var(--node-editor-background-color);
+    color: var(--node-editor-text-color);
+    border-radius: 6px;
+    z-index: 10;
+    box-shadow: var(--node-editor-box-shadow);
+    box-sizing: border-box;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+
+    .node-editor-close-button {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 10;
+    }
+
+    .node-editor-delete-button-container {
+        position: relative;
+        width: 100%;
+        padding: 2rem;
+        padding-bottom: 3rem;
+        box-sizing: border-box;
+
+    }
+
+    &.is-open {
+        visibility: visible;
+    }
+
+    &.open {
+        animation-name: slideInRight;
+    }
+
+    &.close {
+        @keyframes slideOutRight {
+            from {
+                transform: translate3d(0, 0, 0);
+            }
+            to {
+                visibility: hidden;
+                transform: translate3d(110%, 0, 0);
+            }
+        }
+
+        animation-name: slideOutRight;
+    }
+
+    &.is-closed {
+        visibility: hidden;
+    }
+
+}
+
+@media (max-width: 650px) {
+    .node-editor-container {
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        z-index: 10000;
+        border-radius: 0;
+    }
+}

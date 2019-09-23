@@ -1,0 +1,11 @@
+node_modules
+build
+dist
+test
+docs
+npm-debug.log
+lerna-debug.log
+# tsconfig.json
+.gitignore
+README.md
+readme.md

@@ -1,0 +1,25 @@
+<div class="utterance-line-editor overflow-hidden"
+    [ngClass]="{ 'overflow-x-auto': enableScroll }">
+
+    <utterance-line-editor-item
+        *ngFor="let item of utterance;let first = first; let last = last; let index = index"
+        [ngClass]="{ 'fill-remaining-space': numEntities === 0  || (last && !lastItemIsEntity) }"
+        [isFirst]="first"
+        [isLast]="numEntities === 0 || (last && !lastItemIsEntity)"
+        [(item)]=item
+        (itemChange)="onItemChange(index, $event)"
+        (itemBlur)="onItemBlur(index, $event)"
+        (textSelected)="onTextSelected(index, $event)">
+    </utterance-line-editor-item>
+
+    <div class="fill-remaining-space"
+        *ngIf="(numEntities > 0 && lastItemIsEntity) || isEmpty">
+            <utterance-line-editor-item
+                [(item)]=newItem
+                (itemBlur)="onNewItemBlur($event)"
+                [isFirst]="isEmpty"
+                [isLast]="true">
+            </utterance-line-editor-item>
+    </div>
+
+</div>

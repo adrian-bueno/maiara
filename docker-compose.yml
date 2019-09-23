@@ -1,0 +1,53 @@
+version: "3.7"
+services:
+
+    builder-webapp:
+        build: ./builder-webapp
+        image: maiara/builder-webapp
+        ports:
+            - "3080:80"
+            - "80:80"
+        restart: always
+        depends_on:
+            - builder-service
+
+    builder-service:
+        build:
+            context: ./
+            dockerfile: ./Dockerfile.builder-service
+        image: maiara/builder-service
+        network_mode: "host"
+        environment:
+            NODE_ENV: production
+        restart: always
+        depends_on:
+            - storage
+            - database
+
+    storage:
+        image: minio/minio:RELEASE.2019-08-21T19-40-07Z
+        ports:
+            - "9000:9000"
+        volumes:
+            - ~/.maiara/minio/data:/data
+        command: server /data
+        environment:
+            MINIO_ACCESS_KEY: vidsH98hjAKJ
+            MINIO_SECRET_KEY: jy0n0ASkjs623823jaJAKJSNJKD29239ihK
+        restart: always
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://storage:9000/minio/health/live"]
+            interval: 1m30s
+            timeout: 20s
+            retries: 3
+            start_period: 3m
+
+    database:
+        image: mongo:4.2
+        ports:
+            - "27017:27017"
+        restart: always
+        environment:
+            MONGO_INITDB_DATABASE: maiara
+        #   MONGO_INITDB_ROOT_USERNAME: root
+        #   MONGO_INITDB_ROOT_PASSWORD: example

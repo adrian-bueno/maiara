@@ -1,0 +1,51 @@
+<main class="skill-select-page">
+    <div class="skills-container">
+
+        <div class="title-and-button-container">
+            <h1 class="title">Your Skills</h1>
+            <button class="button is-primary is-rounded create-new-skill-button"
+                (tap)="createNewSkill()">
+                    <i class="icon is-left fas fa-plus"></i>
+                    New Skill
+            </button>
+        </div>
+
+        <div *ngFor="let skill of skills" class="skill" routerLink="{{ skill.id }}">
+            <img class="skill-profile-picture" src="/assets/images/skill-default-image-2.jpg" alt="Skill image">
+            <div class="name-and-description">
+                <div class="name">{{ skill.name }}</div>
+                <div class="description">{{ skill.description }}</div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<div class="warning-popup" *ngIf="showSkillCreationPopup">
+    <div class="content">
+        <div class="content-text">
+            <div class="title">New skill</div>
+            <label>
+                <div>Unique identifier</div>
+                <input type="text" [(ngModel)]="newSkillId" (ngModelChange)="onNewSkillIdChange()">
+            </label>
+            <label>
+                <div>Name</div>
+                <input type="text" [(ngModel)]="newSkillName">
+            </label>
+            <label>
+                <div>Description (Optional)</div>
+                <input type="text" [(ngModel)]="newSkillDescription">
+            </label>
+        </div>
+        <div class="content-footer">
+            <button class="button is-rounded is-outlined is-left-button" (tap)="cancelSkillCreation()">Cancel</button>
+            <button class="button is-rounded is-primary is-right-button" (tap)="confirmSkillCreation()">Create</button>
+        </div>
+    </div>
+</div>
+
+<div class="loading-screen" *ngIf="loadingSkills">
+    <div class="spinner"></div>
+    <div class="loading-text">Loading skills...</div>
+</div>

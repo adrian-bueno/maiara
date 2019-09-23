@@ -1,0 +1,11 @@
+<div #elem
+    class="content-editable-text"
+    [ngClass]="{
+        'wrap-words': wrapWords,
+        'has-text-danger': badText}"
+    contenteditable="true"
+    (input)="onContentChange($event)"
+    (blur)="onBlurHandler()"
+    (focus)="onFocusHandler()"
+    (keydown.enter)="onEnter($event)"
+    (touchend)="onTouchEnd()">{{ viewText }}</div>

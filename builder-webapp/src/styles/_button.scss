@@ -1,0 +1,97 @@
+$button-border-radius: 5px !default;
+$button-disabled-opacity: 0.75 !default;
+
+
+a {
+    &.button {
+        line-height: 110%;
+        text-decoration: none;
+    }
+}
+
+button,
+.button {
+    @include unselectable;
+    padding: 0.5rem 0.85rem !important;
+    color: var(--button-text-color);
+    background: var(--button-color);
+    border: none;
+    width: fit-content !important;
+    cursor: pointer;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-radius: $button-border-radius;
+    position: relative;
+    display: inline-block;
+    border: 1px solid transparent;
+    font-size: map-get($font-sizes, 7);
+
+    &:focus {
+        outline: 0;
+        box-shadow: 0 0 0 .2rem #fafafa;
+    }
+
+    &:disabled {
+        opacity: $button-disabled-opacity;
+        cursor: default;
+    }
+
+    &.is-small {
+        font-size: map-get($font-sizes, 8);
+        padding: 0.4rem 0.75rem !important;
+
+        .icon {
+            margin-left: .2rem;
+            &.is-left {
+                margin-left: 0;
+                margin-right: .2rem;
+            }
+        }
+    }
+
+    &.is-large {
+        font-size: map-get($font-sizes, 5);
+        padding: 0.6rem 0.95rem !important;
+    }
+
+    &.is-outlined:not(:hover) {
+        color: var(--button-text-color) !important;
+        border: 1px solid var(--button-color) !important;
+        background: transparent !important;
+    }
+
+    .icon {
+        margin-left: 0.4rem;
+        &.is-left {
+            margin-left: 0 !important;
+            margin-right: 0.4rem !important;
+        }
+    }
+
+    @each $name, $color in $colors {
+        &.is-#{$name} {
+            &:hover {
+                background: unquote("var(--color-#{$name}-dark)") !important;
+            }
+            &:hover:disabled {
+                background: unquote("var(--color-#{$name})") !important;
+            }
+            &:active {
+                background: unquote("var(--color-#{$name}-darker)") !important;
+            }
+            &:focus {
+                outline: 0;
+                transition: .1s;
+                box-shadow: 0 0 0 .2rem unquote("var(--color-#{$name}-lighter)") !important;
+            }
+            &.is-outlined:not(:hover) {
+                color: unquote("var(--color-#{$name})") !important;
+                border: 1px solid unquote("var(--color-#{$name})") !important;
+                background: transparent !important;
+            }
+        }
+    }
+
+}

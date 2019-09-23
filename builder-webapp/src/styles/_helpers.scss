@@ -1,0 +1,49 @@
+.fill-remaining-space {
+    /* This fills the remaining space, by using flexbox */
+    flex: 1 1 auto;
+}
+
+.is-full-width {
+    width: 100% !important;
+}
+
+.is-unselectable {
+    @include unselectable;
+}
+
+.is-rounded {
+    border-radius: 100000px !important;
+}
+
+.is-unfocusable {
+    outline: 0;
+    box-shadow: none;
+}
+
+.is-bold {
+    font-weight: bold;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.overflow-hidden {
+    overflow: hidden !important;
+}
+
+.overflow-x-auto {
+    overflow-x: auto !important;
+}
+
+.overflow-y-auto {
+    overflow-y: auto !important;
+}
+
+.display-none {
+    display: none;
+}

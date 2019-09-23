@@ -1,0 +1,144 @@
+
+.home-page {
+    width: 100%;
+
+    .home-page-hero {
+        height: 350px;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+
+        img {
+            width: 400px;
+            height: 111px;
+        }
+
+        .home-page-hero-subtitle {
+            width: 100%;
+            text-align: center;
+            font-size: 1.6rem;
+            margin-top: 2rem;
+            padding: 0 1.5rem;
+        }
+    }
+
+    @media (max-width: 800px) {
+        .home-page-hero {
+            height: 300px;
+            .home-page-hero-subtitle {
+                font-size: 1.4rem;
+            }
+        }
+    }
+
+    @media (max-width: 600px) {
+        .home-page-hero {
+            img {
+                width: 300px;
+                height: 83px;
+            }
+        }
+    }
+
+    @media (max-width: 400px) {
+        .home-page-hero {
+            img {
+                width: 250px;
+                height: 69px;
+            }
+        }
+    }
+
+    .assistants-and-skills-info {
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        margin-bottom: 150px;
+        padding: 1rem 0;
+        box-sizing: border-box;
+
+        .info-container {
+            position: relative;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            height: 250px;
+            width: 350px;
+            background: rgba(0,0,0,0.1);
+            margin-top: 30px;
+            border-radius: 15px;
+            cursor: pointer;
+
+            &:hover {
+                background: rgba(0,0,0,0.15);
+            }
+
+            &.assistant-info-container {
+
+            }
+
+            &.skill-info-container {
+                margin-left: 3rem;
+            }
+
+            .info-container-number {
+                font-size: 3rem;
+                font-weight: bold;
+                margin-bottom: 1rem;
+            }
+            .info-container-title {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                font-size: 1.5rem;
+                text-align: center;
+                padding: 2rem 1rem;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .info-container {
+                width: 325px;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .home-page-hero {
+                height: 270px;
+            }
+
+            .assistants-and-skills-info {
+                flex-direction: column;
+            }
+            .info-container {
+
+                &.skill-info-container {
+                    margin-left: 1rem;
+                }
+            }
+        }
+
+        @media (max-width: 665px) {
+            .info-container {
+                &.skill-info-container {
+                    margin-left: 0;
+                }
+            }
+        }
+
+        @media (max-width: 410px) {
+            .info-container {
+                width: 85%;
+            }
+        }
+
+    }
+}

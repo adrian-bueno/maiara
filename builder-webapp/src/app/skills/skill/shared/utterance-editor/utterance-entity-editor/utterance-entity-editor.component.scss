@@ -1,0 +1,59 @@
+@import 'mixins';
+
+.utterance-entity-table-container {
+    width: 100%;
+    background: var(--utterance-entity-table-background-color);
+    box-sizing: border-box;
+    font-size: 0.9rem;
+
+    .utterance-entity-table-header {
+        @include display-flex-item;
+        width: 100%;
+        background: var(--utterance-entity-table-header-background-color);
+        padding: 0.85rem 1.2rem;
+        box-sizing: border-box;
+    }
+
+    .utterance-entity-table-row {
+        position: relative;
+        @include display-flex-item;
+        width: 100%;
+        padding: 0.85rem 1.2rem;
+        box-sizing: border-box;
+
+        &:hover {
+            .delete-button {
+                display: flex;
+            }
+        }
+
+        .delete-button {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            height: 100%;
+            width: 50px;
+            @include display-flex-item;
+            display: none;
+            justify-content: center;
+
+            i {
+                color: var(--utterance-entity-table-delete-icon-color);
+                cursor: pointer;
+            }
+        }
+    }
+
+    .utterance-entity-table-item {
+        width: 33%;
+
+        .is-entity {
+            background: var(--utterance-entity-default-background-color);
+            color: var(--utterance-entity-default-text-color);
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.4rem;
+        }
+    }
+
+}

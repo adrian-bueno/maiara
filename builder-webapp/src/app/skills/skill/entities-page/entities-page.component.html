@@ -1,0 +1,70 @@
+<main class="entities-page container">
+
+    <div class="entities-editor-container">
+        <div class="new-entity-form">
+            <input type="text" placeholder="Entity name" [(ngModel)]="newEntityName">
+            <button class="button is-primary is-rounded" (tap)="createNewEntity()">
+                <i class="icon is-left fas fa-plus"></i>
+                Create entity
+            </button>
+        </div>
+        <div class="div-table">
+            <div class="div-table-header">
+                <div class="div-table-item">Entity name</div>
+                <div class="div-table-item">Number of values</div>
+            </div>
+
+            <div *ngFor="let entity of entities; let index = index;">
+                <div class="div-table-row">
+                    <div class="div-table-item" (tap)="toggleEntityEditor(index)">{{ entity.name }}</div>
+                    <div class="div-table-item" (tap)="toggleEntityEditor(index)">{{ entity.data?.length }}</div>
+                    <div class="delete-button">
+                        <i class="fas fa-times-circle has-text-danger"
+                           (tap)="deleteEntity($event, index)">
+                        </i>
+                    </div>
+                </div>
+                <div class="div-table-separator"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="system-entities-editor-container">
+        <div class="entity-editor-title">
+            System entities
+        </div>
+        <system-entities-editor
+            [systemEntities]="systemEntities"
+            (systemEntityChange)="onSystemEntityChange($event)">
+        </system-entities-editor>
+    </div>
+
+    <div class="entity-editor-container" [ngClass]="activeClases">
+        <div class="container entity-editor-close-button-container">
+            <button class="button is-rounded is-outlined"
+                (tap)="closeEntityEditor()">
+                    <i class="icon is-left fa fa-times"></i>
+                    Close entity editor
+            </button>
+        </div>
+        <entity-editor *ngIf="activeEntity"
+            [(entity)]="activeEntity" (entityChange)="onEntityChange($event)"
+            (entityNameChange)="onEntityNameChange($event)"
+            (valueDeleted)="onEntityValueDeleted($event)"
+            (newName)="onNewEntityName($event)">
+        </entity-editor>
+    </div>
+
+</main>
+
+
+<div class="warning-popup" *ngIf="warningMessage">
+    <div class="content">
+        <div class="content-text">
+            <p>{{ warningMessage }}</p>
+        </div>
+        <div class="content-footer">
+            <button class="button is-rounded is-outlined is-right-button" (tap)="closeWarningPopup()">Close</button>
+        </div>
+    </div>
+</div>

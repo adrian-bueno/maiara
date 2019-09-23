@@ -1,0 +1,25 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[requires]
+python_version = "3.6"
+
+[packages]
+flask = "*"
+snips-nlu = "*"
+bjoern = "*"
+minio = "*"
+
+[dev-packages]
+
+[scripts]
+start = "python src/main.py"
+storage = "python src/storage.py"
+clean = "find . -name '*.pyc' -type f -delete"
+download_resource = "python -m snips_nlu download"
+docker_build = "docker build -t maiara/snips-nlu-service ."
+docker_run = "docker run -it -p 5000:5000 maiara/snips-nlu-service"
+upload_test_data_to_storage = "python test/upload-data-to-storage.py"
+clean_storage = "python test/clean-storage.py"

@@ -1,0 +1,46 @@
+<main class="assistant-select-page">
+    <div class="assistants-container">
+
+        <div class="title-and-button-container">
+            <h1 class="title">Your Assistants</h1>
+            <button class="button is-primary is-rounded create-new-assistant-button"
+                (tap)="createNewAssistant()">
+                    <i class="icon is-left fas fa-plus"></i>
+                    New Assistant
+            </button>
+        </div>
+
+        <div *ngFor="let assistant of assistants" class="assistant" routerLink="{{ assistant.id }}">
+            <img class="assistant-profile-picture" src="/assets/images/assistant-default-image-2.jpg" alt="Assistant image">
+            <div class="name-and-description">
+                <div class="name">{{ assistant.name }}</div>
+                <div class="description">{{ assistant.description }}</div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<div class="warning-popup" *ngIf="showAssistantCreationPopup">
+    <div class="content">
+        <div class="content-text">
+            <div class="title">New assistant</div>
+            <label>
+                <div>Unique identifier</div>
+                <input type="text" [(ngModel)]="newAssistantId" (ngModelChange)="onNewAssistantIdChange()" pattern="[a-z0-9_]*">
+            </label>
+            <label>
+                <div>Name</div>
+                <input type="text" [(ngModel)]="newAssistantName">
+            </label>
+            <label>
+                <div>Description (Optional)</div>
+                <input type="text" [(ngModel)]="newAssistantDescription">
+            </label>
+        </div>
+        <div class="content-footer">
+            <button class="button is-rounded is-outlined is-left-button" (tap)="cancelAssistantCreation()">Cancel</button>
+            <button class="button is-rounded is-primary is-right-button" (tap)="confirmAssistantCreation()">Create</button>
+        </div>
+    </div>
+</div>

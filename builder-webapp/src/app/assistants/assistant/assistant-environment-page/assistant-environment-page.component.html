@@ -1,0 +1,138 @@
+<main class="assistant-environment-page">
+    <div class="environment-container">
+
+        <h1 class="title"><b>{{ environmentId }}</b> environment</h1>
+
+
+        <div class="environment-table">
+            <div class="environment-table-title">
+                Telegram
+            </div>
+            <div class="environment-table-row">
+                <div class="environment-table-item environment-variable-name-title">
+                    Name
+                </div>
+                <div class="environment-table-item environment-variable-value-title">
+                    Value
+                </div>
+            </div>
+            <div class="environment-table-row">
+                <div class="environment-table-item environment-variable-name">
+                        TOKEN
+                </div>
+                <div class="environment-table-item environment-variable-value">
+                    <div class="is-full-width">
+                        <content-editable-text
+                            [(text)]="environment.TELEGRAM_TOKEN" [trimOnBlur]="true">
+                        </content-editable-text>
+                    </div>
+                </div>
+            </div>
+            <div class="environment-table-row">
+                <div class="environment-table-item environment-variable-name">
+                        PUBLIC DOMAIN
+                </div>
+                <div class="environment-table-item environment-variable-value">
+                    <div class="is-full-width">
+                        <content-editable-text
+                            [(text)]="environment.TELEGRAM_PUBLIC_DOMAIN" [trimOnBlur]="true">
+                        </content-editable-text>
+                    </div>
+                </div>
+            </div>
+            <div class="environment-table-row">
+                <div class="environment-table-item environment-variable-name">
+                        POLLING
+                </div>
+                <div class="environment-table-item environment-variable-value">
+                    <div class="is-full-width">
+                        <content-editable-text
+                            [(text)]="environment.TELEGRAM_POLLING" [trimOnBlur]="true">
+                        </content-editable-text>
+                    </div>
+                </div>
+            </div>
+            <div class="environment-table-row">
+                <div class="environment-table-item environment-variable-name">
+                        ENDPOINT
+                </div>
+                <div class="environment-table-item environment-variable-value">
+                    <div class="is-full-width">
+                        <content-editable-text
+                            [(text)]="environment.TELEGRAM_ENDPOINT" [trimOnBlur]="true">
+                        </content-editable-text>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="environment-table">
+            <div class="environment-table-title">
+                Facebook Messenger
+            </div>
+            <div class="environment-table-row">
+                <div class="environment-table-item environment-variable-name-title">
+                    Name
+                </div>
+                <div class="environment-table-item environment-variable-value-title">
+                    Value
+                </div>
+            </div>
+            <div class="environment-table-row">
+                <div class="environment-table-item environment-variable-name">
+                        PAGE ACCESS TOKEN
+                </div>
+                <div class="environment-table-item environment-variable-value">
+                    <div class="is-full-width">
+                        <content-editable-text
+                            [(text)]="environment.FACEBOOK_PAGE_ACCESS_TOKEN" [trimOnBlur]="true">
+                        </content-editable-text>
+                    </div>
+                </div>
+            </div>
+            <div class="environment-table-row">
+                <div class="environment-table-item environment-variable-name">
+                        VERIFY TOKEN
+                </div>
+                <div class="environment-table-item environment-variable-value">
+                    <div class="is-full-width">
+                        <content-editable-text
+                            [(text)]="environment.FACEBOOK_VERIFY_TOKEN" [trimOnBlur]="true">
+                        </content-editable-text>
+                    </div>
+                </div>
+            </div>
+            <div class="environment-table-row">
+                <div class="environment-table-item environment-variable-name">
+                        PUBLIC DOMAIN
+                </div>
+                <div class="environment-table-item environment-variable-value">
+                    <div class="is-full-width">
+                        <content-editable-text
+                            [(text)]="environment.FACEBOOK_PUBLIC_DOMAIN" [trimOnBlur]="true">
+                        </content-editable-text>
+                    </div>
+                </div>
+            </div>
+            <div class="environment-table-row">
+                <div class="environment-table-item environment-variable-name">
+                        ENDPOINT
+                </div>
+                <div class="environment-table-item environment-variable-value">
+                    <div class="is-full-width">
+                        <content-editable-text
+                            [(text)]="environment.FACEBOOK_ENDPOINT" [trimOnBlur]="true">
+                        </content-editable-text>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="delete-environment-button-container">
+            <button class="button is-danger is-outlined is-rounded" (tap)="deleteEnvironment()">
+                Delete environment
+            </button>
+        </div>
+
+    </div>
+</main>

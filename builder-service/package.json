@@ -1,0 +1,27 @@
+{
+  "name": "@maiara/builder-service",
+  "version": "0.0.0",
+  "description": "",
+  "author": "Adrián Bueno Jiménez <adrian.buenoj@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrian-bueno/maiara.git"
+  },
+  "homepage": "https://github.com/adrian-bueno/maiara#readme",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/main.js",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@maiara/core": "^0.0.0",
+    "@maiara/minio": "^0.0.0",
+    "dockerode": "^2.5.8",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "get-port": "^5.0.0",
+    "mongodb": "^3.3.2"
+  }
+}

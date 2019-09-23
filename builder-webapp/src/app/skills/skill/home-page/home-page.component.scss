@@ -1,0 +1,177 @@
+//
+
+
+.skill-home-page {
+    width: 100%;
+    padding-bottom: 150px;
+
+    .skill-header {
+        width: 100%;
+        height: 350px;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        // border-bottom: 1px solid rgba(0,0,0,0.2);
+
+        .skill-profile-picture {
+            border-radius: 10000px;
+            height: 150px;
+            width: 150px;
+        }
+
+        .skill-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .skill-description {
+
+        }
+
+        .is-empty {
+            color: var(--color-danger);
+            border-bottom: 1px solid var(--color-danger);
+
+            &::before {
+                font-family: 'Font Awesome\ 5 Free';
+                content: '\f071';
+            }
+        }
+    }
+
+    .skill-intent-entity-dialog-info {
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        margin-bottom: 80px;
+        // padding: 1rem 0;
+        box-sizing: border-box;
+
+        .info-container {
+            position: relative;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            height: 100px;
+            width: 180px;
+            background: rgba(0,0,0,0.1);
+            margin-top: 30px;
+            border-radius: 15px;
+            cursor: pointer;
+
+            &:hover {
+                background: rgba(0,0,0,0.15);
+            }
+
+            &.skill-intent-count-container {
+                // margin-left: 1rem;
+            }
+
+            &.skill-entity-count-container {
+                margin-left: 1rem;
+            }
+
+            &.skill-node-count-container {
+                margin-left: 1rem;
+            }
+
+            .info-container-number {
+                font-size: 1.8rem;
+                font-weight: bold;
+                margin-bottom: 1.3rem;
+            }
+            .info-container-title {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                font-size: 1.2rem;
+                text-align: center;
+                padding: 1rem 1rem;
+            }
+        }
+    }
+
+
+    .select-language-container {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        margin-bottom: 150px;
+
+        .select-language-column {
+            position: relative;
+            width: 300px;
+            display: flex;
+            flex-flow: column wrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+            align-content: flex-start;
+            font-size: 0.9rem;
+            padding: 1rem;
+            box-sizing: border-box;
+            border-radius: 6px;
+            border: var(--skill-languages-border);
+
+            .title {
+                font-weight: bold;
+                padding: 1rem;
+                padding-bottom: 2rem;
+                width: 100%;
+                text-align: center;
+                box-sizing: border-box;
+            }
+
+            .select-language-item {
+                width: 100%;
+                padding: 0.5rem 1.2rem;
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: space-between;
+                align-items: center;
+                align-content: center;
+                cursor: pointer;
+                box-sizing: border-box;
+
+                &:hover {
+                    background: rgba(255,255,255,0.03);
+                }
+
+                .name {
+                    width: fit-content;
+                }
+
+                .switch {
+                    position: relative;
+                    align-self: flex-end;
+                    // margin-right: 21px;
+                }
+            }
+
+        }
+    }
+
+
+    .delete-skill-button-container {
+        width: 100%;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        margin-top: 120px;
+    }
+
+
+}

@@ -1,0 +1,58 @@
+.div-table {
+    width: 100%;
+    background: var(--div-table-background-color);
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 0.9rem;
+
+    .div-table-header {
+        @include display-flex-item;
+        width: 100%;
+        background: var(--div-table-header-background-color);
+        box-sizing: border-box;
+        border-radius: 6px 6px 0 0;
+    }
+
+    .div-table-separator {
+        width: 100%;
+        height: 1px;
+        background: var(--div-table-separator-color);
+    }
+
+    .div-table-row {
+        position: relative;
+        @include display-flex-item;
+        width: 100%;
+        box-sizing: border-box;
+
+        &:hover {
+            background: var(--div-table-row-hover-background-color);
+
+            .delete-button {
+                display: flex;
+            }
+        }
+
+        .delete-button {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            height: 100%;
+            width: 50px;
+            @include display-flex-item;
+            display: none;
+            justify-content: center;
+
+            i {
+                color: var(--div-table-delete-icon-color);
+                cursor: pointer;
+            }
+        }
+    }
+
+    .div-table-item {
+        padding: 0.85rem 1.2rem;
+    }
+
+}

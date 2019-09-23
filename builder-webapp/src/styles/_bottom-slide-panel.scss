@@ -1,0 +1,54 @@
+.bottom-slide-panel {
+    position: fixed;
+    width: 100%;
+    height: fit-content;
+    max-height: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: auto;
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+    background: none;
+    z-index: 10000000;
+
+    &.is-open {
+        visibility: visible;
+    }
+
+    &.open {
+        animation-name: slideInUp;
+    }
+
+    &.close {
+        animation-name: slideOutDown;
+    }
+
+    &.is-closed {
+        visibility: hidden;
+    }
+
+    &.is-full-screen {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: auto;
+
+        &.top-1-navbar {
+            top: $navbar-height;
+        }
+
+        &.top-2-navbar {
+            top: $navbar-height * 2;
+        }
+    }
+}
+
+@media (print), (prefers-reduced-motion: reduce) {
+  .bottom-slide-panel {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

@@ -1,0 +1,11 @@
+{
+    "id": "develop",
+    "TELEGRAM_TOKEN": "",
+    "TELEGRAM_POLLING": "true",
+    "TELEGRAM_PUBLIC_DOMAIN": "",
+    "TELEGRAM_ENDPOINT": "/telegram",
+    "FACEBOOK_PAGE_ACCESS_TOKEN": "",
+    "FACEBOOK_VERIFY_TOKEN": "",
+    "FACEBOOK_PUBLIC_DOMAIN": "",
+    "FACEBOOK_ENDPOINT": "/facebook-messenger"
+}

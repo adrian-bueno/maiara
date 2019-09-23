@@ -1,0 +1,144 @@
+@mixin display-flex-item {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+}
+
+@mixin unselectable {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+@mixin box-shadow($args...) {
+    -webkit-box-shadow: $args;
+    -moz-box-shadow: $args;
+    box-shadow: $args;
+}
+
+@mixin text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+// @mixin height-diff($a, $b) {
+//     height: -webkit-calc(#{$a} - #{$b});
+//     height: -moz-calc(#{$a} - #{$b});
+//     height: -o-calc(#{$a} - #{$b});
+//     height: calc(#{$a} - #{$b});
+// }
+
+// @mixin width-diff($a, $b) {
+//     width: -webkit-calc(#{$a} - #{$b});
+//     width: -moz-calc(#{$a} - #{$b});
+//     width: -o-calc(#{$a} - #{$b});
+//     width: calc(#{$a} - #{$b});
+// }
+
+// @mixin background-image-cover {
+//     // background-image: url();
+//     background-size: cover;
+//     background-repeat:no-repeat;
+//     background-position: center center;
+//     background-origin: border-box;
+// }
+
+// @mixin screen-size-1 {
+//     @media only screen and (max-width: 480px) {
+//         @content;
+//     }
+// }
+//
+// @mixin screen-size-2 {
+//     @media only screen and (min-width: 481px) and (max-width: 768px) {
+//         @content;
+//     }
+// }
+//
+// @mixin screen-size-3 {
+//     @media only screen and (min-width: 769px) and (max-width: 1023px) {
+//         @content;
+//     }
+// }
+//
+// @mixin screen-size-4 {
+//     @media only screen and (min-width: 1024px) and (max-width: 1215px) {
+//         @content;
+//     }
+// }
+//
+// @mixin screen-size-5 {
+//     @media only screen and (min-width: 1216px) and (max-width: 1407px) {
+//         @content;
+//     }
+// }
+//
+// @mixin screen-size-6 {
+//     @media only screen and (min-width: 1408px) and (max-width: 1600px) {
+//         @content;
+//     }
+// }
+//
+// @mixin screen-size-7 {
+//     @media only screen and (min-width: 1601px) and (max-width: 1800px) {
+//         @content;
+//     }
+// }
+//
+// @mixin screen-size-8 {
+//     @media only screen and (min-width: 1801px) and (max-width: 2000px) {
+//         @content;
+//     }
+// }
+//
+// @mixin screen-size-9 {
+//     @media only screen and (min-width: 2001px) and (max-width: 2500px) {
+//         @content;
+//     }
+// }
+//
+// @mixin screen-size-10 {
+//     @media only screen and (min-width: 2501px) {
+//         @content;
+//     }
+// }
+
+// @include screen-size-8 {
+//     // css code for screen-size-8 screens go here
+// }
+
+
+// @mixin inside-sidebar-layout {
+//     .sidebar-layout-container {
+//         @content;
+//     }
+// }
+
+// @mixin inside-sidebar-layout-menu-open {
+//     .sidebar-layout-container {
+//         .open {
+//             @content;
+//         }
+//     }
+// }
+
+// @mixin inside-responsive-container {
+//     .responsive-container {
+//         @content;
+//     }
+// }
+
+// @mixin rotate($a) {
+//   -webkit-transform: rotate($a);
+//   -moz-transform: rotate($a);
+//   -ms-transform: rotate($a);
+//   -o-transform: rotate($a);
+//   transform: rotate($a);
+// }

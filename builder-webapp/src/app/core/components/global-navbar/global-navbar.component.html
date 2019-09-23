@@ -1,0 +1,39 @@
+<nav class="navbar is-fixed-top">
+    <img class="navbar-brand" src="{{ brandImageUrl }}" alt="brand image" routerLink="/home">
+    <a class="navbar-item" routerLink="/home">Home</a>
+    <a class="navbar-item" routerLink="/assistants">Assistants</a>
+    <a class="navbar-item" routerLink="/skills">Skills</a>
+
+    <div class="fill-remaining-space"></div>
+
+    <!-- <div class="navbar-item">
+        <a class="button is-small is-rounded is-outlined is-rounded"
+            href="https://docs.maiara.ai" target="_blank" rel="noreferrer">
+                Documentation
+                <i class="icon fas fa-external-link-alt"></i>
+        </a>
+    </div> -->
+
+    <div class="navbar-item dropdown">
+        <div class="dropdown-button">
+            <a class="button is-small is-rounded is-outlined">
+                <i class="icon fas fa-cog"></i>
+            </a>
+        </div>
+        <div class="dropdown-content is-left">
+            <!-- <a routerLink="/settings" class="dropdown-item">Settings</a> -->
+            <!-- <a routerLink="/style-gallery" class="dropdown-item">Style gallery</a> -->
+
+            <div class="dropdown-separator"></div>
+
+            <label class="dropdown-item">
+                Dark theme
+                <div class="switch">
+                    <input type="checkbox" [(ngModel)]="darkThemeActive" (change)="toggleDarkTheme()">
+                    <span class="slider is-rounded"></span>
+                </div>
+            </label>
+        </div>
+    </div>
+
+</nav>

@@ -1,0 +1,19 @@
+input, textarea {
+    border: var(--input-border);
+    color: var(--input-text-color);
+    background: var(--input-background-color);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 1px var(--color-primary);
+    }
+}
+
+// input[type="text"], textarea {
+//     color: rgba(255,255,255,0.85);
+//     background-color : #252525;
+// }

@@ -1,0 +1,98 @@
+<nav class="navbar is-fixed-top is-secondary-navbar">
+    <a class="navbar-item" routerLink="<assistant-id>">
+        <img class="rounded-image is-left" src="/assets/images/skill-default-image-2.jpg" alt="Assistant picture">
+        <div class="double-text">
+            <div class="up is-bold has-text-primary">Skill</div>
+            <div class="down is-bold">{{ skillName }}</div>
+        </div>
+    </a>
+    <a *ngIf="languages?.length > 0" class="navbar-item" routerLink="intents">Intents</a>
+    <a *ngIf="languages?.length > 0" class="navbar-item" routerLink="entities">Entities</a>
+    <a *ngIf="languages?.length > 0" class="navbar-item" routerLink="dialog">Dialog</a>
+
+    <div class="fill-remaining-space"></div>
+
+    <div class="navbar-item dropdown">
+        <div class="dropdown-button" (click)="clickChangeLanguageDropdown()">
+            <div class="double-text">
+                <div class="up has-text-primary is-bold">Language</div>
+                <div class="down">{{ getLanguageName(activeLanguage) }}<i class="icon is-right fas fa-chevron-down"></i></div>
+            </div>
+        </div>
+        <div class="dropdown-content is-left">
+            <div *ngFor="let lang of languages" class="dropdown-item"
+                (tap)="changeActiveLanguage(lang)">
+                    {{ getLanguageName(lang) }}
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="navbar-item dropdown">
+        <div class="dropdown-button">
+            <div class="double-text">
+                <div class="up has-text-primary is-bold">Version</div>
+                <div class="down">3.2.1 <i class="icon is-right fas fa-chevron-down"></i></div>
+            </div>
+        </div>
+        <div class="dropdown-content is-left">
+            <a href="#" class="dropdown-item">3.2.1</a>
+            <a href="#" class="dropdown-item">3.2.0</a>
+            <a href="#" class="dropdown-item">2.4.34</a>
+        </div>
+    </div> -->
+
+    <!-- <div class="navbar-item dropdown">
+        <div class="dropdown-button">
+            <div class="double-text">
+                <div class="up has-text-primary is-bold">Environment</div>
+                <div class="down">Development <i class="icon is-right fas fa-chevron-down"></i></div>
+            </div>
+        </div>
+        <div class="dropdown-content is-left">
+            <a href="#" class="dropdown-item">Development</a>
+            <a href="#" class="dropdown-item">Staging</a>
+            <a href="#" class="dropdown-item">Production</a>
+        </div>
+    </div> -->
+
+    <!-- <div class="navbar-item" style="padding-right: 0"> -->
+    <div class="navbar-item">
+        <button class="button is-small is-rounded is-primary" (click)="saveChanges()">
+            <!-- <i class="icon is-left fas fa-truck-loading"></i> -->
+            <i class="icon is-left fas fa-save"></i>
+            Save changes
+        </button>
+    </div>
+
+    <!-- <div class="navbar-item">
+        <button class="button is-small is-rounded is-primary">
+            <i class="icon is-left fas fa-vial"></i>
+            Test chat
+        </button>
+    </div> -->
+
+</nav>
+
+
+<div class="loading-screen" *ngIf="savingSkill">
+    <div class="spinner"></div>
+    <div class="loading-text">Saving skill data...</div>
+</div>
+
+
+<div class="warning-popup" *ngIf="showChangeLanguagePopup">
+    <div class="content">
+        <div class="content-text">
+            <div *ngFor="let lang of languages" class="language-list-item"
+                (tap)="changeActiveLanguage(lang)">
+                    {{ getLanguageName(lang) }}
+            </div>
+            <p *ngIf="languages?.length === 0">
+                No languages available
+            </p>
+        </div>
+        <div class="content-footer">
+            <button class="button is-rounded is-outlined is-left-button" (tap)="cancelChangeLanguage()">Cancel</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<main class="container intents-page">
+
+    <div class="new-intent-form">
+        <input type="text" placeholder="Intent name" [(ngModel)]="newIntentName">
+        <button class="button is-primary is-rounded" (tap)="createIntent()">
+            <i class="icon is-left fas fa-plus"></i>
+            Create intent
+        </button>
+    </div>
+
+    <div class="div-table">
+        <div class="div-table-header">
+            <div class="div-table-item">Intent name</div>
+            <div class="div-table-item">Utterrances</div>
+        </div>
+
+        <div *ngFor="let intent of intents; let index = index;">
+            <div class="div-table-row">
+                <div class="div-table-item" (tap)="toggleIntentEditor(index)">{{ intent.name }}</div>
+                <div class="div-table-item" (tap)="toggleIntentEditor(index)">{{ intent.utterances?.length }}</div>
+                <div class="delete-button">
+                    <i class="fas fa-times-circle has-text-danger"
+                       (tap)="deleteIntent($event, index)">
+                    </i>
+                </div>
+            </div>
+            <div class="div-table-separator"></div>
+        </div>
+    </div>
+
+    <div class="intent-editor-container" [ngClass]="activeClases">
+        <div class="container intent-editor-close-button-container">
+            <button class="button is-rounded is-outlined"
+                (tap)="toggleIntentEditor()">
+                    <i class="icon is-left fa fa-times"></i>
+                    Close intent editor
+            </button>
+        </div>
+
+        <intent-editor *ngIf="activeIntent"
+            [(intentName)]="activeIntent.name" (intentNameChange)="onIntentNameChange($event)"
+            [(utterances)]="activeIntent.utterances" (utterancesChange)="onUtterancesChange($event)"
+            (newEntityAssigned)="onNewEntityAssigned($event)"
+            (newName)="onNewIntentName($event)">
+        </intent-editor>
+    </div>
+
+</main>
+
+
+
+<div class="warning-popup" *ngIf="warningMessage">
+    <div class="content">
+        <div class="content-text">
+            <p>{{ warningMessage }}</p>
+        </div>
+        <div class="content-footer">
+            <button class="button is-rounded is-outlined is-right-button" (tap)="closeWarningPopup()">Close</button>
+        </div>
+    </div>
+</div>

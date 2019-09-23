@@ -1,0 +1,107 @@
+@import 'mixins';
+@import 'navbar';
+
+.entities-page {
+    position: relative;
+    padding-top: 50px;
+    padding-bottom: 100px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-content: flex-start;
+    align-items: flex-start;
+    box-sizing: border-box;
+
+    .new-entity-form {
+        button {
+            margin-left: 1rem;
+        }
+        margin-bottom: 2rem;
+        @include display-flex-item;
+        justify-content: flex-end;
+    }
+
+    .div-table-row {
+        cursor: pointer;
+    }
+
+    .div-table-item {
+        width: 50%;
+    }
+
+    .entities-editor-container {
+        width: -webkit-calc(95% - 275px);
+        width: -moz-calc(95% - 275px);
+        width: calc(95% - 275px);
+        box-sizing: border-box;
+    }
+
+    .system-entities-editor-container {
+        width: 275px;
+        box-sizing: border-box;
+        position: relative;
+        border-radius: 6px;
+        padding-bottom: 1rem;
+        border: var(--system-entities-editor-border);
+    }
+
+    .entity-editor-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding: 1.5rem 1.2rem;
+    }
+
+    .entity-editor-container {
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: $navbar-height * 2;
+        animation-duration: 0.5s;
+        animation-fill-mode: both;
+        background: none;
+        padding-top: 20px;
+        background: var(--entity-editor-background-color);
+        overflow: auto;
+
+        &.is-open {
+            visibility: visible;
+        }
+
+        &.open {
+            animation-name: slideInUp;
+        }
+
+        &.close {
+            animation-name: slideOutDown;
+        }
+
+        &.is-closed {
+            visibility: hidden;
+        }
+
+        .entity-editor-close-button-container {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+@media (max-width: 845px) {
+    .entities-page {
+        flex-flow: column wrap;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+
+        .entities-editor-container {
+            width: 100%;
+        }
+
+        .system-entities-editor-container {
+            margin-top: 50px;
+        }
+    }
+}

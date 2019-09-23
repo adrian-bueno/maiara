@@ -1,0 +1,36 @@
+@import 'mixins';
+
+.new-entity-editor-container {
+    width: 100%;
+    padding: 0.8rem;
+    box-sizing: border-box;
+    font-size: 0.9rem;
+    background: var(--utterance-new-entity-editor-background-color);
+
+    .new-entity-editor {
+        // width: 100%;
+        width: fit-content;
+        padding: 0.85rem 1.2rem;
+        box-sizing: border-box;
+        border: 1px solid var(--utterance-new-entity-editor-border-color);
+        border-radius: 6px;
+        @include display-flex-item;
+        justify-content: space-between;
+
+        .new-entity-text {
+            width: fit-content;
+            max-width: 60%;
+            // flex: 1 1 auto;
+        }
+
+        .new-entity-input {
+            margin-left: 1rem;
+        }
+
+        .new-entity-button {
+            margin-left: 1rem;
+        }
+
+    }
+
+}

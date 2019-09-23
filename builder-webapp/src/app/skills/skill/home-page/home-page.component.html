@@ -1,0 +1,72 @@
+<main class="skill-home-page">
+
+    <div class="skill-header">
+        <img class="skill-profile-picture" src="/assets/images/skill-default-image-2.jpg" alt="Skill image">
+        <h1 class="skill-name" [ngClass]="{ 'is-empty': skill?.name.length === 0 }">
+            <content-editable-text *ngIf="skill"
+                [(text)]="skill.name"
+                [trimOnBlur]="true"
+                (textChange)="onNameChange($event)">
+            </content-editable-text>
+        </h1>
+        <div class="skill-description" [ngClass]="{ 'is-empty': skill?.description.length === 0 }">
+            <content-editable-text *ngIf="skill"
+                [(text)]="skill.description"
+                [trimOnBlur]="true"
+                (textChange)="onDescriptionChange($event)">
+            </content-editable-text>
+        </div>
+    </div>
+
+    <div class="skill-intent-entity-dialog-info">
+        <div class="info-container skill-intent-count-container" routerLink="intents">
+            <div class="info-container-number">{{ numIntents }}</div>
+            <div class="info-container-title">Intents</div>
+        </div>
+        <div class="info-container skill-entity-count-container" routerLink="entities">
+            <div class="info-container-number">{{ numEntities }}</div>
+            <div class="info-container-title">Entities</div>
+        </div>
+        <div class="info-container skill-node-count-container" routerLink="dialog">
+            <div class="info-container-number">{{ numNodes }}</div>
+            <div class="info-container-title">Dialog Nodes</div>
+        </div>
+    </div>
+
+    <div class="select-language-container">
+        <div class="select-language-column">
+            <div class="title">Languages</div>
+            <label
+                *ngFor="let lang of availableLanguages; let index = index"
+                class="select-language-item">
+                <div class="name">{{ lang?.name }}</div>
+                <div class="switch">
+                    <input type="checkbox" [(ngModel)]="lang.isActive" (change)="updateSkillLanguages(index, lang.id)">
+                    <span class="slider is-rounded"></span>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="delete-skill-button-container">
+        <button class="button is-danger is-outlined is-rounded" (tap)="deleteSkill()">
+            Delete skill
+        </button>
+    </div>
+
+</main>
+
+<div class="loading-screen" *ngIf="!skill">
+    <div class="spinner"></div>
+    <div class="loading-text">Downloading skill data...</div>
+</div>
+
+<div class="warning-popup" *ngIf="showWarningPopup">
+    <div class="content">
+        <div class="content-text">All language data will be deleted. Delete anyways?</div>
+        <div class="content-footer">
+            <button class="button is-rounded is-outlined is-left-button" (tap)="cancelLanguageDelete()">Cancel</button>
+            <button class="button is-rounded is-danger is-right-button" (tap)="confirmLanguageDelete()">OK</button>
+        </div>
+    </div>
+</div>

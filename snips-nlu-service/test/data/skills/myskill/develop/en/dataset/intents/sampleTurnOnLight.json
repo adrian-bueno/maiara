@@ -1,0 +1,73 @@
+{
+    "utterances": [
+        {
+            "data": [
+                {
+                    "text": "The "
+                },
+                {
+                    "text": "bedroom",
+                    "entity": "room",
+                    "slot_name": "room"
+                },
+                {
+                    "text": " is dark, please turn on the light !"
+                }
+            ]
+        },
+        {
+            "data": [
+                {
+                    "text": "Can you enlight the "
+                },
+                {
+                    "text": "living room",
+                    "entity": "room",
+                    "slot_name": "room"
+                },
+                {
+                    "text": " ?"
+                }
+            ]
+        },
+        {
+            "data": [
+                {
+                    "text": "I need some light in the "
+                },
+                {
+                    "text": "basement",
+                    "entity": "room",
+                    "slot_name": "room"
+                },
+                {
+                    "text": " please"
+                }
+            ]
+        },
+        {
+            "data": [
+                {
+                    "text": "Please put some lights in the "
+                },
+                {
+                    "text": "bathroom",
+                    "entity": "room",
+                    "slot_name": "room"
+                }
+            ]
+        },
+        {
+            "data": [
+                {
+                    "text": "Turn on the lights in the "
+                },
+                {
+                    "text": "kitchen",
+                    "entity": "room",
+                    "slot_name": "room"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,1 @@
+{"id":"node-1568595881080","name":"goodbye","position":{"x":379,"y":273},"actions":[{"type":"SendText","text":"See you soon!","quickReplies":[]}],"conditions":[],"fallback":{"changeContext":false,"returnHereOnContextChangeEnd":false,"onContextReturnResponse":{"type":"SendText","text":"","quickReplies":[]},"response":{"type":"SendText","text":"","quickReplies":[]}}}

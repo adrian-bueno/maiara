@@ -1,0 +1,17 @@
+.badge {
+    font-size: 0.7rem;
+    padding: 0.7rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    margin: 0;
+    width: fit-content;
+    border-radius: 50px;
+
+    &.is-small {
+        font-size: 0.7rem;
+        padding: 0.5rem;
+        padding-top: 0.2rem;
+        padding-bottom: 0.2rem;
+        border-radius: 10px;
+    }
+}

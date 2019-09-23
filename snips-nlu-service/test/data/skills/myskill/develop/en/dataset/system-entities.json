@@ -1,0 +1,30 @@
+[
+    {
+        "name": "snips/amountOfMoney",
+        "enabled": false
+    },
+    {
+        "name": "snips/datetime",
+        "enabled": true
+    },
+    {
+        "name": "snips/duration",
+        "enabled": false
+    },
+    {
+        "name": "snips/number",
+        "enabled": false
+    },
+    {
+        "name": "snips/ordinal",
+        "enabled": false
+    },
+    {
+        "name": "snips/percentage",
+        "enabled": false
+    },
+    {
+        "name": "snips/temperature",
+        "enabled": false
+    }
+]

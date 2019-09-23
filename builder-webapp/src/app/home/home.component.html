@@ -1,0 +1,21 @@
+<main class="home-page">
+
+    <div class="home-page-hero">
+        <img src="{{ brandImageUrl }}" alt="brand image">
+        <div class="home-page-hero-subtitle">
+            Open source chatbot/assistant builder
+        </div>
+    </div>
+
+    <div class="assistants-and-skills-info">
+        <div class="info-container assistant-info-container" routerLink="/assistants">
+            <div class="info-container-number">{{ numAssistants }}</div>
+            <div class="info-container-title">Assistants</div>
+        </div>
+        <div class="info-container skill-info-container" routerLink="/skills">
+            <div class="info-container-number">{{ numSkills }}</div>
+            <div class="info-container-title">Skills</div>
+        </div>
+    </div>
+
+</main>

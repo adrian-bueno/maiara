@@ -1,0 +1,85 @@
+@import 'variables';
+
+
+.node {
+    position: absolute;
+    width: fit-content !important;
+    // padding: 0.5rem 0.7rem;
+    color: var(--dialog-editor-node-text-color);
+    background: var(--dialog-editor-node-background-color);
+    border: var(--dialog-editor-node-border);
+    cursor: pointer;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    text-align: center;
+    z-index: 1;
+    // transition: box-shadow 200ms cubic-bezier(0, 0, 0.2, 1);
+    // box-shadow: var(--node-box-shadow);
+    border-radius: $node-border-radius;
+    min-width: 70px;
+    max-width: 200px;
+    width: 175px !important; // Fixed with for now, because if node size changes edges positions have to be updated
+    min-height: 37px;
+    box-sizing: border-box;
+    font-size: 0.9rem;
+    text-align: left;
+
+    &:active {
+        // box-shadow: var(--node-box-shadow-active);
+        cursor: move;
+    }
+
+    .name {
+        box-sizing: border-box;
+        padding: 0.5rem 1rem;
+        font-weight: bold;
+        width: 100%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .condition {
+        position: relative;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+        .condition-text {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        height: 30px;
+    }
+
+    .port {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        stroke: var(--dialog-editor-node-port-border-color);
+        stroke-width: 2;
+        fill: var(--dialog-editor-node-port-color);
+
+        &.is-condition-out-port {
+            top: 0;
+            right: -15px;
+        }
+
+        &:hover {
+            fill: var(--color-primary);
+            cursor: crosshair;
+        }
+
+        &.is-left {
+            left: -17px;
+        }
+
+        &.is-right {
+            right: -17px;
+        }
+    }
+}

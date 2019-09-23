@@ -1,0 +1,54 @@
+.utterance-item-container {
+    padding: 0.85rem 0;
+
+    &.is-last {
+        padding-right: 1.2rem;
+        width: -webkit-calc(100% - 1.2rem);
+        width: -moz-calc(100% - 1.2rem);
+        width: -o-calc(100% - 1.2rem);
+        width: calc(100% - 1.2rem);
+    }
+
+    &.is-first {
+        padding-left: 1.2rem;
+    }
+
+    &.is-first-and-last {
+        width: -webkit-calc(100% - 2.4rem);
+        width: -moz-calc(100% - 2.4rem);
+        width: -o-calc(100% - 2.4rem);
+        width: calc(100% - 2.4rem);
+    }
+
+    .utterance-item {
+        width: fit-content;
+        font-size: 0.9rem;
+        white-space: pre;
+
+        &.is-entity {
+            background: var(--utterance-entity-default-background-color);
+            color: var(--utterance-entity-default-text-color);
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.4rem;
+        }
+
+        &.is-last {
+            width: 100%;
+            min-width: 3rem;
+        }
+
+        &.has-space-right {
+            margin-right: 0.3rem;
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        .slot-text {
+            color: blue;
+            font-size: 0.5rem;
+        }
+    }
+
+}

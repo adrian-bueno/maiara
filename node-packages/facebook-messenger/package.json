@@ -1,0 +1,25 @@
+{
+  "name": "@maiara/facebook-messenger",
+  "description": "",
+  "version": "0.0.0",
+  "author": "Adrián Bueno Jiménez <adrian.buenoj@gmail.com>",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "build:test": "tsc --p tsconfig.test.json"
+  },
+  "dependencies": {
+    "@maiara/core": "^0.0.0",
+    "axios": "^0.19.0"
+  },
+  "peerDependencies": {
+    "express": "^4.17.1",
+    "rxjs": "^6.5.2"
+  },
+  "devDependencies": {
+    "express": "^4.17.1",
+    "rxjs": "^6.5.2"
+  }
+}

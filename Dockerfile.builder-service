@@ -1,0 +1,49 @@
+FROM node:10.16-alpine as builder
+
+ENV NPM_CONFIG_LOGLEVEL=error
+ENV NPM_CONFIG_COLOR=false
+
+WORKDIR /usr/src/app
+
+# Install general devDependencies
+COPY lerna.json ./
+COPY package*.json ./
+RUN npm install
+
+# Copy package.json from node-packages
+COPY ./node-packages/core/package*.json ./node-packages/core/
+COPY ./node-packages/minio/package*.json ./node-packages/minio/
+
+# Copy builder-service package.json
+COPY ./builder-service/package*.json ./builder-service/
+
+RUN npm run bootstrap
+
+# Copy everything from node-packages
+COPY ./node-packages/core ./node-packages/core/
+COPY ./node-packages/minio ./node-packages/minio/
+
+# Copy everything from builder-service
+COPY ./builder-service ./builder-service/
+
+# Build packages and builder-service
+RUN npm run build
+
+# Remove devDependencies from root
+RUN npm prune --production
+# RUN npm run clean:devDependencies
+
+
+
+FROM node:10.16-alpine
+
+ENV NPM_CONFIG_LOGLEVEL=error
+ENV NPM_CONFIG_COLOR=false
+ENV NODE_ENV=production
+
+COPY --from=builder /usr/src/app /usr/src/app
+
+WORKDIR /usr/src/app/builder-service
+
+EXPOSE 8080
+CMD [ "npm", "start" ]

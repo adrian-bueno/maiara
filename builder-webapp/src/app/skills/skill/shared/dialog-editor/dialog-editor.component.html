@@ -1,0 +1,62 @@
+<!-- <button class="button is-small" style="position: fixed; bottom: 30px; left: 10px; z-index: 1000000;" (click)="print()">Print</button> -->
+
+<div #dialogEditorContainerElem class="dialog-editor-container">
+
+    <div class="dialog-editor">
+
+        <button class="button is-rounded is-small is-primary new-node-button"
+            (tap)="newEmptyNode()">
+                <i class="icon is-left fas fa-plus"></i>
+                New node
+        </button>
+
+        <node *ngFor="let node of dialog.nodes; let index = index;"
+            [node]="node"
+            (tap)="onNodeClick(index, node)"
+            (onMoveStart)="onNodeMoveStart(index, node)"
+            (onMove)="onNodeMove(index, node, $event)"
+            (onMoveEnd)="onNodeMoveEnd(index, node)"
+            (newEdgeStart)="onNewEdgeStart(index, node, $event)"
+            (newEdgeMoving)="onNewEdgeMoving(index, node, $event)"
+            (newEdgeEnd)="onNewEdgeEnd(index, node, $event)">
+        </node>
+
+        <svg class="edge-container">
+            <line *ngIf="newEdge" class="is-new-edge"
+                  [attr.x1]="newEdge.start.position.x" [attr.y1]="newEdge.start.position.y"
+                  [attr.x2]="newEdge.end.position.x" [attr.y2]="newEdge.end.position.y"/>
+            <line *ngFor="let edge of edgeMapOutputs | keyvalue"
+                [attr.x1]="edge.value.start.position.x" [attr.y1]="edge.value.start.position.y"
+                [attr.x2]="edge.value.end.position.x" [attr.y2]="edge.value.end.position.y"
+                (press)="deleteEdge(edge.value)"
+                (tap)="deleteEdge(edge.value)"/>
+        </svg>
+
+        <div class="node-editor-container" [ngClass]="nodeEditorActiveClases">
+            <button class="button is-rounded is-outlined node-editor-close-button"
+                (tap)="closeNodeEditor()">
+                    <i class="fas fa-times"></i>
+            </button>
+            <node-editor *ngIf="selectedNode"
+                [node]="selectedNode"
+                (nodeChange)="onNodeEditorChange($event)"
+                (nameChanged)="onNodeEditorNameChanged($event)"
+                (actionAdded)="onNodeEditorActionAdded($event)"
+                (actionChanged)="onNodeEditorActionChanged($event)"
+                (actionDeleted)="onNodeEditorActionDeleted($event)"
+                (conditionAdded)="onNodeEditorConditionAdded($event)"
+                (conditionTextChanged)="onNodeEditorConditionTextChanged($event)"
+                (conditionDeleted)="onNodeEditorConditionDeleted($event)"
+                (fallbackChanged)="onFallbackChanged($event)">
+            </node-editor>
+            <div class="node-editor-delete-button-container" *ngIf="selectedNode?.id !== 'start'">
+                <button class="button is-small is-rounded is-outlined is-danger-on-hover node-editor-delete-button"
+                    (tap)="deleteSelectedNode()">
+                        Delete node
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+</div>

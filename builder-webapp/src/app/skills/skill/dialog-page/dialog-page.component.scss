@@ -1,0 +1,15 @@
+@import 'mixins';
+@import 'navbar';
+
+
+.dialog-editor-container {
+    position: absolute;
+    width: 100%;
+    top: $navbar-height*2;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+    // border: 5px solid red;
+    overflow: auto;
+}

@@ -1,0 +1,1 @@
+{"id":"node-1569179272970","name":"Lights 3","position":{"x":641,"y":445},"actions":[{"type":"SendText","text":"Luces 3","quickReplies":[]}],"conditions":[],"fallback":{"changeContext":false,"returnHereOnContextChangeEnd":false,"onContextReturnResponse":{"type":"SendText","text":"","quickReplies":[]},"response":{"type":"SendText","text":"","quickReplies":[]}}}

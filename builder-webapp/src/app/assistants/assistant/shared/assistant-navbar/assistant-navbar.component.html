@@ -1,0 +1,90 @@
+<nav class="navbar is-fixed-top is-secondary-navbar">
+    <a class="navbar-item" routerLink="<assistant-id>">
+        <img class="rounded-image is-left" src="/assets/images/assistant-default-image-2.jpg" alt="Assistant picture">
+        <div class="double-text">
+            <div class="up is-bold has-text-primary">Assistant</div>
+            <div class="down is-bold">{{ assistant?.name }}</div>
+        </div>
+    </a>
+
+    <div class="fill-remaining-space"></div>
+
+    <b class="navbar-item environments-title">Environments:</b>
+    <a class="navbar-item" *ngFor="let envId of environmentsIds"
+        routerLink="environment/{{ envId }}">{{ envId }}</a>
+
+    <div class="navbar-item">
+        <button class="button is-small is-rounded is-outlined" (click)="addNewEnvironment()">
+            <i class="icon is-left fas fa-plus"></i>
+            New environment
+        </button>
+    </div>
+
+    <div class="navbar-item" style="padding-right: 0;">
+        <button class="button is-small is-rounded is-primary" (click)="saveAssistant()">
+            <i class="icon is-left fas fa-save"></i>
+            Save changes
+        </button>
+    </div>
+
+    <div class="navbar-item">
+        <button class="button is-small is-rounded is-primary" (click)="startAssistant()">
+            <i class="icon is-left fas fa-truck-loading"></i>
+            Train and deploy
+        </button>
+    </div>
+
+</nav>
+
+<div class="loading-screen" *ngIf="savingAssistant">
+    <div class="spinner"></div>
+    <div class="loading-text">Saving assistant data...</div>
+</div>
+
+<div class="loading-screen" *ngIf="startingAssistant">
+    <div class="spinner"></div>
+    <div class="loading-text">Training and starting assistant...</div>
+</div>
+
+<div class="warning-popup" *ngIf="showStartAssistantPopup">
+    <div class="content">
+        <div class="content-text">
+            <div *ngFor="let environmentsId of environmentsIds" class="environment-id-item-list"
+                (tap)="confirmStartAssistant(environmentsId)">
+                    {{ environmentsId }}
+            </div>
+            <p *ngIf="environmentsIds?.length === 0">
+                No environments available
+            </p>
+        </div>
+        <div class="content-footer">
+            <button class="button is-rounded is-outlined is-left-button" (tap)="cancelStartAssistant()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div class="warning-popup" *ngIf="warningPopup">
+    <div class="content">
+        <div class="content-text">
+            <p>{{ warningMessage }}</p>
+        </div>
+        <div class="content-footer">
+            <button class="button is-rounded is-outlined is-right-button" (tap)="closeWarningPopup()">Close</button>
+        </div>
+    </div>
+</div>
+
+<div class="warning-popup" *ngIf="showNewEnvironmentPopup">
+    <div class="content" style="min-width: 320px !important;">
+        <div class="content-text">
+            <label>
+                <div>Environment ID</div>
+                <input type="text" [(ngModel)]="newEnvironmentId">
+            </label>
+        </div>
+        <div class="content-footer">
+            <button class="button is-rounded is-outlined is-left-button" (tap)="cancelAddNewEnvironment()">Cancel</button>
+            <button class="button is-rounded is-right-button is-primary" (tap)="confirmAddNewEnvironment()">Create environment</button>
+        </div>
+    </div>
+</div>

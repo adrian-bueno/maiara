@@ -1,0 +1,37 @@
+<div class="utterance-entity-table-container" *ngIf="numEntities > 0">
+
+    <div class="utterance-entity-table-header">
+        <div class="utterance-entity-table-item">Text</div>
+        <div class="utterance-entity-table-item">Entity</div>
+        <div class="utterance-entity-table-item">Slot</div>
+    </div>
+
+    <div *ngFor="let item of utterance; let index = index">
+        <div *ngIf="item.entity" class="utterance-entity-table-row">
+            <div class="utterance-entity-table-item">
+                <content-editable-text
+                    [(text)]="item.text"
+                    (textChange)="onItemTextChange(index, $event)"
+                    [wrapWords]="true">
+                </content-editable-text>
+            </div>
+            <div class="utterance-entity-table-item">
+                <span class="is-entity">{{ item.entity }}</span>
+            </div>
+            <div class="utterance-entity-table-item">
+                <content-editable-text
+                    [(text)]="item.slotName"
+                    (textChange)="onItemTextChange(index, $event)"
+                    [wrapWords]="true">
+                </content-editable-text>
+            </div>
+            <div class="delete-button">
+                <i class="fas fa-times-circle has-text-danger"
+                   (tap)="deleteEntity($event, index)"
+                   (contextmenu)="deleteEntity($event, index, true)">
+                </i>
+            </div>
+        </div>
+    </div>
+
+</div>

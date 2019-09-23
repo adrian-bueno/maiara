@@ -1,0 +1,1 @@
+{"id":"node-1567963169152","name":"Weather2","position":{"x":662,"y":66},"actions":[{"type":"SendText","text":"Weather 2","quickReplies":[]}],"conditions":[],"fallback":{"changeContext":false,"returnHereOnContextChangeEnd":false,"onContextReturnResponse":{"type":"SendText","text":"","quickReplies":[]},"response":{"type":"SendText","text":"","quickReplies":[]}}}

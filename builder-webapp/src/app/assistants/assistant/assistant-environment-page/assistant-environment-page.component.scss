@@ -1,0 +1,97 @@
+
+.assistant-environment-page {
+
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    padding-bottom: 150px;
+
+    .environment-container {
+        width: 750px;
+        margin: 0 auto;
+        margin-top: 30px;
+
+        .title {
+            font-size: 1.3rem;
+        }
+
+        .environment-table {
+            font-size: 0.9rem;
+            margin-top: 30px;
+
+            .environment-table-title {
+                font-size: 1.1rem;
+                font-weight: bold;
+                padding: 1rem 0;
+            }
+
+            .environment-table-row {
+                width: 100%;
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: flex-start;
+                align-items: center;
+                align-content: center;
+                box-sizing: border-box;
+
+                .environment-table-item {
+                    padding: 0 1rem;
+                    height: 2.5rem;
+                    box-sizing: border-box;
+                    display: flex;
+                    flex-flow: row nowrap;
+                    justify-content: flex-start;
+                    align-items: center;
+                    align-content: center;
+                    overflow-y: hidden;
+                    overflow-x: auto;
+                }
+
+                .environment-variable-name-title {
+                    width: 35%;
+                    background: rgba(0,0,0,0.1);
+                    font-size: 1rem;
+                    font-weight: bold;
+                }
+
+                .environment-variable-value-title {
+                    width: 65%;
+                    background: rgba(0,0,0,0.1);
+                    font-size: 1.1rem;
+                    font-weight: bold;
+                }
+
+                .environment-variable-name {
+                    width: 35%;
+                }
+
+                .environment-variable-value {
+                    width: 65%;
+                }
+
+            }
+
+        }
+
+
+        .delete-environment-button-container {
+            width: 100%;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            margin-top: 120px;
+        }
+
+
+    }
+
+    @media (max-width: 850px) {
+        .environment-container {
+            width: 90%;
+        }
+    }
+
+}

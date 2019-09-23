@@ -1,0 +1,54 @@
+<div class="entity-editor-container">
+    <div class="container entity-editor">
+        <div class="entity-editor-header">
+            <h2 class="entity-name" [ngClass]="{ 'is-empty': entity.name.length === 0 }">
+                <content-editable-text
+                    [(text)]="entity.name"
+                    [regexInvalid]="entityNameRegexInvalid"
+                    [trimOnBlur]="true"
+                    (textChange)="onEntityNameChange($event)">
+                </content-editable-text>
+            </h2>
+            <div class="fill-remaining-space"></div>
+            <button class="button is-primary is-rounded" (tap)="addNewEmptyValue()">
+                <i class="icon is-left fas fa-plus"></i>
+                New value
+            </button>
+        </div>
+
+        <div class="div-table">
+            <div class="div-table-header">
+                <div class="div-table-item div-table-item-value">Value</div>
+                <div class="div-table-item div-table-item-synonyms">Synonyms</div>
+            </div>
+
+            <div *ngFor="let entityData of entity.data; let index = index;">
+                <div class="div-table-row">
+                    <div class="div-table-item div-table-item-value">
+                        <content-editable-text
+                            [(text)]="entityData.value"
+                            [trimOnBlur]="true"
+                            (textChange)="onValueTextChange(index, $event)">
+                        </content-editable-text>
+                    </div>
+                    <div class="div-table-item div-table-item-synonyms">
+                        <content-editable-text
+                            [text]="synonymsToText(entityData.synonyms)"
+                            [trimOnBlur]="true"
+                            (textChange)="onSynonymsTextChange(index, $event)"
+                            (onBlur)="onSynonymsTextBlur(index, $event)">
+                        </content-editable-text>
+                    </div>
+                    <div class="delete-button">
+                        <i class="fas fa-times-circle has-text-danger"
+                           (tap)="deleteValue(index)">
+                        </i>
+                    </div>
+                </div>
+                <div class="div-table-separator"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

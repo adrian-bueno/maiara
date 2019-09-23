@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <base href="/">
+    <title>Maiara Builder</title>
+    <meta name="description" content="Maiara assistant builder app">
+    <meta name="theme-color" id="meta-theme-color" content="#000"/>
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+    <link rel="apple-touch-icon" sizes="192x192" href="assets/icons/icon-192x192.png"/>
+    <link rel="dns-prefetch" href="https://maiara.ai:8080">
+    <link rel="dns-prefetch" href="https://use.fontawesome.com">
+</head>
+
+<body>
+    <!--[if lt IE 11]>
+        <p>
+            You are using an <strong>outdated</strong> browser.
+            Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+        </p>
+    <![endif]-->
+    <app-root></app-root>
+
+    <!-- https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery -->
+    <noscript id="deferred-styles">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    </noscript>
+    <script>
+        var loadDeferredStyles = function() {
+            var addStylesNode = document.getElementById("deferred-styles");
+            var replacement = document.createElement("div");
+            replacement.innerHTML = addStylesNode.textContent;
+            document.body.appendChild(replacement)
+            addStylesNode.parentElement.removeChild(addStylesNode);
+        };
+        var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+            window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+        if (raf) raf(function() {
+            window.setTimeout(loadDeferredStyles, 0);
+        });
+        else window.addEventListener('load', loadDeferredStyles);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+@import 'mixins';
+@import 'navbar';
+
+.intents-page {
+    position: relative;
+    padding-top: 50px;
+
+    .new-intent-form {
+        button {
+            margin-left: 1rem;
+        }
+        margin-bottom: 2rem;
+        @include display-flex-item;
+        justify-content: flex-end;
+    }
+
+    .div-table-row {
+        cursor: pointer;
+    }
+
+    .div-table-item {
+        width: 50%;
+    }
+
+    .intent-editor-container {
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: $navbar-height * 2;
+        animation-duration: 0.5s;
+        animation-fill-mode: both;
+        background: none;
+        padding-top: 20px;
+        background: var(--intent-editor-background-color);
+        overflow: auto;
+
+        &.is-open {
+            visibility: visible;
+        }
+
+        &.open {
+            animation-name: slideInUp;
+        }
+
+        &.close {
+            animation-name: slideOutDown;
+        }
+
+        &.is-closed {
+            visibility: hidden;
+        }
+
+        .intent-editor-close-button-container {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+        }
+    }
+}

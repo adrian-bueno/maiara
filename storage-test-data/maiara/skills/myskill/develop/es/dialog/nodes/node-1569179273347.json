@@ -1,0 +1,1 @@
+{"id":"node-1569179273347","name":"Weather 3","position":{"x":641,"y":318},"actions":[{"type":"SendText","text":"Tiempo 3","quickReplies":[]}],"conditions":[],"fallback":{"changeContext":false,"returnHereOnContextChangeEnd":false,"onContextReturnResponse":{"type":"SendText","text":"","quickReplies":[]},"response":{"type":"SendText","text":"","quickReplies":[]}}}

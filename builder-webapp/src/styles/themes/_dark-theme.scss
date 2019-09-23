@@ -1,0 +1,116 @@
+@mixin dark-theme {
+    --text-color:           #eee;
+    --secondary-text-color: #bbb;
+
+    --background-color: #191e20;
+
+    // Button
+    --button-color: var(--gray3);
+    --button-text-color: hsl(0, 0%, 90%);
+
+    // Navbar
+    --navbar-background: #222a2d;
+    --navbar-border-bottom: none;
+    --secondary-navbar-background: #283337;
+    --secondary-navbar-border-bottom: none;
+
+    // Generic
+    --hr-color: #252e32;
+
+    // Dialog editor
+    --dialog-editor-grid-color: rgba(255, 255, 255, .05);
+
+    --dialog-editor-node-background-color: var(--gray2);
+    --dialog-editor-node-text-color: var(--gray7);
+    --dialog-editor-node-border: 1.5px solid var(--gray3);
+    --dialog-editor-node-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .15),
+                                     0 2px 2px 0 rgba(0, 0, 0, .09),
+                                     0 1px 5px 0 rgba(0, 0, 0, .07);
+    --dialog-editor-node-box-shadow-active: 0 5px 5px -3px rgba(0, 0, 0, .15),
+                                            0 8px 10px 1px rgba(0, 0, 0, .09),
+                                            0 3px 14px 2px rgba(0, 0, 0, .07);
+    --dialog-editor-node-port-color: var(--gray3);
+    --dialog-editor-node-port-border-color: var(--gray4);
+    --dialog-editor-edge-color: var(--gray4);
+
+    // Node editor
+    --node-editor-background-color: rgba(34, 42, 45, 1);
+    --node-editor-text-color: inherit;
+    --node-editor-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.2);
+    --node-editor-action-border: 1px solid rgba(255,255,255,0.05);
+
+    // Dropdown
+    --dropdown-content-background: #283337;
+    --dropdown-content-color: #fff;
+    --dropdown-content-item-hover-background: #{lighten(#283337, 5%)};
+    --dropdown-content-item-hover-color: inherit;
+    --dropdown-content-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.35);
+    --dropdown-separator-color: #1c2426;
+
+    // Switch
+    --switch-active-background: var(--color-primary);
+    --switch-active-color: hsl(0, 0%, 90%);
+    --switch-not-active-background: hsl(195, 14%, 35%);
+    --switch-not-active-color: hsl(195, 14%, 85%);
+
+    // Tooltip
+    --tooltip-background-color: var(--gray5);
+    --tooltip-text-color: var(--gray0);
+
+    // DivTable
+    --div-table-background-color: none;
+    --div-table-header-background-color: rgba(33, 41, 45);
+    --div-table-row-hover-background-color: rgba(0,0,0,0.04);
+    --div-table-delete-icon-color: var(--color-danger);
+    --div-table-separator-color: #252e32;
+
+    // Utterrance
+    --utterance-list-border-color: #252e32;
+    --utterance-entity-default-background-color: var(--gray3);
+    --utterance-entity-default-text-color: var(--gray7);
+    --utterance-new-entity-editor-border-color: #252e32;
+    --utterance-new-entity-editor-background-color: transparent;
+    --utterance-entity-table-background-color: rgba(0,0,0,0.05);
+    --utterance-entity-table-header-background-color: rgba(0,0,0,0.05);
+    --utterance-entity-table-delete-icon-color: var(--color-danger);
+
+    // Intent
+    --intent-editor-background-color: hsl(197, 12%, 12%);
+
+    // Entities
+    --system-entities-editor-border: 1px solid #252e32;
+    --entity-editor-background-color: hsl(197, 12%, 12%);
+
+    // Form
+    --input-text-color: inherit;
+    --input-background-color: var(--gray1);
+    --input-border: 1px solid rgba(255,255,255,0.05);
+
+    // Skill
+    --skill-languages-border: 1px solid #252e32;
+
+    // Skill selection
+    --skill-list-item-background: var(--gray2);
+    --skill-list-item-background-hover: var(--gray3);
+    --skill-list-item-color: inherit;
+    --skill-list-item-border: 1px solid rgba(0,0,0,0.2);
+
+    // Assistant selection
+    --assistant-list-item-background: var(--gray2);
+    --assistant-list-item-background-hover: var(--gray3);
+    --assistant-list-item-color: inherit;
+    --assistant-list-item-border: 1px solid rgba(0,0,0,0.2);
+
+    // Loading screen
+    --loading-screen-background: rgba(0,0,0,0.8);
+    --loading-screen-spinner-color: var(--color-primary);
+    --loading-screen-text-color: var(--color-primary);
+
+    // Warning popup
+    --warning-popup-screen-background-color: rgba(0,0,0,0.8);
+    --warning-popup-background-color: var(--gray1);
+    --warning-popup-text-color: var(--gray6);
+    --warning-popup-box-shadow: 1px 3px 5px 2px rgba(0,0,0,0.75);
+
+
+}

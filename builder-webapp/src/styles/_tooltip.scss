@@ -1,0 +1,98 @@
+
+$tooltip-font-size: 0.8rem;
+$tooltip-border-radius: 6px;
+$tooltip-arrow-border-width: 5px;
+$tooltip-separation: 0.5rem;
+$tooltip-padding: 0.4rem 0.65rem;
+
+
+.tooltip {
+    position: relative;
+
+    .tooltip-content {
+        position: absolute;
+        visibility: hidden;
+        // visibility: visible;
+        width: fit-content;
+        background-color: var(--tooltip-background-color);
+        color: var(--tooltip-text-color);
+        text-align: center;
+        border-radius: $tooltip-border-radius;
+        font-size: $tooltip-font-size;
+        z-index: 1;
+        opacity: 0;
+        // opacity: 1;
+        transition: opacity 0.3s;
+        box-sizing: border-box;
+        padding: $tooltip-padding;
+
+        &::after {
+            content: " ";
+            position: absolute;
+            border-width: $tooltip-arrow-border-width;
+            border-style: solid;
+        }
+
+        &.is-top {
+            bottom: 100%;
+            bottom: calc(100% + #{$tooltip-separation});
+            left: 0;
+            &::after {
+                top: 100%;
+                left: 50%;
+                border-color: var(--tooltip-background-color) transparent transparent transparent;
+            }
+
+        }
+        &.is-right {
+            top: 0;
+            left: 100%;
+            left: calc(100% + #{$tooltip-separation});
+            &::after {
+                top: 50%;
+                top: calc(50% - #{$tooltip-arrow-border-width});
+                right: 100%;
+                border-color: transparent var(--tooltip-background-color) transparent transparent;
+            }
+        }
+        &.is-bottom {
+            top: 100%;
+            top: calc(100% + #{$tooltip-separation});
+            left: 0;
+            &::after {
+                bottom: 100%;
+                left: 50%;
+                border-color: transparent transparent var(--tooltip-background-color) transparent;
+            }
+        }
+        &.is-left {
+            top: 0;
+            right: 100%;
+            right: calc(100% + #{$tooltip-separation});
+            &::after {
+                top: 50%;
+                top: calc(50% - #{$tooltip-arrow-border-width});
+                left: 100%;
+                border-color: transparent transparent transparent var(--tooltip-background-color);
+            }
+        }
+
+        &.has-no-arrow {
+            &::after {
+                content: "";
+                border-width: 0;
+            }
+        }
+    }
+
+    &:hover .tooltip-content {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    &.is-visible .tooltip-content {
+        visibility: visible;
+        opacity: 1;
+    }
+
+}

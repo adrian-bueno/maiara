@@ -1,0 +1,132 @@
+@import 'mixins';
+
+.node-editor {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 2rem;
+    padding-bottom: 3rem;
+
+    .node-name {
+        font-size: 1.3rem;
+        width: 100%;
+        margin-bottom: 2rem;
+        font-weight: bold;
+
+        &.is-empty {
+            color: var(--color-danger);
+            border-bottom: 1px solid var(--color-danger);
+
+            &::before {
+                font-family: 'Font Awesome\ 5 Free';
+                content: '\f071';
+            }
+        }
+    }
+
+    .node-editor-section-title-and-button {
+        width: 100%;
+        @include display-flex-item;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+
+        .node-editor-section-title {
+            font-size: 1.1rem;
+            opacity: 0.75;
+            width: fit-content;
+            margin: 0;
+        }
+
+        .node-editor-section-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.75;
+            width: fit-content;
+            margin: 0;
+        }
+    }
+
+    .separator {
+        width: 100%;
+        height: 20px;
+    }
+
+    .new-action-dropdown {
+        padding: 8px 0;
+        color: inherit;
+        &:hover {
+            color: inherit;
+        }
+
+        .dropdown-content {
+            font-size: 0.9rem;
+        }
+    }
+
+    .node-actions-container {
+        width: 100%;
+        box-sizing: border-box;
+
+        .node-action {
+            position: relative;
+            width: 100%;
+            margin-bottom: 1rem;
+            border: var(--node-editor-action-border);
+            padding: 1rem;
+            border-radius: 6px;
+            box-sizing: border-box;
+
+            &:hover {
+                .delete-node-action-button {
+                    display: flex;
+                }
+            }
+
+            .delete-node-action-button {
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 34px;
+                height: 34px;
+                display: none;
+                color: var(--color-danger);
+                cursor: pointer;
+
+                i {
+                    margin: auto;
+                }
+            }
+        }
+    }
+
+    .node-condition {
+        position: relative;
+        margin: 10px 0;
+
+        &:hover {
+            .delete-condition-button {
+                display: flex;
+            }
+        }
+
+        .delete-condition-button {
+            position: absolute;
+            right: 0;
+            width: 34px;
+            height: 34px;
+            display: none;
+            color: var(--color-danger);
+            cursor: pointer;
+
+            i {
+                margin: auto;
+            }
+        }
+
+        input {
+            width: 100%;
+        }
+    }
+
+
+
+}

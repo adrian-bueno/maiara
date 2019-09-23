@@ -1,0 +1,38 @@
+<div #nodeElem class="node" cdkDrag cdkDragBoundary=".dialog-editor"
+    [cdkDragDisabled]="isDragDisabled"
+    (cdkDragStarted)="onCdkDragStart($event)"
+    (cdkDragMoved)="onCdkDragMoved($event)"
+    (cdkDragEnded)="onCdkDragEnded($event)"
+    [ngStyle]="{ left: getXpx(), top: getYpx() }">
+
+    <div class="name">{{ node?.name }}</div>
+
+    <svg class="port is-left" *ngIf="node.id !== 'start'"
+        (tap)="onPortTap($event, 'Input', null)"
+        (mouseup)="onPortMouseUp($event, 'Input', null)"
+        (touchstart)="onPortTouchStart($event, 'Input', null)"
+        (touchend)="onPortTouchEnd($event, 'Input', null)"
+        (forcedtouchend)="onForcedTouchEndEvent($event, 'Input', null)"
+        (mousedown)="onPortMousePanStart($event, 'Input', null)"
+        (panmove)="onPortPanMove($event, 'Input', null)"
+        (panend)="onPortPanEnd($event, 'Input', null)">
+            <rect x="9" y="9" rx="4" ry="4" width="12" height="12"/>
+    </svg>
+
+    <div class="condition" *ngFor="let condition of node.conditions; let index = index;">
+        <div class="condition-text">{{ condition.text }}</div>
+
+        <svg class="port is-condition-out-port"
+            (tap)="onPortTap($event, 'Output', index)"
+            (mouseup)="onPortMouseUp($event, 'Output', index)"
+            (touchstart)="onPortTouchStart($event, 'Output', index)"
+            (touchend)="onPortTouchEnd($event, 'Output', index)"
+            (forcedtouchend)="onForcedTouchEndEvent($event, 'Output', index)"
+            (mousedown)="onPortMousePanStart($event, 'Output', index)"
+            (panmove)="onPortPanMove($event, 'Output', index)"
+            (panend)="onPortPanEnd($event, 'Output', index)">
+                <circle cx="15" cy="15" r="6"/>
+        </svg>
+    </div>
+
+</div>

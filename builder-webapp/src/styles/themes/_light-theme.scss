@@ -1,0 +1,119 @@
+@mixin light-theme {
+    --text-color:           #111;
+    --secondary-text-color: #333;
+
+    --background-color: #fff;
+
+    // Button
+    --button-color: var(--gray5);
+    --button-text-color: hsl(0, 0%, 10%);
+
+    // Navbar
+    --navbar-background: #fff;
+    --navbar-border-bottom: 1px solid #eee;
+    --secondary-navbar-background: #f5f5f5;
+    --secondary-navbar-border-bottom: none;
+    // --secondary-navbar-background: #fff;
+    // --secondary-navbar-border-bottom: 1px solid #eee;
+
+    // Generic
+    --hr-color: #eee;
+
+    // Dialog editor
+    --dialog-editor-grid-color: rgba(0, 0, 0, .05);
+
+    --dialog-editor-node-background-color: var(--gray6);
+    --dialog-editor-node-text-color: var(--gray1);
+    --dialog-editor-node-border: 1.5px solid var(--gray5);
+    --dialog-editor-node-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.15),
+                                     0 2px 2px 0 rgba(0, 0, 0, 0.09),
+                                     0 1px 5px 0 rgba(0, 0, 0, 0.07);
+    --dialog-editor-node-box-shadow-active: 0 5px 5px -3px rgba(0, 0, 0, 0.15),
+                                            0 8px 10px 1px rgba(0, 0, 0, 0.09),
+                                            0 3px 14px 2px rgba(0, 0, 0, 0.07);
+    --dialog-editor-node-port-color: var(--gray3);
+    --dialog-editor-node-port-border-color: var(--gray1);
+    --dialog-editor-edge-color: var(--gray3);
+
+    // Node editor
+    --node-editor-background-color: rgba(242, 242, 242, 1);
+    --node-editor-text-color: inherit;
+    --node-editor-box-shadow: none;
+    --node-editor-box-shadow: 0px 2px 5px 0px rgba(100, 100, 100, 0.3);
+    --node-editor-action-border: 1px solid rgba(0,0,0,0.08);
+
+    // Dropdown
+    --dropdown-content-background: #f5f5f5;
+    --dropdown-content-color: #000;
+    --dropdown-content-item-hover-background: #{darken(#f5f5f5, 5%)};
+    --dropdown-content-item-hover-color: inherit;
+    --dropdown-content-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    --dropdown-separator-color: #ddd;
+
+    // Switch
+    --switch-active-background: var(--color-primary);
+    --switch-active-color: hsl(0, 0%, 90%);
+    --switch-not-active-background: hsl(0, 0%, 65%);
+    --switch-not-active-color: hsl(0, 0%, 96%);
+
+    // Tooltip
+    --tooltip-background-color: var(--gray1);
+    --tooltip-text-color: var(--gray7);
+
+    // DivTable
+    --div-table-background-color: none;
+    --div-table-header-background-color: rgba(0,0,0,0.04);
+    --div-table-row-hover-background-color: rgba(0,0,0,0.02);
+    --div-table-delete-icon-color: var(--color-danger);
+    --div-table-separator-color: #eee;
+
+    // Utterrance
+    --utterance-list-border-color: #eee;
+    --utterance-entity-default-background-color: var(--gray6);
+    --utterance-entity-default-text-color: var(--gray2);
+    --utterance-new-entity-editor-border-color: #eee;
+    --utterance-new-entity-editor-background-color: transparent;
+    --utterance-entity-table-background-color: rgba(0,0,0,0.02);
+    --utterance-entity-table-header-background-color: rgba(0,0,0,0.04);
+    --utterance-entity-table-delete-icon-color: var(--color-danger);
+
+    // Intent
+    --intent-editor-background-color: #fff;
+
+    // Entities
+    --system-entities-editor-border: 1px solid #eee;
+    --entity-editor-background-color: #fff;
+
+    // Form
+    --input-text-color: inherit;
+    --input-background-color: var(--gray7);
+    --input-border: 1px solid rgba(0,0,0,0.2);
+
+    // Skill
+    --skill-languages-border: 1px solid #eee;
+
+    // Skill selection
+    --skill-list-item-background: inherit;
+    --skill-list-item-background-hover: rgba(0,0,0,0.04);
+    --skill-list-item-color: inherit;
+    --skill-list-item-border: 1px solid rgba(0,0,0,0.1);
+
+    // Assistant selection
+    --assistant-list-item-background: inherit;
+    --assistant-list-item-background-hover: rgba(0,0,0,0.04);
+    --assistant-list-item-color: inherit;
+    --assistant-list-item-border: 1px solid rgba(0,0,0,0.1);
+
+    // Loading screen
+    --loading-screen-background: rgba(255,255,255,0.8);
+    --loading-screen-spinner-color: var(--color-primary);
+    --loading-screen-text-color: var(--color-primary);
+
+    // Warning popup
+    --warning-popup-screen-background-color: rgba(255,255,255,0.8);
+    --warning-popup-background-color: white;
+    --warning-popup-text-color: black;
+    --warning-popup-box-shadow: 1px 3px 5px 2px rgba(0,0,0,0.2);
+
+
+}

@@ -1,0 +1,7 @@
+<div *ngIf="itemTextSelection && active" class="new-entity-editor-container">
+    <div class="new-entity-editor">
+        <div class="new-entity-text">{{ itemTextSelection?.selection?.text }}</div>
+        <input class="new-entity-input" type="text" [(ngModel)]="entityName" placeholder="Entity name">
+        <button class="button new-entity-button" (tap)="createEntity()">Create entity</button>
+    </div>
+</div>

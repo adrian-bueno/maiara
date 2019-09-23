@@ -1,0 +1,109 @@
+$navbar-height: 2.75rem !default;
+$navbar-z-index: 1001 !default;
+
+$secondary-navbar-z-index: 1000 !default;
+
+$navbar-item-padding-y: 0.5rem !default;
+$navbar-item-padding-x: 0.75rem !default;
+
+.navbar {
+    width: 100%;
+    // height: $navbar-height;
+    max-height: $navbar-height;
+    min-height: $navbar-height;
+    background: var(--navbar-background);
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    z-index: $navbar-z-index;
+    border-bottom: var(--navbar-border-bottom);
+    @include unselectable;
+
+    &.is-fixed-top {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+    }
+
+    &.is-secondary-navbar {
+        top: $navbar-height;
+        background: var(--secondary-navbar-background);
+        border-bottom: var(--secondary-navbar-border-bottom);
+        z-index: $secondary-navbar-z-index;
+    }
+
+}
+
+img {
+    &.navbar-brand {
+        height: $navbar-height - 1.1rem;
+        width: auto;
+        padding: 0.5rem 0.75rem;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+.navbar-item {
+    display: inline-block;
+    margin: 0;
+    padding: $navbar-item-padding-y $navbar-item-padding-x;
+    flex-grow: 0;
+    flex-shrink: 0;
+    line-height: 1.8;
+    position: relative;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--text-color);
+
+    &:hover {
+        color: var(--color-primary);
+    }
+
+    &.active {
+        color: var(--color-primary);
+    }
+
+    .double-text {
+        padding: 0;
+        margin: 0;
+        float: right;
+
+        .up {
+            font-size: 0.8rem !important;
+            line-height: 0.8rem !important;
+            margin-bottom: 0.1rem !important;
+            width: 100%;
+        }
+        .down {
+            width: 100%;
+            line-height: 0.9rem !important;
+            font-size: 0.9rem !important;
+        }
+    }
+
+    .rounded-image {
+        width: $navbar-height - $navbar-item-padding-y * 2;
+        height: $navbar-height - $navbar-item-padding-y * 2;
+        border-radius: 50%;
+        float: left;
+
+        &.is-left {
+            margin-right: 0.5rem;
+        }
+    }
+
+}
+
+.has-navbar-fixed-top {
+    padding-top: $navbar-height;
+}

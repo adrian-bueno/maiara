@@ -1,0 +1,49 @@
+.send-text-dialog-action {
+    width: 100%;
+
+    .title {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        align-items: center;
+
+        &.quick-replies-title {
+            margin: 1rem 0;
+        }
+    }
+
+    input {
+        width: 100%;
+    }
+
+    .quick-reply-input {
+        margin-bottom: 0.4rem;
+        position: relative;
+        margin: 10px 0;
+
+        &:hover {
+            .delete-quick-reply-button {
+                display: flex;
+            }
+        }
+
+        .delete-quick-reply-button {
+            position: absolute;
+            right: 0;
+            width: 34px;
+            height: 34px;
+            display: none;
+            color: var(--color-danger);
+            cursor: pointer;
+
+            i {
+                margin: auto;
+            }
+        }
+    }
+
+}

@@ -1,0 +1,20 @@
+{
+    "data": [
+        {
+            "value": "basement",
+            "synonyms": [
+                "cellar"
+            ]
+        },
+        {
+            "value": "living room",
+            "synonyms": [
+                "lounge",
+                "family room"
+            ]
+        }
+    ],
+    "use_synonyms": true,
+    "automatically_extensible": false,
+    "matching_strictness": 1.0
+}

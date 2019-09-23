@@ -1,0 +1,108 @@
+$dropdown-button-padding-y: 0.4rem !default;
+$dropdown-button-padding-x: 0.75rem !default;
+$dropdown-button-arrow-separation: 0.5rem !default;
+$dropdown-content-margin-top: 0.5rem !default;
+$dropdown-separator-size: 1px !default;
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    z-index: 3;
+
+    &:hover .dropdown-content {
+        display: block;
+    }
+
+    // &:hover .dropdown-button {
+    //     color: var(--color-primary);
+    // }
+
+    .dropdown-button {
+        @include display-flex-item;
+        font-size: 0.9rem;
+        border: none;
+        padding: $dropdown-button-padding-y $dropdown-button-padding-x;
+        cursor: pointer;
+        white-space: nowrap;
+
+        .icon {
+            padding: 0;
+            margin: 0;
+
+            &.is-right {
+                margin-left: $dropdown-button-arrow-separation;
+            }
+            &.is-left {
+                margin-right: $dropdown-button-arrow-separation;
+            }
+        }
+
+        .double-text {
+            padding: 0;
+            margin: 0;
+
+            .up {
+                font-size: 0.8rem !important;
+                line-height: 0.8rem !important;
+                margin-bottom: 0.15rem !important;
+                width: 100%;
+            }
+            .down {
+                width: 100%;
+                line-height: 0.9rem !important;
+                font-size: 0.9rem !important;
+            }
+        }
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background: var(--dropdown-content-background);
+        color: var(--dropdown-content-color);
+        box-shadow: var(--dropdown-content-box-shadow);
+        margin-top: $dropdown-content-margin-top;
+        min-width: 120px;
+
+        &.is-left {
+            right: 0;
+        }
+
+        .dropdown-item {
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+            cursor: pointer;
+
+            &.has-border {
+                border-bottom: 1px solid red;
+            }
+
+            &:hover {
+                background: var(--dropdown-content-item-hover-background);
+                color: var(--dropdown-content-item-hover-color);
+            }
+        }
+
+        .dropdown-separator {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            height: $dropdown-separator-size;
+            background: var(--dropdown-separator-color);
+        }
+    }
+}
+
+.navbar-item .dropdown-button {
+    padding: 0;
+}
+
+.navbar-item:hover .dropdown-button {
+    color: var(--color-primary);
+}

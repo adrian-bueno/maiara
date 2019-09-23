@@ -1,0 +1,6 @@
+<div class="utterance-editor-container" [ngClass]="{ active: isActive }" (click)="onUtteranceEditorClick()">
+    <utterance-line-editor [enableScroll]="isActive"></utterance-line-editor>
+    <new-entity-editor [active]="isActive"></new-entity-editor>
+    <utterance-entity-editor *ngIf="isActive"></utterance-entity-editor>
+    <!-- <button class="button is-small" (click)="print()">Print</button> -->
+</div>

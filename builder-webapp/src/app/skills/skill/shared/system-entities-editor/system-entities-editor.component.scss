@@ -1,0 +1,38 @@
+.system-entities-editor {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+
+    .system-entities-editor-item {
+        width: 100%;
+        padding: 0.5rem 1.2rem;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+        align-content: center;
+        cursor: pointer;
+        box-sizing: border-box;
+
+        &:hover {
+            background: rgba(255,255,255,0.03);
+        }
+
+        .entity-name {
+            width: fit-content;
+        }
+
+        .switch {
+            position: relative;
+            align-self: flex-end;
+            // margin-right: 21px;
+        }
+    }
+
+}

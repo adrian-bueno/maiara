@@ -1,0 +1,146 @@
+<main class="container page">
+
+    <button class="button is-info is-rounded" (click)="changeToLightTheme()">Light Theme</button>
+    <button class="button is-secondary is-rounded" (click)="changeToDarkTheme()">Dark Theme</button>
+
+    <section>
+        <h2>Gray colors</h2>
+        <hr>
+        <div style="width: 200px; height: 50px; background: var(--gray7);"></div>
+        <div style="width: 200px; height: 50px; background: var(--gray6);"></div>
+        <div style="width: 200px; height: 50px; background: var(--gray5);"></div>
+        <div style="width: 200px; height: 50px; background: var(--gray4);"></div>
+        <div style="width: 200px; height: 50px; background: var(--gray3);"></div>
+        <div style="width: 200px; height: 50px; background: var(--gray2);"></div>
+        <div style="width: 200px; height: 50px; background: var(--gray1);"></div>
+        <div style="width: 200px; height: 50px; background: var(--gray0);"></div>
+    </section>
+
+    <section>
+        <h2>Headings</h2>
+        <hr>
+        <h1>h1. Heading 1</h1>
+        <h2>h2. Heading 2</h2>
+        <h3>h3. Heading 3</h3>
+        <h4>h4. Heading 4</h4>
+        <h5>h5. Heading 5</h5>
+        <h6>h6. Heading 6</h6>
+
+        <hr>
+        <div class="is-size-1">Size 1</div>
+        <div class="is-size-2">Size 2</div>
+        <div class="is-size-3">Size 3</div>
+        <div class="is-size-4">Size 4</div>
+        <div class="is-size-5">Size 5</div>
+        <div class="is-size-6">Size 6</div>
+        <div class="is-size-7">Size 7</div>
+        <div class="is-size-8">Size 8</div>
+
+    </section>
+
+    <section>
+        <h2>Paragraph</h2>
+        <hr>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </section>
+
+    <section>
+        <h2>Buttons</h2>
+        <hr>
+        <div class="button">Button</div>
+        <button class="button">Button</button>
+        <button class="button" disabled>Button</button>
+        <button class="button is-small is-rounded">Button</button>
+        <button class="button is-very-small is-rounded">Button</button>
+        <button class="button is-large">Button</button>
+        <button class="button is-very-large">Button</button>
+        <button class="button is-outlined">Button</button>
+        <button class="button is-outlined is-rounded">Button</button>
+        <hr>
+        <button class="button is-primary is-small is-rounded is-outlined">
+            <i class="icon is-left fas fa-external-link-alt"></i>
+            Documentation
+        </button>
+        <button class="button is-small is-rounded is-outlined">
+            Documentation
+            <i class="icon fas fa-external-link-alt"></i>
+        </button>
+        <a href="https://docs.maiara.ai" target="_blank" rel="noopener" class="button is-small is-rounded is-outlined">
+            Documentation
+            <i class="icon fas fa-external-link-alt"></i>
+        </a>
+        <hr>
+        <div class="button is-primary">Primary</div>
+        <button class="button is-primary">Primary</button>
+        <button class="button is-primary" disabled>Primary</button>
+        <button class="button is-primary is-small is-rounded">Primary</button>
+        <button class="button is-primary is-very-small is-rounded">Primary</button>
+        <button class="button is-primary is-large">Primary</button>
+        <button class="button is-primary is-very-large">Primary</button>
+        <hr>
+        <button class="button is-secondary is-rounded">Secondary</button>
+        <hr>
+        <a class="button is-success">Success</a>
+        <button class="button is-success">Success</button>
+        <hr>
+        <a class="button is-warning">Warning</a>
+        <button class="button is-warning">Warning</button>
+        <hr>
+        <a class="button is-danger">Danger</a>
+        <button class="button is-danger">Danger</button>
+        <hr>
+        <a class="button is-info">Info</a>
+        <button class="button is-info">Info</button>
+        <hr>
+        <a class="button is-red">Red</a>
+        <button class="button is-red">Red</button>
+        <hr>
+        <a class="button is-blue">Blue</a>
+        <hr>
+        <a class="button is-green">Green</a>
+        <hr>
+        <a class="button is-yellow">Yellow</a>
+        <hr>
+        <a class="button is-orange">Orange</a>
+        <hr>
+        <a class="button is-purple">Purple</a>
+        <hr>
+        <a class="button is-pink">Pink</a>
+    </section>
+
+    <section>
+        <h2>Bottom slide panel</h2>
+        <hr>
+
+        <button (click)="toggleBottomPanel()">Toggle bottom panel</button>
+
+        <bottom-slide-panel [(isOpen)]="bottomPanelIsOpen" [closeOnClickOut]="true">
+            <div class="is-full-width is-primary">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti voluptatibus dolore quod, culpa rerum necessitatibus optio mollitia veniam repudiandae aliquid, nesciunt, consequuntur accusantium illum magni voluptatum minima perspiciatis doloremque ipsa!
+            </div>
+        </bottom-slide-panel>
+    </section>
+
+    <section>
+        <h2>Tooltips</h2>
+        <hr>
+        <button class="button tooltip">
+            Button with tooltip
+            <div class="tooltip-content is-top">This is a tooltip!</div>
+        </button>
+        <br><br>
+        <div class="button tooltip">
+            <div class="tooltip-content is-right has-no-arrow">
+                <div style="padding: 8px 12px; font-size: 0.9rem; white-space: normal; width: 150px;">
+                    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+                    <div>Nulla, sint quod culpa assumenda est, dolore, vero reprehenderit delectus, eligendi esse ea earum veritatis recusandae.</div>
+                </div>
+            </div>
+            Esto es un boton
+        </div>
+    </section>
+
+
+</main>

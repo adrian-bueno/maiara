@@ -1,0 +1,39 @@
+<div class="intent-editor-container">
+    <div class="container intent-editor">
+        <div class="intent-editor-header">
+            <h2 class="intent-name" [ngClass]="{ 'is-empty': intentName.length === 0 }">
+                <content-editable-text
+                    [(text)]="intentName"
+                    [regexInvalid]="intentNameRegexInvalid"
+                    [trimOnBlur]="true"
+                    (textChange)="onIntentNameChange($event)">
+                </content-editable-text>
+            </h2>
+            <div class="fill-remaining-space"></div>
+            <button class="button is-primary is-rounded" (tap)="addNewEmptyUtterance()">
+                <i class="icon is-left fas fa-plus"></i>
+                New utterance
+            </button>
+        </div>
+
+        <div class="utterance-list">
+            <div class="utterance-list-separator"></div>
+            <div *ngFor="let utterance of utterances; let last = last; let index = index"
+                class="intent-utterance">
+                    <div class="delete-utterance-button">
+                        <i class="fas fa-times-circle has-text-danger"
+                           (tap)="deleteUtterance(index)">
+                        </i>
+                    </div>
+                    <utterance-editor
+                        [(utterance)]="utterance"
+                        (utteranceChange)="onUtteranceChange(index, $event)"
+                        (newEntityAssigned)="onNewEntityAssigned($event)">
+                    </utterance-editor>
+                    <div class="utterance-list-separator"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

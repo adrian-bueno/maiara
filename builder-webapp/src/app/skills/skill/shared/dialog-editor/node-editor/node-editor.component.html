@@ -1,0 +1,133 @@
+<div class="node-editor" *ngIf="node">
+
+    <h3 class="node-name" [ngClass]="{ 'is-empty': node.name.length === 0 }">
+        <content-editable-text
+            [(text)]="node.name"
+            [trimOnBlur]="true"
+            (textChange)="onNodeNameChange($event)">
+        </content-editable-text>
+    </h3>
+
+    <div class="node-editor-section-title-and-button" *ngIf="node.id !== 'start'">
+        <h4 class="node-editor-section-title has-text-primary is-bold">
+            Actions
+        </h4>
+        <div class="dropdown new-action-dropdown">
+            <div class="dropdown-button button is-small is-rounded">
+                <i class="icon is-left fas fa-plus"></i>
+                New action
+            </div>
+            <div class="dropdown-content is-left">
+                <div class="dropdown-item" (tap)="newEmptySendTextAction()">
+                    New text message
+                </div>
+                <div class="dropdown-item" (tap)="newEmptyAssignContextVariableAction()">
+                    Context variable
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngFor="let action of node.actions; let index = index" class="node-actions-container">
+        <div [ngSwitch]="action.type" class="node-action">
+
+            <div class="delete-node-action-button" (tap)="deleteAction(index)">
+                <i class="icon is-left fas fa-times-circle"></i>
+            </div>
+
+            <send-text-dialog-action
+                *ngSwitchCase="'SendText'"
+                [action]="action"
+                (actionChange)="onActionChange(index, action)">
+            </send-text-dialog-action>
+
+            <assign-context-variable-dialog-action
+                *ngSwitchCase="'AssignContextVariable'"
+                [action]="action"
+                (actionChange)="onActionChange(index, action)">
+            </assign-context-variable-dialog-action>
+
+        </div>
+    </div>
+
+    <div class="separator"></div>
+
+    <div class="node-editor-section-title-and-button">
+        <h4 class="node-editor-section-title has-text-primary is-bold">
+            Conditions
+        </h4>
+        <button class="button is-small is-rounded" (tap)="newEmptyCondition()">
+            <i class="icon is-left fas fa-plus"></i>
+            New condition
+        </button>
+    </div>
+
+    <div *ngFor="let condition of node.conditions; let index = index" class="node-condition">
+        <div class="delete-condition-button" (tap)="deleteCondition(index, condition)">
+            <i class="icon is-left fas fa-times-circle"></i>
+        </div>
+        <input type="text" [(ngModel)]="condition.text"
+            (ngModelChange)="onConditionTextChange(index, condition.text)">
+    </div>
+
+    <div class="separator"></div>
+
+    <div *ngIf="!isLeaf">
+        <div class="node-editor-section-title-and-button" *ngIf="node?.fallback">
+            <h4 class="node-editor-section-title has-text-primary is-bold">
+                Fallback
+            </h4>
+        </div>
+
+        <div *ngIf="node?.fallback?.changeContext !== undefined"
+            class="node-editor-section-title-and-button">
+            <h5 class="node-editor-section-subtitle">
+                <div style="margin-bottom: 12px;">Change context</div>
+                <label>
+                    <div class="switch">
+                        <input type="checkbox" [(ngModel)]="node.fallback.changeContext" (change)="fallbackChange()">
+                        <span class="slider is-rounded"></span>
+                    </div>
+                </label>
+            </h5>
+        </div>
+
+        <div *ngIf="node?.fallback?.returnHereOnContextChangeEnd !== undefined && node?.fallback?.changeContext"
+            class="node-editor-section-title-and-button">
+            <h5 class="node-editor-section-subtitle">
+                <div style="margin-bottom: 12px;">Return here on context change end</div>
+
+                <label>
+                    <div class="switch">
+                        <input type="checkbox" [(ngModel)]="node.fallback.returnHereOnContextChangeEnd" (change)="fallbackChange()">
+                        <span class="slider is-rounded"></span>
+                    </div>
+                </label>
+            </h5>
+        </div>
+
+        <div *ngIf="node?.fallback?.onContextReturnResponse && node?.fallback?.returnHereOnContextChangeEnd && node?.fallback?.changeContext"
+            class="node-editor-section-title-and-button">
+            <h5 class="node-editor-section-subtitle">
+                Fallback return message
+            </h5>
+        </div>
+        <div class="node-actions-container" *ngIf="node?.fallback?.onContextReturnResponse && node?.fallback?.returnHereOnContextChangeEnd && node?.fallback?.changeContext">
+            <div class="node-action">
+                <send-text-dialog-action [action]="node?.fallback.onContextReturnResponse"></send-text-dialog-action>
+            </div>
+        </div>
+
+        <div *ngIf="node?.fallback?.response && !node?.fallback?.changeContext"  class="node-editor-section-title-and-button" style="margin-top: 30px">
+            <h5 class="node-editor-section-subtitle">
+                Fallback message
+            </h5>
+        </div>
+        <div *ngIf="node?.fallback?.response && !node?.fallback?.changeContext" class="node-actions-container">
+            <div class="node-action">
+                <send-text-dialog-action [action]="node?.fallback.response"></send-text-dialog-action>
+            </div>
+        </div>
+    </div>
+
+</div>

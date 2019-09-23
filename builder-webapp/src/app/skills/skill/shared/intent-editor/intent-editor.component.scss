@@ -1,0 +1,86 @@
+@import 'mixins';
+@import 'navbar';
+
+.intent-editor-container {
+    position: absolute;
+    width: 100%;
+    // top: 0;
+    // bottom: 0;
+    // left: 0;
+    // right: 0;
+    background: inherit;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    background: var(--intent-editor-background-color);
+}
+.intent-editor {
+    position: relative;
+    padding-bottom: 20px;
+
+    .intent-editor-header {
+        width: 100%;
+        height: fit-content;
+        margin-bottom: 25px;
+        @include display-flex-item;
+
+        .intent-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 0 0.8rem;
+            min-width: 20px;
+
+            &.is-empty {
+                color: var(--color-danger);
+                border-bottom: 1px solid var(--color-danger);
+
+                &::before {
+                    font-family: 'Font Awesome\ 5 Free';
+                    content: '\f071';
+                }
+            }
+        }
+    }
+
+    .utterance-list {
+        position: relative;
+        border-radius: 10px;
+        // border: 1px solid var(--utterance-list-border-color);
+        // padding: 0.5rem 0;
+
+        .intent-utterance {
+            position: relative;
+
+            &:hover {
+                .delete-utterance-button {
+                    display: flex;
+                }
+            }
+
+            .delete-utterance-button {
+                position: absolute;
+                top: 0;
+                right: -50px;
+                width: 50px;
+                height: 42px;
+                @include display-flex-item;
+                justify-content: center;
+                display: none;
+
+                i {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .utterance-list-separator {
+            width: 100%;
+            height: 1px;
+            background: var(--utterance-list-border-color);
+        }
+
+    }
+
+}
