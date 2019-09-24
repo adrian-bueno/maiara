@@ -16,6 +16,9 @@ export class AssignContextVariableDialogActionComponent {
     @Output() actionChange = new EventEmitter<AssignContextVariableDialogAction>();
 
     onChange() {
+        if (this.action.variableName) {
+            this.action.variableName = this.action.variableName.replace(/[\$#%&\/()]/gi, "");
+        }
         this.actionChange.emit(this.action);
     }
 

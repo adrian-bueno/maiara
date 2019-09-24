@@ -167,6 +167,8 @@ export class AssistantEngine {
 
             const nluResult = await this.processNLUService(context, message);
 
+            console.log("NLU RESULT", JSON.stringify(nluResult, null, 4));
+
             let dialogEngineOutput = await this.processDialogEngine({ channel, context, message, nluResult });
 
             if (dialogEngineOutput.fallback && dialogEngineOutput.fallback.changeContext) {
