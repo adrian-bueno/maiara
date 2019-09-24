@@ -32,12 +32,21 @@ def minio_download_json(minio_client, bucket, path):
     return json.loads(data.read())
 
 
-def remove_empty_intents(intents):
+def clean_intents(intents):
     clean_intents = {}
     for key in intents.keys():
         if (len(intents[key]["utterances"]) > 0):
+            intents[key]["utterances"] = clean_utterance_entities(intents[key]["utterances"])
             clean_intents[key] = intents[key]
     return clean_intents
+
+
+def clean_utterance_entities(utterances):
+    for utterance in utterances:
+        for item in utterance.get("data"):
+            if item.get("entity") is not None and item.get("slot_name") is None:
+                item["slot_name"] = item["entity"]
+    return utterances
 
 
 def minio_download_dataset(minio_client, bucket, path, type):
@@ -64,7 +73,7 @@ def minio_download_dataset(minio_client, bucket, path, type):
         entities = minio_download_json_objects(minio_client, bucket, get_object_names(entities_objects))
         system_entities = minio_download_json(minio_client, bucket, path+"/system-entities.json")
 
-        intents = remove_empty_intents(intents)
+        intents = clean_intents(intents)
 
         entities = add_system_entites_to_entities(system_entities, entities)
 
