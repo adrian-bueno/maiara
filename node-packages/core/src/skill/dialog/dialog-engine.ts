@@ -189,12 +189,14 @@ export class DialogEngine {
         node.actions.forEach(action => {
             if (action.type === DialogActionType.SendText) {
                 const a = <SendTextDialogAction> action;
-                input.channel.reply(input.message,
-                    <TextReply> {
-                        type: ReplyType.Text,
-                        text: parseStringWithValues(a.text, input.nluResult, input.context.variables),
-                        quickReplies: this.processQuickReplies(a.quickReplies, input)
-                    });
+                if (a.text && a.text.trim()) {
+                    input.channel.reply(input.message,
+                        <TextReply> {
+                            type: ReplyType.Text,
+                            text: parseStringWithValues(a.text, input.nluResult, input.context.variables),
+                            quickReplies: this.processQuickReplies(a.quickReplies, input)
+                        });
+                }
             } else if (action.type === DialogActionType.AssignContextVariable) {
                 const a = <AssignContextVariableDialogAction> action;
                 if (a.variableName) {
