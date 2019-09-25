@@ -14,10 +14,10 @@ export interface SnipsNLUIntentResult {
 }
 
 export interface SnipsNLUSlotResult {
-    entity: SnipsNLUSystemEntityType;
+    entity: string;
     range: SnipsNLURange;
     rawValue: string;
-    name: string;
+    slotName: string;
     value: SnipsNLUSlotValue;
 }
 

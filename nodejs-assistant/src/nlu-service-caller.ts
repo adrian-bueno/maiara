@@ -31,7 +31,7 @@ export class NLUServiceCaller implements NLUService {
             },
             slots: snipsResult.slots.map(slot => {
                 const nluSlot: NLUSlotResult = {
-                    name: slot.name,
+                    name: slot.slotName,
                     entity: slot.entity,
                     rawValue: slot.rawValue,
                     value: slot.value,
