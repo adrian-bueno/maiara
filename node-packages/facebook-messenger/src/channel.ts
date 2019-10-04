@@ -101,6 +101,8 @@ export class FacebookMessengerChannel implements Channel {
                     // Respond with '403 Forbidden' if verify tokens do not match
                     res.sendStatus(403);
                 }
+            } else {
+                res.sendStatus(400);
             }
         });
 
