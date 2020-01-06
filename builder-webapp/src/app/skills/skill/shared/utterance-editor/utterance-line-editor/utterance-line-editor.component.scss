@@ -11,3 +11,57 @@
     overflow-y: hidden;
     overflow-x: auto;
 }
+
+
+.utterance-line-editor-2 {
+    position: relative;
+    width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+    display: inline-block;
+    // display: flex;
+    // flex-flow: row wrap;
+    // justify-content: flex-start;
+    // align-items: center;
+    // align-content: center;
+    overflow: hidden;
+    padding: 1rem;
+    font-size: 0.9rem;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    line-break: anywhere;
+
+    span {
+        display: inline-block;
+        float: left;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        line-break: anywhere;
+
+        &.is-entity {
+            // background: rgba(0,0,0,0.5);
+            background: blue;
+            color: white;
+            margin: 0;
+            padding: 0;
+            padding: 0.2rem 0.4rem;
+            border-radius: 5px;
+        }
+    }
+
+
+
+    .full-text-copy {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+        font-size: 0.9rem;
+        background: transparent;
+        color: rgba(255, 0, 0, 0.55);
+    }
+}

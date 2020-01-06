@@ -1,11 +1,41 @@
 import {
-    Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef, OnDestroy, Input
+    Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef, OnDestroy, Input, ViewChild, ElementRef
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { UtteranceItem } from '../../models';
 import { UtteranceEditorService, ItemChange } from '../utterance-editor.service';
 import { TextSelection } from '@app/shared/content-editable-text';
+
+
+
+
+
+
+function getCaretPosition() {
+    const selection: Selection = window.getSelection();
+
+    // if (!this.elem.nativeElement.contains(selection.focusNode) ||
+    //     !window.getSelection().toString().trim()) {
+    //         return;
+    // }
+
+    const range: Range = selection.getRangeAt(0);
+
+    // console.log("range", {
+    //     text: window.getSelection().toString(),
+    //     start: range.startOffset,
+    //     end: range.endOffset
+    // });
+
+    return range.startOffset - 1;
+}
+
+
+
+
+
+
 
 
 @Component({
@@ -18,6 +48,7 @@ export class UtteranceLineEditorComponent implements OnInit, OnDestroy {
 
     @Input() enableScroll: boolean = false;
 
+    // TODO use set function
     utterance: UtteranceItem[];
     utteranceChangeSubscription: Subscription;
     itemChangeSubscription: Subscription;
@@ -31,6 +62,10 @@ export class UtteranceLineEditorComponent implements OnInit, OnDestroy {
         text: ""
     }
 
+    @ViewChild("editor", { static: false }) editor: ElementRef;
+
+    fullText: string = "";
+
     constructor(private editorService: UtteranceEditorService, private cdRef: ChangeDetectorRef) {
         // this.cdRef.detach();
     }
@@ -38,6 +73,7 @@ export class UtteranceLineEditorComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.utterance = this.editorService.getUtterance();
         this.updateFlags();
+        this.updateFullText();
         this.cdRef.detectChanges();
 
         this.utteranceChangeSubscription = this.editorService.onUtteranceChange$
@@ -57,12 +93,14 @@ export class UtteranceLineEditorComponent implements OnInit, OnDestroy {
     private onDeleteItemFromService(index: number) {
         this.utterance.splice(index, 1);
         this.updateFlags();
+        this.updateFullText();
         this.cdRef.detectChanges();
     }
 
     private onUtteranceChangeFromService(utterance: UtteranceItem[]) {
         this.utterance = [...utterance];
         this.updateFlags();
+        this.updateFullText();
         this.cdRef.detectChanges();
     }
 
@@ -71,6 +109,7 @@ export class UtteranceLineEditorComponent implements OnInit, OnDestroy {
             return;
         this.utterance[change.index] = change.item;
         this.updateFlags();
+        this.updateFullText();
         this.cdRef.detectChanges();
     }
 
@@ -92,6 +131,15 @@ export class UtteranceLineEditorComponent implements OnInit, OnDestroy {
         } else {
             this.firstItemIsEntity = false;
         }
+    }
+
+    updateFullText() {
+        if (this.utterance) {
+            this.fullText = this.utterance.reduce((accumulator, currentItem) => {
+                return accumulator + currentItem.text;
+            }, "");
+        }
+        // console.log("fullText", this.fullText);
     }
 
     onItemChange(index: number, item: UtteranceItem) {
@@ -117,6 +165,27 @@ export class UtteranceLineEditorComponent implements OnInit, OnDestroy {
         if (item.text) {
             this.editorService.addNewItemAtEnd(item);
         }
+    }
+
+    onKeyPress($event: KeyboardEvent) {
+        // console.log($event);
+        $event.preventDefault();
+
+        // $event.
+    }
+
+    onKeyDown($event: KeyboardEvent) {
+        // console.log("down", $event);
+        // getCaretPosition();
+        // console.log("caret: ", getCaretPosition());
+        // $event.preventDefault();
+    }
+
+    onKeyUp($event: KeyboardEvent) {
+        // console.log("down", $event);
+        // getCaretPosition();
+        // console.log("caretup: ", getCaretPosition());
+        // $event.preventDefault();
     }
 
 }

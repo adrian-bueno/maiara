@@ -1,4 +1,4 @@
-<div class="utterance-line-editor overflow-hidden"
+<!-- <div class="utterance-line-editor overflow-hidden"
     [ngClass]="{ 'overflow-x-auto': enableScroll }">
 
     <utterance-line-editor-item
@@ -21,5 +21,22 @@
                 [isLast]="true">
             </utterance-line-editor-item>
     </div>
+
+</div> -->
+
+<div #editor class="utterance-line-editor-2" contenteditable>
+
+    <!-- <div class="full-text-copy"
+        contenteditable
+        (keypress)="onKeyPress($event)"
+        (keydown)="onKeyDown($event)"
+        (keyup)="onKeyUp($event)">
+            {{ fullText }}
+    </div> -->
+
+    <span *ngFor="let item of utterance; let first = first; let last = last; let index = index"
+        [ngClass]="{ 'is-entity': item.entity }">
+            {{ item.text }}
+    </span>
 
 </div>
