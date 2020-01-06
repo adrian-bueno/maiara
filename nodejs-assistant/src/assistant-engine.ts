@@ -1,11 +1,12 @@
 import {
     Assistant, DialogEngineInput, DialogEngine, ChannelConfig, Channel,
-    TextReply, ReplyType, ExpressApplication, Dialog, MultiLanguageSkill,
-    Context, DialogEngineOutput, NLUResult, AssistantActiveServices, Message, getRandomInteger, MessageType, sleep
+    TextReply, ChannelReplyType, ExpressApp,
+    Context, DialogEngineOutput, NLUResult, AssistantActiveServices,
+    ChannelEvent, getRandomInteger, ChannelEventType, sleep, TextEvent
 } from '@maiara/core';
 import { TelegramChannel, TELEGRAM, TelegramChannelConfig } from '@maiara/telegram';
 import { FACEBOOK_MESSENGER, FacebookMessengerChannelConfig, FacebookMessengerChannel } from '@maiara/facebook-messenger';
-import { NLUServiceCaller, NLUServiceCallerConfig } from './nlu-service-caller';
+import { NLUServiceCaller } from './nlu-service-caller';
 import { MinioStorage, MinioStorageConfig } from '@maiara/minio';
 import { Db, MongoClient } from 'mongodb';
 import cld from "cld";
@@ -14,7 +15,7 @@ import cld from "cld";
 export interface AssistantEngineConfig {
     assistantId: string;
     environmentId: string;
-    app: ExpressApplication;
+    app: ExpressApp;
     storageConfig: MinioStorageConfig;
 }
 
@@ -62,14 +63,14 @@ export class AssistantEngine {
         })
     }
 
-    private async configureChannels(channelsConfig: ChannelConfig[], app: ExpressApplication) {
+    private async configureChannels(channelsConfig: ChannelConfig[], app: ExpressApp) {
         channelsConfig
             .map(config => this.buildChannel(config, app))
             .filter(channel => channel !== null)
-            .forEach(channel => this.setupMessagePipeline(channel))
+            .forEach(channel => this.setupChannelEventPipeline(channel))
     }
 
-    private buildChannel(config: ChannelConfig, app: ExpressApplication): Channel {
+    private buildChannel(config: ChannelConfig, app: ExpressApp): Channel {
         switch(config.channelType) {
             case TELEGRAM:
                 const telegramConfig = <TelegramChannelConfig> config;
@@ -87,29 +88,29 @@ export class AssistantEngine {
         }
     }
 
-    private setupMessagePipeline(channel: Channel) {
-        channel.message$.subscribe(async message => this.processMessage(channel, message));
+    private setupChannelEventPipeline(channel: Channel) {
+        channel.on("event", event => this.processChannelEvent(channel, event));
     }
 
-    private async processMessage(channel: Channel, message: Message) {
+    private async processChannelEvent(channel: Channel, message: ChannelEvent) {
 
         console.log(message);
 
         try {
-            if (message.type === MessageType.NotSupported) {
+            if (message.type === ChannelEventType.Unknown) {
                 const reply: TextReply = {
-                    type: ReplyType.Text,
-                    text: "(Message type not supported)",
+                    type: ChannelReplyType.Text,
+                    text: "(ChannelEvent type not supported)",
                     quickReplies: []
                 }
                 channel.reply(message, reply);
                 return;
             }
 
-            if (this.isStartMessage(message)) {
+            if (this.isStartChannelEvent(message)) {
                 const index = getRandomInteger(0, this.assistant.welcomeMessageStart.length - 1);
                 const reply: TextReply = {
-                    type: ReplyType.Text,
+                    type: ChannelReplyType.Text,
                     text: this.assistant.welcomeMessageStart[index],
                     quickReplies: []
                 }
@@ -117,20 +118,20 @@ export class AssistantEngine {
                 return;
             }
 
-            const context = await this.getContext(this.assistantId, this.environmentId, message.sourceChannel, message.userId);
+            const context = await this.getContext(this.assistantId, this.environmentId, message.sourceChannel, message.user.id);
 
-            // Message loop detection
+            // ChannelEvent loop detection
             if (message._loop === undefined) {
                 message._loop = 0;
             } else if (message._loop > 1) {
                 context.language = null;
-                await this.saveContext(this.assistantId, this.environmentId, message.sourceChannel, message.userId, context);
-                throw Error("Message loop");
+                await this.saveContext(this.assistantId, this.environmentId, message.sourceChannel, message.user.id, context);
+                throw Error("ChannelEvent loop");
             }
             message._loop++;
 
             if (this.assistant.detectLanguage) {
-                const langDetected = await this.detectLanguage(context.currentSkillId, message.text);
+                const langDetected = await this.detectLanguage(context.currentSkillId, (<TextEvent> message).text);
                 console.log("LANGUAGE DETECTED: ", langDetected);
                 if (langDetected) {
                     context.language = langDetected;
@@ -145,7 +146,7 @@ export class AssistantEngine {
             console.log("CONTEXT LANGUAGE: ", context.language);
 
             if (!context.currentSkillId) {
-                context.currentSkillId = await this.chooseSkill(message.text, context.language);
+                context.currentSkillId = await this.chooseSkill((<TextEvent> message).text, context.language);
 
                 console.log("CHOOSE SKILL: ", context.currentSkillId);
 
@@ -156,7 +157,7 @@ export class AssistantEngine {
                     }
                     const index = getRandomInteger(0, this.assistant.fallbackReplies.length - 1);
                     const reply: TextReply = {
-                        type: ReplyType.Text,
+                        type: ChannelReplyType.Text,
                         text: this.assistant.fallbackReplies[index],
                         quickReplies: []
                     }
@@ -165,7 +166,7 @@ export class AssistantEngine {
                 }
             }
 
-            const nluResult = await this.processNLUService(context, message);
+            const nluResult = await this.processNLUService(context, (<TextEvent>message).text);
 
             console.log("NLU RESULT", JSON.stringify(nluResult, null, 4));
 
@@ -173,7 +174,7 @@ export class AssistantEngine {
 
             if (dialogEngineOutput.fallback && dialogEngineOutput.fallback.changeContext) {
 
-                const newSkillId = await this.chooseSkill(message.text, context.language);
+                const newSkillId = await this.chooseSkill((<TextEvent>message).text, context.language);
 
                 if (newSkillId) {
                     console.log("CONTEXT CHANGE. NEW SKILL ID: ", newSkillId);
@@ -188,8 +189,8 @@ export class AssistantEngine {
                     dialogEngineOutput.context.currentNodeId = null;
                     dialogEngineOutput.context.currentSkillId = null;
 
-                    await this.saveContext(this.assistantId, this.environmentId, message.sourceChannel, message.userId, dialogEngineOutput.context);
-                    this.processMessage(channel, message);
+                    await this.saveContext(this.assistantId, this.environmentId, message.sourceChannel, message.user.id, dialogEngineOutput.context);
+                    this.processChannelEvent(channel, message);
                     return;
 
                 } else {
@@ -209,7 +210,7 @@ export class AssistantEngine {
                     dialogEngineOutput = await this.processDialogEngine({ channel, context, message, nluResult });
             }
 
-            this.saveContext(this.assistantId, this.environmentId, message.sourceChannel, message.userId, dialogEngineOutput.context);
+            this.saveContext(this.assistantId, this.environmentId, message.sourceChannel, message.user.id, dialogEngineOutput.context);
 
         } catch(err) {
             console.error(err);
@@ -217,11 +218,11 @@ export class AssistantEngine {
         }
     }
 
-    private replyWithAssistantFallback(channel: Channel, message: Message) {
+    private replyWithAssistantFallback(channel: Channel, message: ChannelEvent) {
         if (!this.assistant.fallbackReplies || this.assistant.fallbackReplies.length === 0
              || this.assistant.fallbackReplies[0].trim().length === 0) {
             const reply: TextReply = {
-                type: ReplyType.Text,
+                type: ChannelReplyType.Text,
                 text: "(An error occurred)",
                 quickReplies: []
             }
@@ -230,7 +231,7 @@ export class AssistantEngine {
         }
         const index = getRandomInteger(0, this.assistant.fallbackReplies.length - 1);
         const reply: TextReply = {
-            type: ReplyType.Text,
+            type: ChannelReplyType.Text,
             text: this.assistant.fallbackReplies[index],
             quickReplies: []
         }
@@ -271,7 +272,7 @@ export class AssistantEngine {
         })
     }
 
-    private async processNLUService(context: Context, message: Message): Promise<NLUResult> {
+    private async processNLUService(context: Context, text: string): Promise<NLUResult> {
         const skillNLUServiceMap = this.nluServiceMap.get(context.currentSkillId);
         if (!skillNLUServiceMap) {
             throw Error(`No NLU service for current skill: ${context.currentSkillId}`);
@@ -282,11 +283,11 @@ export class AssistantEngine {
             throw Error(`No NLU service for language: ${context.language}`);
         }
 
-        if (!message.text) {
+        if (!text) {
             throw Error(`Empty text or not valid message type`);
         }
 
-        return nluService.process(message.text);
+        return nluService.process(text);
     }
 
 
@@ -369,11 +370,10 @@ export class AssistantEngine {
     private async chooseSkill(text: string, language: string): Promise<any> {
         return await Promise.all(this.assistant.skillsIds.map(async skillId => {
             const fakeContext: any = { currentSkillId: skillId, language }
-            const fakeMessage: any = { text };
 
             let nluResult = null;
             try {
-                nluResult = await this.processNLUService(fakeContext, fakeMessage);
+                nluResult = await this.processNLUService(fakeContext, text);
             } catch(error) {
                 console.warn("chooseSkill()", error.message);
             }
@@ -398,9 +398,6 @@ export class AssistantEngine {
                 }
             }
 
-            return bestResult;
-
-        }).then(bestResult => {
             if (bestResult)
                 return bestResult.skillId;
             return null;
@@ -471,8 +468,8 @@ export class AssistantEngine {
         return Array.from(skillDialogMap.keys());
     }
 
-    private isStartMessage(message: Message): boolean {
-        if (message.sourceChannel === TELEGRAM && message.text === "/start") {
+    private isStartChannelEvent(message: ChannelEvent): boolean {
+        if (message.sourceChannel === TELEGRAM && (<TextEvent> message).text === "/start") {
             return true;
         }
         return false;

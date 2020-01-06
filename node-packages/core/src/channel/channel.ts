@@ -1,25 +1,23 @@
-import { Subject } from 'rxjs';
+import { EventEmitter } from 'events';
 
-import { WebhookConfig } from './webhook-config';
-import { Message } from './message';
-import { Reply } from './reply';
-
+import { ChannelEvent } from './channel-event';
+import { ChannelReply } from './channel-reply';
 
 
-export interface ChannelConfig {
-    channelType: string; // telegram, facebookMessenger, etc...
+export declare interface Channel {
+
+    /** Fires with every event received. */
+    on(event: "event", listener: (event: ChannelEvent) => void): this;
+
 }
 
-
-export interface Channel {
-
-    /** Fires with every message received. */
-    message$: Subject<Message>;
-
-    /** Create necessary webhook endpoints in an Express application if needed. */
-    setWebhooks(app: any, webhookConfig?: WebhookConfig): void;
+export abstract class Channel extends EventEmitter {
 
     /** Use this function to send one or more messages to the user of the original message. */
-    reply(receivedMessage: Message, reply: Reply): void;
+    abstract reply(receivedEvent: ChannelEvent, reply: ChannelReply): void;
+
+    protected emitEvent(event: ChannelEvent) {
+        this.emit("event", event);
+    }
 
 }

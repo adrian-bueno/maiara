@@ -1,14 +1,14 @@
-import { Context, ContextVariables } from "../../context";
+import { Context } from "../../context";
 import { NLUResult } from "../nlu/nlu-result";
-import { Dialog, DialogNode, DialogCondition, DialogFallback } from "./dialog";
+import { Dialog, DialogNode, DialogFallback } from "./dialog";
 import { DialogAction, DialogActionType, SendTextDialogAction, AssignContextVariableDialogAction } from "./dialog-action";
 import { generateConditionFunction, parseStringWithValues } from '../../parser';
-import { Channel, Message, TextReply, ReplyType } from "../../channel";
+import { Channel, ChannelEvent, TextReply, ChannelReplyType } from "../../channel";
 
 
 export interface DialogEngineInput {
     channel: Channel;
-    message: Message;
+    message: ChannelEvent;
     nluResult: NLUResult;
     context: Context;
 }
@@ -100,7 +100,7 @@ export class DialogEngine {
             && currentNode.fallback.onContextReturnResponse.text.trim().length !== 0) {
                 input.channel.reply(input.message,
                     <TextReply> {
-                        type: ReplyType.Text,
+                        type: ChannelReplyType.Text,
                         text: parseStringWithValues(currentNode.fallback.onContextReturnResponse.text, input.nluResult, input.context.variables),
                         quickReplies: this.processQuickReplies(currentNode.fallback.onContextReturnResponse.quickReplies, input)
                     });
@@ -148,7 +148,7 @@ export class DialogEngine {
             } else if (hasFallback && currentNode.fallback.response && currentNode.fallback.response.text) {
                 input.channel.reply(input.message,
                     <TextReply> {
-                        type: ReplyType.Text,
+                        type: ChannelReplyType.Text,
                         text: parseStringWithValues(currentNode.fallback.response.text, input.nluResult, input.context.variables),
                         quickReplies: this.processQuickReplies(currentNode.fallback.response.quickReplies, input)
                     });
@@ -156,7 +156,7 @@ export class DialogEngine {
             } else {
                 input.channel.reply(input.message,
                     <TextReply> {
-                        type: ReplyType.Text,
+                        type: ChannelReplyType.Text,
                         text: "(An error occurred: no fallback)",
                         quickReplies: []
                     });
@@ -192,7 +192,7 @@ export class DialogEngine {
                 if (a.text && a.text.trim()) {
                     input.channel.reply(input.message,
                         <TextReply> {
-                            type: ReplyType.Text,
+                            type: ChannelReplyType.Text,
                             text: parseStringWithValues(a.text, input.nluResult, input.context.variables),
                             quickReplies: this.processQuickReplies(a.quickReplies, input)
                         });
@@ -221,7 +221,7 @@ export class DialogEngine {
         if (node.fallback && node.fallback.response) {
             input.channel.reply(input.message,
                 <TextReply> {
-                    type: ReplyType.Text,
+                    type: ChannelReplyType.Text,
                     text: node.fallback.response.text,
                     quickReplies: node.fallback.response.quickReplies
                 });
@@ -236,7 +236,7 @@ export class DialogEngine {
         if (node.fallback && node.fallback.onContextReturnResponse) {
             input.channel.reply(input.message,
                 <TextReply> {
-                    type: ReplyType.Text,
+                    type: ChannelReplyType.Text,
                     text: node.fallback.onContextReturnResponse.text,
                     quickReplies: node.fallback.onContextReturnResponse.quickReplies
                 });

@@ -1,3 +1,4 @@
-export * from "./telegram-channel";
-export * from "./telegram-credentials";
-export * from "./telegram-message";
+export * from "./channel";
+export * from "./config";
+export * from "./credentials";
+export * from "./message";

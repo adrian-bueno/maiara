@@ -2,10 +2,10 @@ import express from "express";
 import * as bodyParser from "body-parser";
 
 
-export type ExpressApplication = express.Application;
+export type ExpressApp = express.Application;
 
-export function newDefaultExpressApp(): ExpressApplication {
-    const expressApp: ExpressApplication = express();
+export function newDefaultExpressApp(): ExpressApp {
+    const expressApp: ExpressApp = express();
 
     expressApp.use(bodyParser.json());
     expressApp.use(bodyParser.urlencoded({ extended: true }));

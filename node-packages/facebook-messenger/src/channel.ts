@@ -1,29 +1,25 @@
 import { Application as ExpressApp, Request, Response } from 'express'
-import { Subject } from 'rxjs';
 import axios from "axios";
 
-import { Channel, ChannelConfig, WebhookConfig, Message, MessageType, Reply, ReplyType, TextReply } from '@maiara/core';
+import {
+    Channel, WebhookConfig, ChannelEvent,
+    ChannelEventType, ChannelReply, ChannelReplyType, TextReply,
+    TextEvent
+} from '@maiara/core';
 import { FacebookMessengerCredentials } from './credentials';
+import { FacebookMessengerChannelConfig } from './config';
 
 
 export const FACEBOOK_MESSENGER: string = "facebookMessenger";
 
 
-export interface FacebookMessengerChannelConfig extends ChannelConfig {
-    credentials: FacebookMessengerCredentials;
-    publicDomain: string;
-    endpoint: string;
-}
+export class FacebookMessengerChannel extends Channel {
 
+    private credentials: FacebookMessengerCredentials;
+    private sendTextUrl: string;
 
-export class FacebookMessengerChannel implements Channel {
-
-    message$: Subject<Message>;
-    credentials: FacebookMessengerCredentials;
-    sendTextUrl: string;
-
-    constructor(config: FacebookMessengerChannelConfig){
-        this.message$ = new Subject();
+    constructor(config: FacebookMessengerChannelConfig) {
+        super();
 
         if (!config.credentials || !config.credentials.pageAccessToken || !config.credentials.verifyToken) {
             throw Error("Invalid credentials");
@@ -49,71 +45,72 @@ export class FacebookMessengerChannel implements Channel {
         if (!endpoint.startsWith("/")) {
             endpoint = "/" + endpoint;
         }
-        let url: string = `https://${webhookConfig.publicDomain}${endpoint}`;
+        
+        expressApp.post(endpoint, (req, res) => this.onNewEventReceived(req, res));
+        expressApp.get(endpoint, (req, res) => this.onVerificationRequest(req, res));
+    }
 
-        expressApp.post(endpoint, (req: Request, res: Response) => {
-            // Check the webhook event is from a Page subscription
-            if (req.body.object === 'page') {
+    private onNewEventReceived(req: Request, res: Response) {
+        // Check the webhook event is from a Page subscription
+        if (req.body.object === 'page') {
 
-                // Return a '200 OK' response to all events
-                res.status(200).send('EVENT_RECEIVED');
-                console.log("[FacebookMessengerChannel] Event received");
+            // Return a '200 OK' response to all events
+            res.status(200).send('EVENT_RECEIVED');
+            console.log("[FacebookMessengerChannel] Event received");
 
-                // Iterate over each entry - there may be multiple if batched
-                req.body.entry.forEach(entry => {
-                    // Get the webhook event. entry.messaging is an array, but
-                    // will only ever contain one event, so we get index 0
-                    let webhook_event = entry;
-                    if (entry.messaging && entry.messaging.length > 0) {
-                        webhook_event = entry.messaging[0];
-                    }
-
-                    if (webhook_event.delivery) {
-                        return;
-                    }
-
-                    this.message$.next(this.parseMessage(webhook_event));
-                });
-            } else {
-                // Return a '404 Not Found' if event is not from a page subscription
-                console.warn("[FacebookMessengerChannel] 404");
-                res.sendStatus(404);
-            }
-        });
-
-        expressApp.get(endpoint, (req: Request, res: Response) => {
-            // Parse params from the webhook verification request
-            const mode = req.query['hub.mode'];
-            const token = req.query['hub.verify_token'];
-            const challenge = req.query['hub.challenge'];
-
-            // Check if a token and mode were sent
-            if (mode && token) {
-
-                // Check the mode and token sent are correct
-                if (mode === 'subscribe' && token === this.credentials.verifyToken) {
-
-                    // Respond with 200 OK and challenge token from the request
-                    console.log('[FacebookMessengerChannel] Webhook verified');
-                    res.status(200).send(challenge);
-
-                } else {
-                    // Respond with '403 Forbidden' if verify tokens do not match
-                    res.sendStatus(403);
+            // Iterate over each entry - there may be multiple if batched
+            req.body.entry.forEach(entry => {
+                // Get the webhook event. entry.messaging is an array, but
+                // will only ever contain one event, so we get index 0
+                let webhook_event = entry;
+                if (entry.messaging && entry.messaging.length > 0) {
+                    webhook_event = entry.messaging[0];
                 }
-            } else {
-                res.sendStatus(400);
-            }
-        });
 
+                if (webhook_event.delivery) {
+                    return;
+                }
+
+                this.emitEvent(this.parseMessage(webhook_event));
+            });
+        } else {
+            // Return a '404 Not Found' if event is not from a page subscription
+            console.warn("[FacebookMessengerChannel] 404");
+            res.sendStatus(404);
+        }
+    }
+
+    private onVerificationRequest(req: Request, res: Response) {
+        // Parse params from the webhook verification request
+        const mode = req.query['hub.mode'];
+        const token = req.query['hub.verify_token'];
+        const challenge = req.query['hub.challenge'];
+
+        // Check if a token and mode were sent
+        if (mode && token) {
+
+            // Check the mode and token sent are correct
+            if (mode === 'subscribe' && token === this.credentials.verifyToken) {
+
+                // Respond with 200 OK and challenge token from the request
+                console.log('[FacebookMessengerChannel] Webhook verified');
+                res.status(200).send(challenge);
+
+            } else {
+                // Respond with '403 Forbidden' if verify tokens do not match
+                res.sendStatus(403);
+            }
+        } else {
+            res.sendStatus(400);
+        }
     }
 
     /** Use this function to send one or more messages to the user of the original message. */
-    reply(receivedMessage: Message, reply: Reply): void {
-        if (reply.type === ReplyType.Text) {
+    reply(receivedMessage: ChannelEvent, reply: ChannelReply): void {
+        if (reply.type === ChannelReplyType.Text) {
             const requestBody: any = {
                 recipient: {
-                    id: receivedMessage.userId
+                    id: receivedMessage.user.id
                 },
                 message: {
                     text: (<TextReply> reply).text
@@ -136,21 +133,33 @@ export class FacebookMessengerChannel implements Channel {
         // // else throw Error / console.warning ?
     }
 
-    private parseMessage(webhookEvent: any): Message {
+    private parseMessage(webhookEvent: any): ChannelEvent {
 
         console.log("[FacebookMessengerChannel] Webhook event", JSON.stringify(webhookEvent, null, 4));
 
-        return {
-            type: this.getMessageType(webhookEvent),
+        const messageType = this.getMessageType(webhookEvent);
+
+        const generalData: ChannelEvent = {
+            type: messageType,
             sourceChannel: FACEBOOK_MESSENGER,
-            text: this.getMessageText(webhookEvent),
             locale: "",
-            timestamp: "",
-            // timestamp: new Date(telegramMessage.date).toISOString(),
-            userId: webhookEvent.sender.id,
-            username: "",
+            timestamp: null,
+            user: {
+                id: webhookEvent.sender.id
+            },
             raw: webhookEvent
         }
+
+        if (messageType == ChannelEventType.Text)
+            return this.buildTextEvent(webhookEvent, generalData);
+        
+        return generalData;
+    }
+
+    private buildTextEvent(webhookEvent: any, generalData: ChannelEvent): TextEvent {
+        const event = <TextEvent> generalData;
+        event.text = this.getMessageText(webhookEvent);
+        return event;
     }
 
     private getMessageText(webhookEvent: any): string {
@@ -163,12 +172,12 @@ export class FacebookMessengerChannel implements Channel {
         }
     }
 
-    private getMessageType(webhookEvent: any): MessageType {
+    private getMessageType(webhookEvent: any): ChannelEventType {
         if ((webhookEvent.message && webhookEvent.message.text) ||
             (webhookEvent.received_postback && webhookEvent.received_postback.payload)) {
-                return MessageType.Text;
+                return ChannelEventType.Text;
         } else {
-            return MessageType.NotSupported;
+            return ChannelEventType.Unknown;
         }
     }
 

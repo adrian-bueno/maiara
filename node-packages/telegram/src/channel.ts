@@ -1,33 +1,25 @@
 import { Application as ExpressApp } from 'express'
 import TelegramBot from 'node-telegram-bot-api';
 import { ReplyKeyboardMarkup, KeyboardButton } from 'node-telegram-bot-api';
-import { Subject } from 'rxjs';
 
-import { Channel, ChannelConfig, WebhookConfig, Message, MessageType, Reply, ReplyType, TextReply } from '@maiara/core';
-import { TelegramCredentials } from './telegram-credentials';
-import { TelegramMessage } from './telegram-message';
+import {
+    Channel, WebhookConfig, ChannelEvent, ChannelEventType,
+    ChannelReply, ChannelReplyType, TextReply, TextEvent
+} from '@maiara/core';
+import { TelegramMessage } from './message';
+import { TelegramChannelConfig } from './config';
 
 
 export const TELEGRAM: string = "telegram";
 
 
-export interface TelegramChannelConfig extends ChannelConfig {
-    credentials: TelegramCredentials;
-    polling: boolean;
-    publicDomain: string;
-    endpoint: string;
-}
-
-
-export class TelegramChannel implements Channel {
+export class TelegramChannel extends Channel {
 
     private readonly bot: TelegramBot;
     private readonly polling: boolean;
 
-    message$: Subject<Message>;
-
     constructor(config: TelegramChannelConfig){
-        this.message$ = new Subject();
+        super();
         this.polling = config.polling ? config.polling : false;
 
         if (!config.credentials || !config.credentials.token) {
@@ -36,7 +28,7 @@ export class TelegramChannel implements Channel {
 
         this.bot = new TelegramBot(config.credentials.token, { polling: this.polling });
 
-        this.bot.on('message', (message: TelegramMessage) => this.message$.next(this.parseMessage(message)));
+        this.bot.on('message', (message: TelegramMessage) => this.emitEvent(this.parseMessage(message)));
     }
 
     /** Create webhook endpoints in an Express application if needed. */
@@ -58,47 +50,67 @@ export class TelegramChannel implements Channel {
             process.exit(1);
         }
 
-        let url: string = `https://${webhookConfig.publicDomain}`;
-        url += webhookConfig.endpoint ? webhookConfig.endpoint : "/telegram";
+        let endpoint = webhookConfig.endpoint ? webhookConfig.endpoint : "/telegram";
+        if (!endpoint.startsWith("/")) {
+            endpoint = "/" + endpoint;
+        }
+
+        let url: string = `https://${webhookConfig.publicDomain}${endpoint}`;
 
         this.bot.setWebHook(url);
         // this.bot.getWebHookInfo().then(info => console.log(info));
 
-        expressApp.post(webhookConfig.endpoint ? webhookConfig.endpoint : "/telegram", (req, res) => {
+        expressApp.post(endpoint, (req, res) => {
             this.bot.processUpdate(req.body);
             res.sendStatus(200);
         });
     }
 
     /** Use this function to send one or more messages to the user of the original message. */
-    reply(receivedMessage: Message, reply: Reply): void {
-        if (reply.type === ReplyType.Text) {
+    reply(receivedMessage: ChannelEvent, reply: ChannelReply): void {
+        if (reply.type === ChannelReplyType.Text) {
             this.bot.sendMessage(receivedMessage.raw.chat.id, (<TextReply> reply).text,
                 { reply_markup: this.buildQuickReplies((<TextReply> reply)) });
         }
         // else throw Error / console.warning ?
     }
 
-    private parseMessage(telegramMessage: TelegramMessage): Message {
-        return {
-            type: this.getMessageType(telegramMessage),
+    private parseMessage(telegramMessage: TelegramMessage): ChannelEvent {
+        const messageType = this.getMessageType(telegramMessage);
+
+        const generalData: ChannelEvent = {
             sourceChannel: TELEGRAM,
-            text: telegramMessage.text, // quickReplies ??
+            type: messageType,
             locale: telegramMessage.from.language_code,
-            timestamp: new Date(telegramMessage.date).toISOString(),
-            userId: String(telegramMessage.from.id), // and groups ??
-            username: telegramMessage.from.username,
+            user: {
+                id: String(telegramMessage.from.id), // and groups ??
+                username: telegramMessage.from.username,
+                name: telegramMessage.from.first_name,
+                surnames: telegramMessage.from.last_name,
+            },
+            timestamp: new Date(telegramMessage.date).getUTCMilliseconds(),
             raw: telegramMessage
+        }
+
+        if (messageType == ChannelEventType.Text)
+            return this.buildTextEvent(telegramMessage, generalData);
+
+        return generalData;
+    }
+
+    private getMessageType(telegramMessage: TelegramMessage): ChannelEventType {
+        if (telegramMessage.text) {
+            return ChannelEventType.Text;
+        } else {
+            return ChannelEventType.Unknown;
         }
     }
 
-    private getMessageType(telegramMessage: TelegramMessage): MessageType {
-        if (telegramMessage.text) {
-            return MessageType.Text;
-        } else {
-            return MessageType.NotSupported;
-        }
-    }
+    private buildTextEvent(telegramMessage: TelegramMessage, generalData: ChannelEvent): TextEvent {
+        const event = <TextEvent> generalData;
+        event.text = telegramMessage.text; // quickReplies ??;
+        return event;
+    }    
 
     private buildQuickReplies(reply: TextReply): ReplyKeyboardMarkup {
         if (!reply || !reply.quickReplies)

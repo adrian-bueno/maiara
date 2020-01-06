@@ -17,11 +17,9 @@
     "node-telegram-bot-api": "^0.30.0"
   },
   "peerDependencies": {
-      "express": "^4.17.1",
-      "rxjs": "^6.5.2"
+      "express": "^4.17.1"
   },
   "devDependencies": {
-      "express": "^4.17.1",
-      "rxjs": "^6.5.2"
+      "express": "^4.17.1"
   }
 }

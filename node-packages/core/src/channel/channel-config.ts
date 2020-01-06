@@ -1,0 +1,3 @@
+export interface ChannelConfig {
+    channelType: string; // telegram, facebookMessenger, etc...
+}
