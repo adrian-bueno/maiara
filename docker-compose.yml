@@ -1,21 +1,21 @@
 version: "3.7"
 services:
 
-    builder-webapp:
-        build: ./builder-webapp
-        image: maiara/builder-webapp
+    editor-web-app:
+        build: ./apps/editor/editor-web-app
+        image: maiara/editor-web-app
         ports:
             - "3080:80"
             - "80:80"
         restart: always
         depends_on:
-            - builder-service
+            - editor-service
 
-    builder-service:
+    editor-service:
         build:
             context: ./
-            dockerfile: ./Dockerfile.builder-service
-        image: maiara/builder-service
+            dockerfile: ./Dockerfile.editor-service
+        image: maiara/editor-service
         network_mode: "host"
         environment:
             NODE_ENV: production

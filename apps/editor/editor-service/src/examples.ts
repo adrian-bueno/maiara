@@ -17,7 +17,7 @@ dotenv.config();
 // });
 //
 // docker.createContainer({
-//     Image: 'maiara/builder-webapp',
+//     Image: 'maiara/editor-web-app',
 //     AttachStdin: false,
 //     AttachStdout: false,
 //     AttachStderr: false,

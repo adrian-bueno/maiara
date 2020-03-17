@@ -111,7 +111,7 @@ Currently they all use the __MIT__ license.
 ## Future work
 
 - Improve actual code
-- Improve builder-webapp visual design (for touch devices and all screen sizes)
+- Improve editor-web-app visual design (for touch devices and all screen sizes)
 - Unit testing
 - E2E testing
 - Documentation
@@ -125,14 +125,14 @@ Currently they all use the __MIT__ license.
 - Add support for other NLU and dialog tools (Rasa)
 - CI/CD
 - Publish stable packages and apps to npm, pip, Docker Hub
-- Add test chat to builder-webapp
+- Add test chat to editor-web-app
 - Skill and assistant versioning
 - Add users and groups / Authentication / Permissions / Roles / etc.
 - Realtime multi-user assistant and skill edition (like Google Docs)
 - Skill and assistant sharing (public, groups, other users)
 - Skill and assistant forking
 - Analytics
-- Multi-language builder-webapp
+- Multi-language editor-web-app
 
 ## Brand icon
 

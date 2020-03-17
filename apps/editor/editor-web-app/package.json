@@ -1,5 +1,5 @@
 {
-  "name": "@maiara/builder-webapp",
+  "name": "@maiara/editor-web-app",
   "version": "0.0.0",
   "author": "Adrián Bueno Jiménez <adrian.buenoj@gmail.com>",
   "license": "MIT",
@@ -16,10 +16,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "docker:build": "docker build -t maiara/builder-webapp .",
-    "docker:start": "docker run -it -p 3080:80 maiara/builder-webapp",
-    "docker:build:https-localhost": "docker build -f Dockerfile-https-localhost -t maiara/builder-webapp:https-localhost .",
-    "docker:start:https-localhost": "docker run -it -p 3080:80 -p 3443:443 maiara/builder-webapp:https-localhost"
+    "docker:build": "docker build -t maiara/editor-web-app .",
+    "docker:start": "docker run -it -p 3080:80 maiara/editor-web-app",
+    "docker:build:https-localhost": "docker build -f Dockerfile-https-localhost -t maiara/editor-web-app:https-localhost .",
+    "docker:start:https-localhost": "docker run -it -p 3080:80 -p 3443:443 maiara/editor-web-app:https-localhost"
   },
   "private": true,
   "dependencies": {

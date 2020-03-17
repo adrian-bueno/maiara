@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'builder-gui'`, () => {
+  it(`should have as title 'editor-gui'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('builder-gui');
+    expect(app.title).toEqual('editor-gui');
   });
 
   it('should render title in a h1 tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to builder-gui!');
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to editor-gui!');
   });
 });

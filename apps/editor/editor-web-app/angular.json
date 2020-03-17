@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "builder-webapp": {
+    "editor-web-app": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/builder-webapp",
+            "outputPath": "dist/editor-web-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -69,18 +69,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "builder-webapp:build"
+            "browserTarget": "editor-web-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "builder-webapp:build:production"
+              "browserTarget": "editor-web-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "builder-webapp:build"
+            "browserTarget": "editor-web-app:build"
           }
         },
         "test": {
@@ -116,7 +116,7 @@
         }
       }
     },
-    "builder-webapp-e2e": {
+    "editor-web-app-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -125,11 +125,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "builder-webapp:serve"
+            "devServerTarget": "editor-web-app:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "builder-webapp:serve:production"
+              "devServerTarget": "editor-web-app:serve:production"
             }
           }
         },
@@ -145,5 +145,5 @@
       }
     }
   },
-  "defaultProject": "builder-webapp"
+  "defaultProject": "editor-web-app"
 }

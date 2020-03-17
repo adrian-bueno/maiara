@@ -1,8 +1,8 @@
 {
   "packages": [
-    "node-packages/*",
-    "builder-service",
-    "nodejs-assistant"
+    "packages/nodejs-packages/*",
+    "apps/editor/editor-service",
+    "apps/assistants/nodejs-assistant"
   ],
   "version": "independent"
 }
