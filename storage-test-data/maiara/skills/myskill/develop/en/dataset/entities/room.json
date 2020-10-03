@@ -1,1 +1,27 @@
-{"data":[{"value":"basement","synonyms":["cellar"]},{"value":"living room","synonyms":["lounge","family room"]},{"value":"kitchen","synonyms":[]},{"value":"room","synonyms":[]},{"value":"habitaci","synonyms":[]},{"value":"habitacion","synonyms":[]},{"value":"cocina","synonyms":[]}],"use_synonyms":true,"automatically_extensible":true,"matching_strictness":1}
+{
+    "data": [{
+        "value": "basement",
+        "synonyms": ["cellar"]
+    }, {
+        "value": "living room",
+        "synonyms": ["lounge", "family room"]
+    }, {
+        "value": "kitchen",
+        "synonyms": []
+    }, {
+        "value": "room",
+        "synonyms": []
+    }, {
+        "value": "habitaci",
+        "synonyms": []
+    }, {
+        "value": "habitacion",
+        "synonyms": []
+    }, {
+        "value": "cocina",
+        "synonyms": []
+    }],
+    "use_synonyms": true,
+    "automatically_extensible": true,
+    "matching_strictness": 1
+}

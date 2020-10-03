@@ -1,1 +1,32 @@
-{"id":"breakdown","name":"Turn on light in room","position":{"x":369,"y":204},"actions":[{"type":"SendText","text":"Turning on lights in {{ @room }}","quickReplies":[]},{"type":"AssignContextVariable","variableName":"lightsOn","value":"true"}],"conditions":[],"fallback":{"changeContext":true,"returnHereOnContextChangeEnd":true,"onContextReturnResponse":{"type":"SendText","text":"Hello again. What dou you want me to do?","quickReplies":["Know weather","Turn on the lights!!"]},"response":{"type":"SendText","text":"","quickReplies":[]}}}
+{
+    "id": "breakdown",
+    "name": "Turn on light in room",
+    "position": {
+        "x": 369,
+        "y": 204
+    },
+    "actions": [{
+        "type": "SendText",
+        "text": "Turning on lights in {{ @room }}",
+        "quickReplies": []
+    }, {
+        "type": "AssignContextVariable",
+        "variableName": "lightsOn",
+        "value": "true"
+    }],
+    "conditions": [],
+    "fallback": {
+        "changeContext": true,
+        "returnHereOnContextChangeEnd": true,
+        "onContextReturnResponse": {
+            "type": "SendText",
+            "text": "Hello again. What dou you want me to do?",
+            "quickReplies": ["Know weather", "Turn on the lights!!"]
+        },
+        "response": {
+            "type": "SendText",
+            "text": "",
+            "quickReplies": []
+        }
+    }
+}

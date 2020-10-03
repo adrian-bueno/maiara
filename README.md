@@ -53,19 +53,19 @@ $ sudo systemctl restart docker.service
 ### Build images
 
 ```
-$ chmod +x build.sh
-$ ./build.sh
+$ chmod +x build-images.sh
+$ ./build-images.sh
 ```
 
 Start application with:
 
 ```
-docker-compose up
+$ docker-compose up
 ```
 
 Or with:
 ```
-docker-compose up -d
+$ docker-compose up -d
 ```
 
 to start in background mode.
@@ -73,6 +73,12 @@ to start in background mode.
 
 Open http://localhost:3080 on your favourite browser.
 
+
+Stop application with:
+
+```
+$ docker-compose down
+```
 
 ## Webhooks
 

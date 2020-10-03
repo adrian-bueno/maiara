@@ -1,1 +1,45 @@
-{"utterances":[{"data":[{"text":"turn off the lights"}]},{"data":[{"text":"turn the lights off"}]},{"data":[{"text":"please turn off tht lights in the"},{"text":"kitchen","entity":"room"}]},{"data":[{"text":"I don't need the lights anymore"}]},{"data":[{"text":"You can turn off the lights now"}]},{"data":[{"text":"you can turn off the lights"}]},{"data":[{"text":"You can turn off the lights in my"},{"text":"room","entity":"room"}]},{"data":[{"text":"I left the lights on, you can turn them off"}]},{"data":[{"text":"lights off"}]}]}
+{
+    "utterances": [{
+        "data": [{
+            "text": "turn off the lights"
+        }]
+    }, {
+        "data": [{
+            "text": "turn the lights off"
+        }]
+    }, {
+        "data": [{
+            "text": "please turn off tht lights in the"
+        }, {
+            "text": "kitchen",
+            "entity": "room"
+        }]
+    }, {
+        "data": [{
+            "text": "I don't need the lights anymore"
+        }]
+    }, {
+        "data": [{
+            "text": "You can turn off the lights now"
+        }]
+    }, {
+        "data": [{
+            "text": "you can turn off the lights"
+        }]
+    }, {
+        "data": [{
+            "text": "You can turn off the lights in my"
+        }, {
+            "text": "room",
+            "entity": "room"
+        }]
+    }, {
+        "data": [{
+            "text": "I left the lights on, you can turn them off"
+        }]
+    }, {
+        "data": [{
+            "text": "lights off"
+        }]
+    }]
+}
