@@ -1,6 +1,6 @@
 import Docker = require("dockerode");
 import getPort = require("get-port");
-import { Db } from "mongodb";
+import { Db, ObjectId } from "mongodb";
 import { Storage, AssistantActiveServices } from "@maiara/core";
 
 
@@ -39,6 +39,7 @@ export class AppLauncherService {
         const assistantInfo = await this.storage.getAssistant(assistantId);
 
         const assistantActiveServices: AssistantActiveServices = {
+            _id: `${assistantId}_${environmentId}` as any,
             environmentId,
             skills: [],
             dialog: null
@@ -96,10 +97,11 @@ export class AppLauncherService {
                 // }]
 
                 console.debug(`Creating NLU service (Skill: ${skillId} - Language: ${language})`);
-                const dockerContainerId: string = await this.docker.createContainer(containerInfo)
-                    .then(container => container.start())
-                    .then(container => container.id);
-                console.debug(`NLU service started (Skill: ${skillId} - Language: ${language})`);
+                const dockerContainer = await this.docker.createContainer(containerInfo);
+                await dockerContainer.start();
+                const dockerContainerId = dockerContainer.id;
+
+                console.debug(`NLU service started (Skill: ${skillId} - Language: ${language} - ContainerID: ${dockerContainerId})`);
 
                 assistantActiveServices.skills.push({ dockerContainerId, endpoint, language, skillId });
             }
@@ -110,12 +112,12 @@ export class AppLauncherService {
 
         await servicesCollection.replaceOne(
             { _id: `${assistantId}_${environmentId}` },
-            { $set: assistantActiveServices },
+            assistantActiveServices,
             { upsert: true }
         );
 
         // Start nodejs-assistant service
-        const dockerContainerId: string = await this.docker.createContainer({
+        const dockerContainer = await this.docker.createContainer({
                 Image: 'maiara/nodejs-assistant',
                 AttachStdin: false,
                 AttachStdout: false,
@@ -136,15 +138,15 @@ export class AppLauncherService {
                     `ENVIRONMENT_ID=${environmentId}`
                 ]
             })
-            .then(container => container.start())
-            .then(container => container.id);
+        await dockerContainer.start();
+        const dockerContainerId = dockerContainer.id;
 
         assistantActiveServices.dialog = { dockerContainerId };
 
         // Update info in DB
         await servicesCollection.replaceOne(
             { _id: `${assistantId}_${environmentId}` },
-            { $set: assistantActiveServices },
+            assistantActiveServices,
             { upsert: true }
         );
 
@@ -158,19 +160,28 @@ export class AppLauncherService {
     }
 
     async stopAllActiveServices() {
+        const collections = await this.db.listCollections().toArray();
+        if(!collections.find(c => c.name == "services"))
+          return;
+
         const servicesCollection = this.db.collection("services");
-        const activeServicesList: AssistantActiveServices[] = await servicesCollection.find().toArray();
+        const activeServicesList = await servicesCollection.find().toArray() as AssistantActiveServices[];
 
         for (const activeServices of activeServicesList) {
+            if (activeServices.dialog.dockerContainerId == null)
+              return;
 
-            await this.docker.getContainer(activeServices.dialog.dockerContainerId).stop().then(container => container.remove())
-                .catch(error => {
-                    if (error.statusCode === 304 || error.statusCode === 409) {
-                        return;
-                    }
-                    console.error(error);
-                    throw error;
-                });
+            try {
+                const container = await this.docker.getContainer(activeServices.dialog.dockerContainerId);
+                await container.stop();
+                await container.remove();
+            } catch (error) {
+                if (error.statusCode === 304 || error.statusCode === 409) {
+                    return;
+                }
+                console.error(error);
+                throw error;
+            }
 
             await Promise.all([activeServices.skills.forEach(async skill => {
                 await this.docker.getContainer(skill.dockerContainerId).remove({ force: true })
@@ -183,7 +194,7 @@ export class AppLauncherService {
                     });
             })]);
         }
-        await servicesCollection.remove({});
+        await servicesCollection.drop();
     }
 
     private async trainDataset(skillId: string, languageCode: string) {
@@ -203,9 +214,9 @@ export class AppLauncherService {
             ]
         }
 
-        await this.docker.createContainer(containerOptions)
-            .then(container => container.start())
-            .then(container => container.wait());
+        const container = await this.docker.createContainer(containerOptions);
+        await container.start();
+        await container.wait();
     }
 
 }

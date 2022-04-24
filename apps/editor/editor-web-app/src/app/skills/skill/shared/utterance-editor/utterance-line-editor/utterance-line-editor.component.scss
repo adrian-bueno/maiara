@@ -18,12 +18,12 @@
     width: 100%;
     padding: 0;
     box-sizing: border-box;
-    display: inline-block;
-    // display: flex;
-    // flex-flow: row wrap;
-    // justify-content: flex-start;
-    // align-items: center;
-    // align-content: center;
+    // display: inline-block;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
     overflow: hidden;
     padding: 1rem;
     font-size: 0.9rem;
@@ -41,17 +41,14 @@
         line-break: anywhere;
 
         &.is-entity {
-            // background: rgba(0,0,0,0.5);
-            background: blue;
-            color: white;
-            margin: 0;
+            background: var(--utterance-entity-default-background-color);
+            color: var(--utterance-entity-default-text-color);
+            margin: 0.2rem;
             padding: 0;
             padding: 0.2rem 0.4rem;
             border-radius: 5px;
         }
     }
-
-
 
     .full-text-copy {
         position: absolute;

@@ -1,5 +1,7 @@
+import { ObjectId } from 'mongodb';
 
 export interface AssistantActiveServices {
+    _id: ObjectId | string;
     environmentId: string;
     skills: SkillNLUServiceState[];
     dialog: AssistantDialogServiceState;

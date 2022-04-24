@@ -22,7 +22,7 @@ export class FacebookMessengerChannel extends Channel {
         super();
 
         if (!config.credentials || !config.credentials.pageAccessToken || !config.credentials.verifyToken) {
-            throw Error("Invalid credentials");
+            throw Error("Empty credentials");
         }
 
         this.credentials = config.credentials;

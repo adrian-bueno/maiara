@@ -50,7 +50,7 @@
     <div class="content">
         <div class="content-text">
             <div *ngFor="let environmentsId of environmentsIds" class="environment-id-item-list"
-                (tap)="confirmStartAssistant(environmentsId)">
+                (click)="confirmStartAssistant(environmentsId)">
                     {{ environmentsId }}
             </div>
             <p *ngIf="environmentsIds?.length === 0">
@@ -58,7 +58,7 @@
             </p>
         </div>
         <div class="content-footer">
-            <button class="button is-rounded is-outlined is-left-button" (tap)="cancelStartAssistant()">Cancel</button>
+            <button class="button is-rounded is-outlined is-left-button" (click)="cancelStartAssistant()">Cancel</button>
         </div>
     </div>
 </div>
@@ -69,7 +69,7 @@
             <p>{{ warningMessage }}</p>
         </div>
         <div class="content-footer">
-            <button class="button is-rounded is-outlined is-right-button" (tap)="closeWarningPopup()">Close</button>
+            <button class="button is-rounded is-outlined is-right-button" (click)="closeWarningPopup()">Close</button>
         </div>
     </div>
 </div>
@@ -83,8 +83,8 @@
             </label>
         </div>
         <div class="content-footer">
-            <button class="button is-rounded is-outlined is-left-button" (tap)="cancelAddNewEnvironment()">Cancel</button>
-            <button class="button is-rounded is-right-button is-primary" (tap)="confirmAddNewEnvironment()">Create environment</button>
+            <button class="button is-rounded is-outlined is-left-button" (click)="cancelAddNewEnvironment()">Cancel</button>
+            <button class="button is-rounded is-right-button is-primary" (click)="confirmAddNewEnvironment()">Create environment</button>
         </div>
     </div>
 </div>

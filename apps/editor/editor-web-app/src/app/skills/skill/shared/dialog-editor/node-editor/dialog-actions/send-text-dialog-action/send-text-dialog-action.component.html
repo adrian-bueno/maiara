@@ -7,7 +7,7 @@
     <div class="title quick-replies-title">
         Quick replies
         <button class="button is-rounded is-small is-outlined"
-            (tap)="newEmptyQuickReply()">
+            (click)="newEmptyQuickReply()">
                 <i class="icon is-left fas fa-plus"></i>
                 Add
         </button>
@@ -15,7 +15,7 @@
 
     <div *ngFor="let quickReply of action.quickReplies; let index = index; trackBy: customTrackByIndex"
         class="quick-reply-input">
-        <div class="delete-quick-reply-button" (tap)="deleteQuickReply(index)">
+        <div class="delete-quick-reply-button" (click)="deleteQuickReply(index)">
             <i class="icon is-left fas fa-times-circle"></i>
         </div>
         <input  type="text" [(ngModel)]="action.quickReplies[index]" (ngModelChange)="onQuickReplyTextChange()">

@@ -173,6 +173,7 @@ mongodb.connect()
         const servicesCollection = db.collection("services");
 
         const assistantActiveServices: AssistantActiveServices = {
+            _id: null,
             environmentId: "develop",
             skills: [
                 {

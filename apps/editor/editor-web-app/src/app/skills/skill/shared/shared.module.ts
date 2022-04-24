@@ -37,7 +37,7 @@ import { SystemEntitiesEditorComponent } from './system-entities-editor';
     ]
 })
 export class SkillSharedModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<SkillSharedModule> {
         return {
             ngModule: SkillSharedModule,
             providers: []

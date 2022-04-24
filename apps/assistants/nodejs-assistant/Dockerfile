@@ -1,4 +1,4 @@
-FROM node:12.18.4 as builder
+FROM node:16.14.2 as builder
 
 ENV NPM_CONFIG_LOGLEVEL=error
 ENV NPM_CONFIG_COLOR=false
@@ -45,7 +45,7 @@ RUN npm prune --production
 
 
 
-FROM node:12.18.4-alpine
+FROM node:16.14.2-alpine
 
 ENV NPM_CONFIG_LOGLEVEL=error
 ENV NPM_CONFIG_COLOR=false

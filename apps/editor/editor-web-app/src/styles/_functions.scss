@@ -1,8 +1,10 @@
-@function text-contrast($color) {
-    $color-brightness: round((red($color) * 299) + (green($color) * 587) + (blue($color) * 114) / 1000);
-    $light-color: round((red(#ffffff) * 299) + (green(#ffffff) * 587) + (blue(#ffffff) * 114) / 1000);
+@use "sass:math";
 
-    @if abs($color-brightness) < ($light-color / 2) {
+@function text-contrast($color) {
+    $color-brightness: round((red($color) * 299) + (green($color) * 587) + math.div(blue($color) * 114, 1000));
+    $light-color: round((red(#ffffff) * 299) + (green(#ffffff) * 587) + math.div(blue(#ffffff) * 114, 1000));
+
+    @if abs($color-brightness) < (math.div($light-color, 2)) {
         @return #fff;
     } @else {
         @return #000;

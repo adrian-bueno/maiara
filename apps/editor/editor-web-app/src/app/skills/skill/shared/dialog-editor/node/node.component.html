@@ -8,7 +8,7 @@
     <div class="name">{{ node?.name }}</div>
 
     <svg class="port is-left" *ngIf="node.id !== 'start'"
-        (tap)="onPortTap($event, 'Input', null)"
+        (click)="onPortTap($event, 'Input', null)"
         (mouseup)="onPortMouseUp($event, 'Input', null)"
         (touchstart)="onPortTouchStart($event, 'Input', null)"
         (touchend)="onPortTouchEnd($event, 'Input', null)"
@@ -23,7 +23,7 @@
         <div class="condition-text">{{ condition.text }}</div>
 
         <svg class="port is-condition-out-port"
-            (tap)="onPortTap($event, 'Output', index)"
+            (click)="onPortTap($event, 'Output', index)"
             (mouseup)="onPortMouseUp($event, 'Output', index)"
             (touchstart)="onPortTouchStart($event, 'Output', index)"
             (touchend)="onPortTouchEnd($event, 'Output', index)"

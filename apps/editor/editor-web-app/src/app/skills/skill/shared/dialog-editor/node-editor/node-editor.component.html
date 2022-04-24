@@ -18,10 +18,10 @@
                 New action
             </div>
             <div class="dropdown-content is-left">
-                <div class="dropdown-item" (tap)="newEmptySendTextAction()">
+                <div class="dropdown-item" (click)="newEmptySendTextAction()">
                     New text message
                 </div>
-                <div class="dropdown-item" (tap)="newEmptyAssignContextVariableAction()">
+                <div class="dropdown-item" (click)="newEmptyAssignContextVariableAction()">
                     Context variable
                 </div>
             </div>
@@ -31,7 +31,7 @@
     <div *ngFor="let action of node.actions; let index = index" class="node-actions-container">
         <div [ngSwitch]="action.type" class="node-action">
 
-            <div class="delete-node-action-button" (tap)="deleteAction(index)">
+            <div class="delete-node-action-button" (click)="deleteAction(index)">
                 <i class="icon is-left fas fa-times-circle"></i>
             </div>
 
@@ -56,14 +56,14 @@
         <h4 class="node-editor-section-title has-text-primary is-bold">
             Conditions
         </h4>
-        <button class="button is-small is-rounded" (tap)="newEmptyCondition()">
+        <button class="button is-small is-rounded" (click)="newEmptyCondition()">
             <i class="icon is-left fas fa-plus"></i>
             New condition
         </button>
     </div>
 
     <div *ngFor="let condition of node.conditions; let index = index" class="node-condition">
-        <div class="delete-condition-button" (tap)="deleteCondition(index, condition)">
+        <div class="delete-condition-button" (click)="deleteCondition(index, condition)">
             <i class="icon is-left fas fa-times-circle"></i>
         </div>
         <input type="text" [(ngModel)]="condition.text"

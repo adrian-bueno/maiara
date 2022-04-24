@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@maiara/core": "^0.0.0",
-    "minio": "^7.0.12"
+    "minio": "^7.0.27"
   },
   "peerDependencies": {},
   "devDependencies": {}

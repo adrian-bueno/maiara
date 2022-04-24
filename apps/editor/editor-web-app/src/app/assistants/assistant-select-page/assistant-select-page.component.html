@@ -4,7 +4,7 @@
         <div class="title-and-button-container">
             <h1 class="title">Your Assistants</h1>
             <button class="button is-primary is-rounded create-new-assistant-button"
-                (tap)="createNewAssistant()">
+                (click)="createNewAssistant()">
                     <i class="icon is-left fas fa-plus"></i>
                     New Assistant
             </button>
@@ -39,8 +39,8 @@
             </label>
         </div>
         <div class="content-footer">
-            <button class="button is-rounded is-outlined is-left-button" (tap)="cancelAssistantCreation()">Cancel</button>
-            <button class="button is-rounded is-primary is-right-button" (tap)="confirmAssistantCreation()">Create</button>
+            <button class="button is-rounded is-outlined is-left-button" (click)="cancelAssistantCreation()">Cancel</button>
+            <button class="button is-rounded is-primary is-right-button" (click)="confirmAssistantCreation()">Create</button>
         </div>
     </div>
 </div>

@@ -22,7 +22,7 @@ import { AssistantNavbarComponent } from './assistant-navbar';
     ]
 })
 export class AssistantSharedModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<AssistantSharedModule> {
         return {
             ngModule: AssistantSharedModule,
             providers: []

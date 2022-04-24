@@ -35,6 +35,7 @@ export class ContentEditableTextComponent implements OnInit, OnChanges {
 
     @ViewChild("elem", { static: false }) elem: ElementRef;
 
+    constructor(private elemRef: ElementRef) {}
 
     ngOnInit() {
         this.editText = this.text;
@@ -133,7 +134,7 @@ export class ContentEditableTextComponent implements OnInit, OnChanges {
     processTextSelection() {
         const selection: Selection = window.getSelection();
 
-        if (!this.elem.nativeElement.contains(selection.focusNode) ||
+        if (!this.elemRef.nativeElement.contains(selection.focusNode) ||
             !window.getSelection().toString().trim()) {
                 return;
         }

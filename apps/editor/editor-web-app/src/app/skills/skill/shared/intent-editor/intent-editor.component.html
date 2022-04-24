@@ -10,7 +10,7 @@
                 </content-editable-text>
             </h2>
             <div class="fill-remaining-space"></div>
-            <button class="button is-primary is-rounded" (tap)="addNewEmptyUtterance()">
+            <button class="button is-primary is-rounded" (click)="addNewEmptyUtterance()">
                 <i class="icon is-left fas fa-plus"></i>
                 New utterance
             </button>
@@ -22,11 +22,11 @@
                 class="intent-utterance">
                     <div class="delete-utterance-button">
                         <i class="fas fa-times-circle has-text-danger"
-                           (tap)="deleteUtterance(index)">
+                           (click)="deleteUtterance(index)">
                         </i>
                     </div>
                     <utterance-editor
-                        [(utterance)]="utterance"
+                        [(utterance)]="utterances[index]"
                         (utteranceChange)="onUtteranceChange(index, $event)"
                         (newEntityAssigned)="onNewEntityAssigned($event)">
                     </utterance-editor>

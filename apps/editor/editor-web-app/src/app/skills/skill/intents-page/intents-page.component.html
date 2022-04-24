@@ -2,7 +2,7 @@
 
     <div class="new-intent-form">
         <input type="text" placeholder="Intent name" [(ngModel)]="newIntentName">
-        <button class="button is-primary is-rounded" (tap)="createIntent()">
+        <button class="button is-primary is-rounded" (click)="createIntent()">
             <i class="icon is-left fas fa-plus"></i>
             Create intent
         </button>
@@ -16,11 +16,11 @@
 
         <div *ngFor="let intent of intents; let index = index;">
             <div class="div-table-row">
-                <div class="div-table-item" (tap)="toggleIntentEditor(index)">{{ intent.name }}</div>
-                <div class="div-table-item" (tap)="toggleIntentEditor(index)">{{ intent.utterances?.length }}</div>
+                <div class="div-table-item" (click)="toggleIntentEditor(index)">{{ intent.name }}</div>
+                <div class="div-table-item" (click)="toggleIntentEditor(index)">{{ intent.utterances?.length }}</div>
                 <div class="delete-button">
                     <i class="fas fa-times-circle has-text-danger"
-                       (tap)="deleteIntent($event, index)">
+                       (click)="deleteIntent($event, index)">
                     </i>
                 </div>
             </div>
@@ -31,7 +31,7 @@
     <div class="intent-editor-container" [ngClass]="activeClases">
         <div class="container intent-editor-close-button-container">
             <button class="button is-rounded is-outlined"
-                (tap)="toggleIntentEditor()">
+                (click)="toggleIntentEditor()">
                     <i class="icon is-left fa fa-times"></i>
                     Close intent editor
             </button>
@@ -55,7 +55,7 @@
             <p>{{ warningMessage }}</p>
         </div>
         <div class="content-footer">
-            <button class="button is-rounded is-outlined is-right-button" (tap)="closeWarningPopup()">Close</button>
+            <button class="button is-rounded is-outlined is-right-button" (click)="closeWarningPopup()">Close</button>
         </div>
     </div>
 </div>

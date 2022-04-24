@@ -14,12 +14,12 @@
   },
   "dependencies": {
     "@maiara/core": "^0.0.0",
-    "node-telegram-bot-api": "^0.30.0"
+    "node-telegram-bot-api": "^0.57.0"
   },
   "peerDependencies": {
-      "express": "^4.17.1"
+      "express": "^4.17.3"
   },
   "devDependencies": {
-      "express": "^4.17.1"
+      "express": "^4.17.3"
   }
 }

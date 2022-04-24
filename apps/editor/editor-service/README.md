@@ -1,1 +1,1 @@
-# Builder service
+# Editor service

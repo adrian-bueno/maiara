@@ -1,7 +1,5 @@
-import os, json, shutil, re
+import os, json, shutil
 from minio import Minio
-from minio.error import (ResponseError, BucketAlreadyOwnedByYou,
-                         BucketAlreadyExists)
 
 
 def clean_data_directory():
@@ -63,8 +61,8 @@ def minio_download_dataset(minio_client, bucket, path, type):
 
         dataset.update(minio_download_json(minio_client, bucket, path + "/info.json"))
 
-        intents_objects = minio_client.list_objects_v2(bucket, prefix=path+"/intents", recursive=True)
-        entities_objects = minio_client.list_objects_v2(bucket, prefix=path+"/entities", recursive=True)
+        intents_objects = minio_client.list_objects(bucket, prefix=path+"/intents", recursive=True)
+        entities_objects = minio_client.list_objects(bucket, prefix=path+"/entities", recursive=True)
 
         if intents_objects is None:
             intents_objects = []

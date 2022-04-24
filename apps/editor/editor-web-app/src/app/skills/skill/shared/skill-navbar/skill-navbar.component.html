@@ -21,7 +21,7 @@
         </div>
         <div class="dropdown-content is-left">
             <div *ngFor="let lang of languages" class="dropdown-item"
-                (tap)="changeActiveLanguage(lang)">
+                (click)="changeActiveLanguage(lang)">
                     {{ getLanguageName(lang) }}
             </div>
         </div>
@@ -84,7 +84,7 @@
     <div class="content">
         <div class="content-text">
             <div *ngFor="let lang of languages" class="language-list-item"
-                (tap)="changeActiveLanguage(lang)">
+                (click)="changeActiveLanguage(lang)">
                     {{ getLanguageName(lang) }}
             </div>
             <p *ngIf="languages?.length === 0">
@@ -92,7 +92,7 @@
             </p>
         </div>
         <div class="content-footer">
-            <button class="button is-rounded is-outlined is-left-button" (tap)="cancelChangeLanguage()">Cancel</button>
+            <button class="button is-rounded is-outlined is-left-button" (click)="cancelChangeLanguage()">Cancel</button>
         </div>
     </div>
 </div>

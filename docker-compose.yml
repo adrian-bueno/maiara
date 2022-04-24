@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.9"
 services:
 
     editor-web-app:
@@ -25,7 +25,7 @@ services:
             - database
 
     storage:
-        image: minio/minio:RELEASE.2019-08-21T19-40-07Z
+        image: minio/minio:RELEASE.2022-04-16T04-26-02Z
         ports:
             - "9000:9000"
         volumes:
@@ -43,7 +43,7 @@ services:
             start_period: 3m
 
     database:
-        image: mongo:4.2
+        image: mongo:5.0.7
         ports:
             - "27017:27017"
         restart: always

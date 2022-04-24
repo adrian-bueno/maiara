@@ -48,7 +48,7 @@
         <div class="title-and-button-container">
             <h3 class="title">Skills</h3>
             <button class="button is-outlined is-rounded is-small add-new-item-button"
-                (tap)="addSkill()">
+                (click)="addSkill()">
                     <i class="icon is-left fas fa-plus"></i>
                     Add Skill
             </button>
@@ -60,7 +60,7 @@
                 <div class="name">{{ skill.name }}</div>
                 <div class="description">{{ skill.description }}</div>
             </div>
-            <div class="delete-skill-button" (tap)="removeSkill(index)">
+            <div class="delete-skill-button" (click)="removeSkill(index)">
                 <i class="icon is-left has-text-danger fas fa-times-circle"></i>
             </div>
         </div>
@@ -72,7 +72,7 @@
         <div class="title-and-button-container">
             <h3 class="title">Welcome message</h3>
             <button class="button is-outlined is-rounded is-small add-new-item-button"
-                (tap)="addWelcomeMessageVariation()">
+                (click)="addWelcomeMessageVariation()">
                     <i class="icon is-left fas fa-plus"></i>
                     Add message variation
             </button>
@@ -80,7 +80,7 @@
 
         <div *ngFor="let message of assistant?.welcomeMessageStart; let index = index; trackBy: customTrackByIndex" class="input-text">
             <input type="text" [(ngModel)]="assistant.welcomeMessageStart[index]">
-            <div class="delete-input-text-button" (tap)="removeWelcomeMessageVariation(index)">
+            <div class="delete-input-text-button" (click)="removeWelcomeMessageVariation(index)">
                 <i class="icon has-text-danger fas fa-times-circle"></i>
             </div>
         </div>
@@ -92,7 +92,7 @@
         <div class="title-and-button-container">
             <h3 class="title">Fallback replies</h3>
             <button class="button is-outlined is-rounded is-small add-new-item-button"
-                (tap)="addFallbackReplyVariation()">
+                (click)="addFallbackReplyVariation()">
                     <i class="icon is-left fas fa-plus"></i>
                     Add message variation
             </button>
@@ -100,7 +100,7 @@
 
         <div *ngFor="let message of assistant?.fallbackReplies; let index = index; trackBy: customTrackByIndex" class="input-text">
             <input type="text" [(ngModel)]="assistant.fallbackReplies[index]">
-            <div class="delete-input-text-button" (tap)="removeFallbackReplyVariation(index)">
+            <div class="delete-input-text-button" (click)="removeFallbackReplyVariation(index)">
                 <i class="icon is-left has-text-danger fas fa-times-circle"></i>
             </div>
         </div>
@@ -127,7 +127,7 @@
 
 
     <div class="delete-assistant-button-container">
-        <button class="button is-danger is-outlined is-rounded" (tap)="deleteAssistant()">
+        <button class="button is-danger is-outlined is-rounded" (click)="deleteAssistant()">
             Delete assistant
         </button>
     </div>
@@ -140,7 +140,7 @@
     <div class="content">
         <div class="content-text">
             <div *ngFor="let skill of notAddedSkills; let index = index" class="skill"
-                (tap)="confirmAddSkill(index)">
+                (click)="confirmAddSkill(index)">
                     <img class="skill-profile-picture" src="/assets/images/skill-default-image-2.jpg" alt="Skill image">
                     <div class="name-and-description">
                         <div class="name">{{ skill.name }}</div>
@@ -152,7 +152,7 @@
             </p>
         </div>
         <div class="content-footer">
-            <button class="button is-rounded is-outlined is-left-button" (tap)="cancelAddSkills()">Cancel</button>
+            <button class="button is-rounded is-outlined is-left-button" (click)="cancelAddSkills()">Cancel</button>
         </div>
     </div>
 </div>

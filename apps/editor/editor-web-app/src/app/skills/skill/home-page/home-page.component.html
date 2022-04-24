@@ -49,7 +49,7 @@
     </div>
 
     <div class="delete-skill-button-container">
-        <button class="button is-danger is-outlined is-rounded" (tap)="deleteSkill()">
+        <button class="button is-danger is-outlined is-rounded" (click)="deleteSkill()">
             Delete skill
         </button>
     </div>
@@ -65,8 +65,8 @@
     <div class="content">
         <div class="content-text">All language data will be deleted. Delete anyways?</div>
         <div class="content-footer">
-            <button class="button is-rounded is-outlined is-left-button" (tap)="cancelLanguageDelete()">Cancel</button>
-            <button class="button is-rounded is-danger is-right-button" (tap)="confirmLanguageDelete()">OK</button>
+            <button class="button is-rounded is-outlined is-left-button" (click)="cancelLanguageDelete()">Cancel</button>
+            <button class="button is-rounded is-danger is-right-button" (click)="confirmLanguageDelete()">OK</button>
         </div>
     </div>
 </div>

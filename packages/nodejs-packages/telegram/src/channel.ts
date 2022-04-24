@@ -1,12 +1,11 @@
 import { Application as ExpressApp } from 'express'
 import TelegramBot from 'node-telegram-bot-api';
-import { ReplyKeyboardMarkup, KeyboardButton } from 'node-telegram-bot-api';
+import { ReplyKeyboardMarkup, KeyboardButton, Message } from 'node-telegram-bot-api';
 
 import {
     Channel, WebhookConfig, ChannelEvent, ChannelEventType,
     ChannelReply, ChannelReplyType, TextReply, TextEvent
 } from '@maiara/core';
-import { TelegramMessage } from './message';
 import { TelegramChannelConfig } from './config';
 
 
@@ -28,7 +27,7 @@ export class TelegramChannel extends Channel {
 
         this.bot = new TelegramBot(config.credentials.token, { polling: this.polling });
 
-        this.bot.on('message', (message: TelegramMessage) => this.emitEvent(this.parseMessage(message)));
+        this.bot.on('message', message => this.emitEvent(this.parseMessage(message)));
     }
 
     /** Create webhook endpoints in an Express application if needed. */
@@ -75,7 +74,7 @@ export class TelegramChannel extends Channel {
         // else throw Error / console.warning ?
     }
 
-    private parseMessage(telegramMessage: TelegramMessage): ChannelEvent {
+    private parseMessage(telegramMessage: Message): ChannelEvent {
         const messageType = this.getMessageType(telegramMessage);
 
         const generalData: ChannelEvent = {
@@ -98,7 +97,7 @@ export class TelegramChannel extends Channel {
         return generalData;
     }
 
-    private getMessageType(telegramMessage: TelegramMessage): ChannelEventType {
+    private getMessageType(telegramMessage: Message): ChannelEventType {
         if (telegramMessage.text) {
             return ChannelEventType.Text;
         } else {
@@ -106,7 +105,7 @@ export class TelegramChannel extends Channel {
         }
     }
 
-    private buildTextEvent(telegramMessage: TelegramMessage, generalData: ChannelEvent): TextEvent {
+    private buildTextEvent(telegramMessage: Message, generalData: ChannelEvent): TextEvent {
         const event = <TextEvent> generalData;
         event.text = telegramMessage.text; // quickReplies ??;
         return event;

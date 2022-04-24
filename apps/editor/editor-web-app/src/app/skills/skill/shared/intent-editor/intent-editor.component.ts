@@ -49,7 +49,7 @@ export class IntentEditorComponent implements OnInit {
         this.utterancesChange.emit(this.utterances);
     }
 
-    onNewEntityAssigned($event) {
+    onNewEntityAssigned($event: any): void {
         this.newEntityAssigned.emit($event);
     }
 

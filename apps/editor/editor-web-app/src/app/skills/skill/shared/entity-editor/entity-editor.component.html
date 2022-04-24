@@ -10,7 +10,7 @@
                 </content-editable-text>
             </h2>
             <div class="fill-remaining-space"></div>
-            <button class="button is-primary is-rounded" (tap)="addNewEmptyValue()">
+            <button class="button is-primary is-rounded" (click)="addNewEmptyValue()">
                 <i class="icon is-left fas fa-plus"></i>
                 New value
             </button>
@@ -41,7 +41,7 @@
                     </div>
                     <div class="delete-button">
                         <i class="fas fa-times-circle has-text-danger"
-                           (tap)="deleteValue(index)">
+                           (click)="deleteValue(index)">
                         </i>
                     </div>
                 </div>

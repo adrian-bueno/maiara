@@ -70,18 +70,36 @@ export class AssistantEngine {
             .forEach(channel => this.setupChannelEventPipeline(channel))
     }
 
+    private buildTelegramChannel(config: ChannelConfig, app: ExpressApp): Channel {
+      try {
+          const telegramConfig = <TelegramChannelConfig>config;
+          const telegramChannel = new TelegramChannel(telegramConfig);
+          telegramChannel.setWebhooks(app, { https: true, publicDomain: telegramConfig.publicDomain, endpoint: telegramConfig.endpoint });
+          return telegramChannel;
+      } catch (error) {
+          console.error(error);
+          return null;
+      }
+    }
+
+    private buildFacebookMessengerChannel(config: ChannelConfig, app: ExpressApp): Channel {
+        try {
+            const facebookMessengerConfig = <FacebookMessengerChannelConfig>config;
+            const facebookMessengerChannel = new FacebookMessengerChannel(facebookMessengerConfig);
+            facebookMessengerChannel.setWebhooks(app, { https: true, publicDomain: facebookMessengerConfig.publicDomain, endpoint: facebookMessengerConfig.endpoint });
+            return facebookMessengerChannel;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    }
+
     private buildChannel(config: ChannelConfig, app: ExpressApp): Channel {
         switch(config.channelType) {
             case TELEGRAM:
-                const telegramConfig = <TelegramChannelConfig> config;
-                const telegramChannel = new TelegramChannel(telegramConfig);
-                telegramChannel.setWebhooks(app, { https: true, publicDomain: telegramConfig.publicDomain, endpoint: telegramConfig.endpoint });
-                return telegramChannel;
+                return this.buildTelegramChannel(config, app);
             case FACEBOOK_MESSENGER:
-                const facebookMessengerConfig = <FacebookMessengerChannelConfig> config;
-                const facebookMessengerChannel = new FacebookMessengerChannel(facebookMessengerConfig);
-                facebookMessengerChannel.setWebhooks(app, { https: true, publicDomain: facebookMessengerConfig.publicDomain, endpoint: facebookMessengerConfig.endpoint });
-                return facebookMessengerChannel;
+                return this.buildFacebookMessengerChannel(config, app);
             default:
                 console.warn(`Channel ${config.channelType} not supported`);
                 return null;
@@ -311,7 +329,7 @@ export class AssistantEngine {
         if (findResArray && findResArray.length < 1) {
             return null;
         }
-        return findResArray[0];
+        return findResArray[0] as AssistantActiveServices;
     }
 
     private async getAssistantInfo(assistantId: string, environmentId: string): Promise<Assistant> {
@@ -343,13 +361,14 @@ export class AssistantEngine {
         const findResArray = await findRes.toArray();
         if (findResArray && findResArray.length < 1) {
             return {
+                _id: `${assistantId}_${environmentId}_${channelId}_${userId}`,
                 currentSkillId: null,
                 currentNodeId: null,
                 language: null,        //// use default language or first language
                 variables: new Map()
             };
         }
-        const context: Context = findResArray[0];
+        const context = findResArray[0] as Context;
         context.variables = new Map(Object.entries(context.variables)); // Convert object to Map
         return context;
     }
@@ -358,12 +377,8 @@ export class AssistantEngine {
         const collection = this.db.collection("context");
         await collection.replaceOne(
             { _id: `${assistantId}_${environmentId}_${channelId}_${userId}`},
-            {
-                $set: context
-            },
-            {
-                upsert: true // insert if doesnt exist
-            }
+            context,
+            { upsert: true } // insert if doesnt exist
         );
     }
 

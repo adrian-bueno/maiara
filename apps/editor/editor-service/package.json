@@ -18,10 +18,10 @@
   "dependencies": {
     "@maiara/core": "^0.0.0",
     "@maiara/minio": "^0.0.0",
-    "dockerode": "^2.5.8",
-    "dotenv": "^8.1.0",
-    "express": "^4.17.1",
-    "get-port": "^5.0.0",
-    "mongodb": "^3.3.2"
+    "dockerode": "^3.3.1",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "get-port": "^5.1.1",
+    "mongodb": "^4.5.0"
   }
 }

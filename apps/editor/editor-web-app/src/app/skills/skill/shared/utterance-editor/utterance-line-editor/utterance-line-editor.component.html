@@ -1,4 +1,4 @@
-<!-- <div class="utterance-line-editor overflow-hidden"
+<div class="utterance-line-editor overflow-hidden"
     [ngClass]="{ 'overflow-x-auto': enableScroll }">
 
     <utterance-line-editor-item
@@ -6,7 +6,7 @@
         [ngClass]="{ 'fill-remaining-space': numEntities === 0  || (last && !lastItemIsEntity) }"
         [isFirst]="first"
         [isLast]="numEntities === 0 || (last && !lastItemIsEntity)"
-        [(item)]=item
+        [(item)]="utterance[index]"
         (itemChange)="onItemChange(index, $event)"
         (itemBlur)="onItemBlur(index, $event)"
         (textSelected)="onTextSelected(index, $event)">
@@ -15,28 +15,22 @@
     <div class="fill-remaining-space"
         *ngIf="(numEntities > 0 && lastItemIsEntity) || isEmpty">
             <utterance-line-editor-item
-                [(item)]=newItem
+                [(item)]="newItem"
                 (itemBlur)="onNewItemBlur($event)"
                 [isFirst]="isEmpty"
                 [isLast]="true">
             </utterance-line-editor-item>
     </div>
 
-</div> -->
+</div>
 
-<div #editor class="utterance-line-editor-2" contenteditable>
 
-    <!-- <div class="full-text-copy"
-        contenteditable
-        (keypress)="onKeyPress($event)"
-        (keydown)="onKeyDown($event)"
-        (keyup)="onKeyUp($event)">
-            {{ fullText }}
-    </div> -->
+
+<!-- <div #editor class="utterance-line-editor-2" contenteditable>
 
     <span *ngFor="let item of utterance; let first = first; let last = last; let index = index"
         [ngClass]="{ 'is-entity': item.entity }">
             {{ item.text }}
     </span>
 
-</div>
+</div> -->

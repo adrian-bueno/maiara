@@ -1,7 +1,9 @@
+import { ObjectId } from 'mongodb';
 
 // TODO remove context if last change > 1 day ?
 
 export interface Context {
+    _id: ObjectId | string;
     currentSkillId: string;
     currentNodeId: string;
     language: string;

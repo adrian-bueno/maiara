@@ -5,14 +5,14 @@
     <div class="dialog-editor">
 
         <button class="button is-rounded is-small is-primary new-node-button"
-            (tap)="newEmptyNode()">
+            (click)="newEmptyNode()">
                 <i class="icon is-left fas fa-plus"></i>
                 New node
         </button>
 
         <node *ngFor="let node of dialog.nodes; let index = index;"
             [node]="node"
-            (tap)="onNodeClick(index, node)"
+            (click)="onNodeClick(index, node)"
             (onMoveStart)="onNodeMoveStart(index, node)"
             (onMove)="onNodeMove(index, node, $event)"
             (onMoveEnd)="onNodeMoveEnd(index, node)"
@@ -29,12 +29,12 @@
                 [attr.x1]="edge.value.start.position.x" [attr.y1]="edge.value.start.position.y"
                 [attr.x2]="edge.value.end.position.x" [attr.y2]="edge.value.end.position.y"
                 (press)="deleteEdge(edge.value)"
-                (tap)="deleteEdge(edge.value)"/>
+                (click)="deleteEdge(edge.value)"/>
         </svg>
 
         <div class="node-editor-container" [ngClass]="nodeEditorActiveClases">
             <button class="button is-rounded is-outlined node-editor-close-button"
-                (tap)="closeNodeEditor()">
+                (click)="closeNodeEditor()">
                     <i class="fas fa-times"></i>
             </button>
             <node-editor *ngIf="selectedNode"
@@ -51,7 +51,7 @@
             </node-editor>
             <div class="node-editor-delete-button-container" *ngIf="selectedNode?.id !== 'start'">
                 <button class="button is-small is-rounded is-outlined is-danger-on-hover node-editor-delete-button"
-                    (tap)="deleteSelectedNode()">
+                    (click)="deleteSelectedNode()">
                         Delete node
                 </button>
             </div>

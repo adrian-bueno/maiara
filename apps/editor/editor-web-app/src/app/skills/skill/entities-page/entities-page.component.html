@@ -3,7 +3,7 @@
     <div class="entities-editor-container">
         <div class="new-entity-form">
             <input type="text" placeholder="Entity name" [(ngModel)]="newEntityName">
-            <button class="button is-primary is-rounded" (tap)="createNewEntity()">
+            <button class="button is-primary is-rounded" (click)="createNewEntity()">
                 <i class="icon is-left fas fa-plus"></i>
                 Create entity
             </button>
@@ -16,11 +16,11 @@
 
             <div *ngFor="let entity of entities; let index = index;">
                 <div class="div-table-row">
-                    <div class="div-table-item" (tap)="toggleEntityEditor(index)">{{ entity.name }}</div>
-                    <div class="div-table-item" (tap)="toggleEntityEditor(index)">{{ entity.data?.length }}</div>
+                    <div class="div-table-item" (click)="toggleEntityEditor(index)">{{ entity.name }}</div>
+                    <div class="div-table-item" (click)="toggleEntityEditor(index)">{{ entity.data?.length }}</div>
                     <div class="delete-button">
                         <i class="fas fa-times-circle has-text-danger"
-                           (tap)="deleteEntity($event, index)">
+                           (click)="deleteEntity($event, index)">
                         </i>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
     <div class="entity-editor-container" [ngClass]="activeClases">
         <div class="container entity-editor-close-button-container">
             <button class="button is-rounded is-outlined"
-                (tap)="closeEntityEditor()">
+                (click)="closeEntityEditor()">
                     <i class="icon is-left fa fa-times"></i>
                     Close entity editor
             </button>
@@ -64,7 +64,7 @@
             <p>{{ warningMessage }}</p>
         </div>
         <div class="content-footer">
-            <button class="button is-rounded is-outlined is-right-button" (tap)="closeWarningPopup()">Close</button>
+            <button class="button is-rounded is-outlined is-right-button" (click)="closeWarningPopup()">Close</button>
         </div>
     </div>
 </div>
